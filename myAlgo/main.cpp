@@ -1,15 +1,13 @@
-//
-//  main.cpp
-//  myAlgo
-//
-//  Created by Joshua Karbi on 2018-08-27.
-//  Copyright © 2018 Joshua Karbi. All rights reserved.
-//
 
-#include <iostream>
+#include <fstream>
+#include "Trader.hpp"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    
+    trading::Trader application;
+    application.initialize();
+    application.runTrader();
+    application.finishUp();
+    
     return 0;
 }
