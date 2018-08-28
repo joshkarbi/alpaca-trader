@@ -108,6 +108,9 @@
 		D146E0982134DDFE0005027D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					New,
+				);
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Joshua Karbi";
 				TargetAttributes = {
@@ -242,17 +245,20 @@
 		D146E0A82134DDFE0005027D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"HEADER_SEARCH_PATHS[arch=*]" = "";
-				"LIBRARY_SEARCH_PATHS[arch=*]" = "/Users/joshuakarbi/Desktop/IBJts/**";
+				BUILD_VARIANTS = normal;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
 			};
 			name = Debug;
 		};
 		D146E0A92134DDFE0005027D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"LIBRARY_SEARCH_PATHS[arch=*]" = "/Users/joshuakarbi/Desktop/IBJts/**";
+				BUILD_VARIANTS = normal;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
 			};
 			name = Release;
 		};

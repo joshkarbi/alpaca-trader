@@ -9,26 +9,34 @@
 #pragma once
 
 #include <stdint.h>
+#include <stddef.h>
+
 #include <vector>
+
+#include "Holding.hpp"
 
 namespace trading
 {
-    // forward declaration
-    class Holding;
-    
     class Portfolio
     {
     public:
         Portfolio();
-        ~Portfolio() = default;
+        ~Portfolio() {};
         
         // query Tradier API to retrieve current User data
         // return true on success
-        bool initialize();
+        bool update();
         
+        // GETTERS
+        std::vector<Holding> getHoldings() const { return holdings; };
+        uint32_t getCash() const { return cash; };
+        size_t getNumHoldings() const { return holdings.size(); };
     private:
+        
+        // money in account
         uint32_t cash;
-        uint32_t numHoldings;
+        
+        // securities currently held
         std::vector<Holding> holdings;
     };
 }

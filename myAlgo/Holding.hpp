@@ -9,6 +9,7 @@
 #pragma once
 #include <stdint.h>
 #include <string>
+
 namespace trading
 {
     // one holding has only a few data points
@@ -16,15 +17,21 @@ namespace trading
     {
     public:
         Holding();
-        ~Holding() = default;
+        ~Holding() { };
         
         // TODO: put some getters and setters
         
     private:
-        uint32_t purchase_price;
-        uint32_t current_price;
+        
+        // ie. "APPL"
         std::string symbol;
+        
         // "NYSE", "NASDAQ", "TSX", etc.
         std::string exchange;
+        
+        // in USD
+        double purchase_price;
+        
+        int num_shares;
     };
 }

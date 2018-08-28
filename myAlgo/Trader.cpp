@@ -7,3 +7,22 @@
 //
 
 #include "Trader.hpp"
+
+namespace trading
+{
+void initialize()
+{
+    
+}
+
+void runTrader()
+{
+    
+}
+
+void finishUp()
+{
+    
+}
+
+}

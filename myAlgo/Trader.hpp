@@ -18,7 +18,7 @@ namespace trading
     {
     public:
         Trader();
-        ~Trader() = default;
+        ~Trader() {};
         void initialize();
         void runTrader();
         void finishUp();
