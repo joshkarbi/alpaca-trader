@@ -39,8 +39,8 @@ namespace trading
         
         // can use range-based for to write to files at end of each day or trade
         std::unordered_set<Holding> getHoldings() const { return holdings; };
-    private:
         
+    private:
         // money in account
         uint32_t cash;
         

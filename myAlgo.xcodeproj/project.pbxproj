@@ -12,6 +12,7 @@
 		D162C7B7213578A700E8B927 /* Stats.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D162C7B5213578A700E8B927 /* Stats.cpp */; };
 		D162C7BA213578CE00E8B927 /* Portfolio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D162C7B8213578CE00E8B927 /* Portfolio.cpp */; };
 		D162C7BD21357A1500E8B927 /* Holding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D162C7BB21357A1500E8B927 /* Holding.cpp */; };
+		D162C7D32135F89C00E8B927 /* Order.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D162C7D12135F89C00E8B927 /* Order.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,8 @@
 		D162C7B9213578CE00E8B927 /* Portfolio.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Portfolio.hpp; sourceTree = "<group>"; };
 		D162C7BB21357A1500E8B927 /* Holding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Holding.cpp; sourceTree = "<group>"; };
 		D162C7BC21357A1500E8B927 /* Holding.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Holding.hpp; sourceTree = "<group>"; };
+		D162C7D12135F89C00E8B927 /* Order.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Order.cpp; sourceTree = "<group>"; };
+		D162C7D22135F89C00E8B927 /* Order.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Order.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +81,8 @@
 				D162C7B9213578CE00E8B927 /* Portfolio.hpp */,
 				D162C7BB21357A1500E8B927 /* Holding.cpp */,
 				D162C7BC21357A1500E8B927 /* Holding.hpp */,
+				D162C7D12135F89C00E8B927 /* Order.cpp */,
+				D162C7D22135F89C00E8B927 /* Order.hpp */,
 			);
 			path = myAlgo;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 			files = (
 				D162C7BD21357A1500E8B927 /* Holding.cpp in Sources */,
 				D162C7BA213578CE00E8B927 /* Portfolio.cpp in Sources */,
+				D162C7D32135F89C00E8B927 /* Order.cpp in Sources */,
 				D146E0A42134DDFE0005027D /* main.cpp in Sources */,
 				D162C7B4213577B200E8B927 /* Trader.cpp in Sources */,
 				D162C7B7213578A700E8B927 /* Stats.cpp in Sources */,

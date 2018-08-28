@@ -13,6 +13,9 @@
 
 namespace trading
 {
+    /**
+     * Read from config file.
+     */
     void Trader::initialize()
     {
     
@@ -20,12 +23,14 @@ namespace trading
 
     void Trader::runTrader()
     {
-    
+        // get access token
+        // query prices
+        // change positions
     }
 
     void Trader::finishUp()
     {
-    
+        // write the trading day's stats to a file.
     }
 
 }
