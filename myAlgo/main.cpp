@@ -5,10 +5,7 @@
 using namespace trading;
 
 int main(int argc, const char * argv[]) {
-    Trader app;
-    app.initialize();
-    app.runTrader();
-    app.finishUp();
-
+    Trader* app = new Trader();
+    app->run();
     return 0;
 }

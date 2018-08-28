@@ -19,6 +19,14 @@ namespace trading
     public:
         Trader();
         ~Trader() {};
+        
+        void run()
+        {
+            initialize();
+            runTrader();
+            finishUp();
+        }
+        
         void initialize();
         void runTrader();
         void finishUp();
