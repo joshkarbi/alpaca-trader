@@ -4,8 +4,8 @@
 
 using namespace trading;
 
-int main(int argc, const char * argv[]) {
-    Trader* app = new Trader();
-    app->run();
+int main() {
+    Trader app;
+    app.run();
     return 0;
 }

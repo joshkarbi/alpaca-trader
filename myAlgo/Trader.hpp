@@ -17,7 +17,10 @@ namespace trading
     class Trader
     {
     public:
-        Trader();
+        Trader()
+        {
+            // do nothing;
+        };
         ~Trader() {};
         
         void run()

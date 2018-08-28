@@ -8,24 +8,24 @@
 
 #include "Trader.hpp"
 
-// Dependencies: cpr networking library
+// Dependency: cpr networking library
 #include "../cpr/cpr.h"
 
 namespace trading
 {
-void initialize()
-{
+    void Trader::initialize()
+    {
     
-}
+    }
 
-void runTrader()
-{
+    void Trader::runTrader()
+    {
     
-}
+    }
 
-void finishUp()
-{
+    void Trader::finishUp()
+    {
     
-}
+    }
 
 }
