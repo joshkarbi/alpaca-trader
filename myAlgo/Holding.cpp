@@ -7,3 +7,18 @@
 //
 
 #include "Holding.hpp"
+
+namespace trading
+{
+
+    // do not take into account price or number of shares
+    bool Holding::operator==(const Holding& other) const
+    {
+        if (symbol == other.getSymbol() && exchange == other.getExchange())
+        {
+            return true;
+        }
+        return false;
+    }
+
+}

@@ -9,19 +9,23 @@
 
 #include <string>
 
+#include "Stats.hpp"
+#include "Portfolio.hpp"
+
 namespace trading
 {
-    class Portfolio;
-    class Stats;
-    
     class Trader
     {
     public:
         Trader()
         {
-            // do nothing;
+            // do nothing
         };
-        ~Trader() {};
+        
+        ~Trader()
+        {
+            // do nothing
+        };
         
         void run()
         {
@@ -33,11 +37,11 @@ namespace trading
         void initialize();
         void runTrader();
         void finishUp();
+        
     private:
-        std::string authCode;
+        std::string auth_code;
         std::string token;
-        // other objects
-        // Stats?
-        // Portfolio object?
+        Stats trading_stats;
+        Portfolio current_portfolio;
     };
 }
