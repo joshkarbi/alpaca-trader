@@ -44,10 +44,10 @@
 		D162C7BC21357A1500E8B927 /* Holding.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Holding.hpp; sourceTree = "<group>"; };
 		D162C7D12135F89C00E8B927 /* Order.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Order.cpp; sourceTree = "<group>"; };
 		D162C7D22135F89C00E8B927 /* Order.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Order.hpp; sourceTree = "<group>"; };
-		D162C86D21373DBB00E8B927 /* FileReadingUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileReadingUtilities.cpp; path = tools/FileReadingUtilities.cpp; sourceTree = "<group>"; };
-		D162C87121373E0E00E8B927 /* FileReadingUtilities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = FileReadingUtilities.hpp; path = tools/FileReadingUtilities.hpp; sourceTree = "<group>"; };
-		D162C873213744E100E8B927 /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Logger.cpp; path = tools/Logger.cpp; sourceTree = "<group>"; };
-		D162C874213744E100E8B927 /* Logger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Logger.hpp; path = tools/Logger.hpp; sourceTree = "<group>"; };
+		D162C86D21373DBB00E8B927 /* FileReadingUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileReadingUtilities.cpp; sourceTree = "<group>"; };
+		D162C87121373E0E00E8B927 /* FileReadingUtilities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FileReadingUtilities.hpp; sourceTree = "<group>"; };
+		D162C873213744E100E8B927 /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
+		D162C874213744E100E8B927 /* Logger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +120,7 @@
 				D162C873213744E100E8B927 /* Logger.cpp */,
 				D162C874213744E100E8B927 /* Logger.hpp */,
 			);
-			name = tools;
+			path = tools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
