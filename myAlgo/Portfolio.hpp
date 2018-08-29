@@ -1,9 +1,5 @@
 //
-//  Portfolio.hpp
-//  myAlgo
-//
 //  Created by Joshua Karbi on 2018-08-28.
-//  Copyright © 2018 Joshua Karbi. All rights reserved.
 //
 
 #pragma once
@@ -17,6 +13,9 @@
 
 namespace trading
 {
+    /**
+     * Used by Trader to keep track of holdings and cash left.
+     */
     class Portfolio
     {
     public:
@@ -33,7 +32,7 @@ namespace trading
         // return true on success
         bool update();
         
-        // GETTERS
+        // getters
         uint32_t getCash() const { return cash; };
         size_t getNumHoldings() const { return holdings.size(); };
         

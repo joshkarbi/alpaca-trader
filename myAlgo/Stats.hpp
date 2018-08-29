@@ -1,20 +1,26 @@
 //
-//  Stats.hpp
-//
 //  Created by Joshua Karbi on 2018-08-28.
 //
 
 #pragma once
 
+#include <vector>
+
 #include "Portfolio.hpp"
+#include "Order.hpp"
 
 namespace trading
 {
-    // keeps track of the day's statistics
+    /**
+     * Used by Trader to keep track of (and log) statistics.
+     *
+     * A Holding is a security with a ticker symbol,
+     * exchange, number of shares, and purchase price.
+     */
     class Stats
     {
     public:
-        Stats() : todays_earnings(0), orders_placed(0)
+        Stats() : market_diff(0), capital_gains(0)
         {
             // do nothing
         }
@@ -28,9 +34,13 @@ namespace trading
         bool logStats(const std::string& file_path, const Portfolio& holdings) const;
         
     private:
-        // could be zero
-        int todays_earnings;
-        size_t orders_placed;
+        // updates to portfolios "market value"
+        int market_diff;
         
+        // if sell orders were placed, keep track of earnings
+        int capital_gains;
+        
+        // all orders placed today
+        std::vector<Order> orders;
     };
 }

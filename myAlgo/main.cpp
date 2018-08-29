@@ -1,11 +1,12 @@
+//
+// Created by Joshua Karbi on 2018-08-28.
+//
 
 #include <fstream>
 #include "Trader.hpp"
 
-using namespace trading;
-
 int main() {
-    Trader app;
+    trading::Trader app;
     app.run();
     return 0;
 }
