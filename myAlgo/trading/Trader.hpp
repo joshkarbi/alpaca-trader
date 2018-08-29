@@ -19,10 +19,9 @@ namespace trading
     class Trader
     {
     public:
-        Trader()
-        {
-            // do nothing
-        };
+        static std::string AUTH_CODE_FILE_PATH;
+        
+        Trader();
         
         ~Trader()
         {
@@ -42,6 +41,11 @@ namespace trading
         void finishUp();
         
     private:
+        
+        // look for code in file
+        void findAuthCode();
+        
+        // private variables
         std::string auth_code;
         std::string token;
         Stats trading_stats;

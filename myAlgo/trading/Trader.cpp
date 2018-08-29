@@ -3,13 +3,30 @@
 //
 
 #include "Trader.hpp"
+#include "FileReadingUtilities.hpp"
+#include "Logger.hpp"
 
-// Dependency: cpr networking library
-// TODO: use angle include
 #include "/cpr/cpr.h"
+#include <fstream>
 
 namespace trading
 {
+    // default constructor
+    Trader::Trader()
+    {
+        // look for user authorization code in file
+        AUTH_CODE_FILE_PATH = "/tmp/auth_code.txt";
+        
+        try
+        {
+            findAuthCode();
+        } catch (const std::runtime_error& e)
+        {
+            tools::log(e.what());
+            return;
+        }
+    }
+    
     /**
      * Read from config file.
      */
@@ -22,7 +39,10 @@ namespace trading
     
     void Trader::initialize()
     {
-        // TODO: query for current user holdings
+        auto r = cpr::Post(cpr::Url{"https://api.tradier.com/v1/oauth/accesstoken"},
+                 cpr::Multipart{{"grant_type", "authorization_code"}, {"code", auth_code}});
+        std::string url = r.url;
+        std::string response = r.text;
     }
 
     void Trader::runTrader()
@@ -39,6 +59,20 @@ namespace trading
     {
         // write the trading day's stats to a file.
         // ie. trading_stats.logStats(file_path);
+    }
+    
+    void Trader::findAuthCode()
+    {
+        // get user auth_code
+        if ( ! tools::fileExists(AUTH_CODE_FILE_PATH))
+        {
+            throw std::runtime_error("ERROR: Cannot find authorization code file.");
+        }
+        else
+        {
+            // parse out the auth code
+            auth_code = tools::getLines(AUTH_CODE_FILE_PATH)[0];
+        }
     }
 
 }
