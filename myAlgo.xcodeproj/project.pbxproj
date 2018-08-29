@@ -13,41 +13,6 @@
 		D162C7BA213578CE00E8B927 /* Portfolio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D162C7B8213578CE00E8B927 /* Portfolio.cpp */; };
 		D162C7BD21357A1500E8B927 /* Holding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D162C7BB21357A1500E8B927 /* Holding.cpp */; };
 		D162C7D32135F89C00E8B927 /* Order.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D162C7D12135F89C00E8B927 /* Order.cpp */; };
-		D162C84321371F6E00E8B927 /* api.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C82021371F6E00E8B927 /* api.h */; };
-		D162C84421371F6E00E8B927 /* auth.cpp in Headers */ = {isa = PBXBuildFile; fileRef = D162C82121371F6E00E8B927 /* auth.cpp */; };
-		D162C84521371F6E00E8B927 /* auth.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C82221371F6E00E8B927 /* auth.h */; };
-		D162C84621371F6E00E8B927 /* body.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C82321371F6E00E8B927 /* body.h */; };
-		D162C84721371F6E00E8B927 /* CMakeLists.txt in Headers */ = {isa = PBXBuildFile; fileRef = D162C82421371F6E00E8B927 /* CMakeLists.txt */; };
-		D162C84821371F6E00E8B927 /* cookies.cpp in Headers */ = {isa = PBXBuildFile; fileRef = D162C82521371F6E00E8B927 /* cookies.cpp */; };
-		D162C84921371F6E00E8B927 /* cookies.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C82621371F6E00E8B927 /* cookies.h */; };
-		D162C84A21371F6E00E8B927 /* cpr.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C82721371F6E00E8B927 /* cpr.h */; };
-		D162C84B21371F6E00E8B927 /* cprtypes.cpp in Headers */ = {isa = PBXBuildFile; fileRef = D162C82821371F6E00E8B927 /* cprtypes.cpp */; };
-		D162C84C21371F6E00E8B927 /* cprtypes.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C82921371F6E00E8B927 /* cprtypes.h */; };
-		D162C84D21371F6E00E8B927 /* curlholder.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C82A21371F6E00E8B927 /* curlholder.h */; };
-		D162C84E21371F6E00E8B927 /* defines.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C82B21371F6E00E8B927 /* defines.h */; };
-		D162C84F21371F6E00E8B927 /* digest.cpp in Headers */ = {isa = PBXBuildFile; fileRef = D162C82C21371F6E00E8B927 /* digest.cpp */; };
-		D162C85021371F6E00E8B927 /* digest.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C82D21371F6E00E8B927 /* digest.h */; };
-		D162C85121371F6E00E8B927 /* error.cpp in Headers */ = {isa = PBXBuildFile; fileRef = D162C82E21371F6E00E8B927 /* error.cpp */; };
-		D162C85221371F6E00E8B927 /* error.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C82F21371F6E00E8B927 /* error.h */; };
-		D162C85321371F6E00E8B927 /* low_speed.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C83021371F6E00E8B927 /* low_speed.h */; };
-		D162C85421371F6E00E8B927 /* max_redirects.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C83121371F6E00E8B927 /* max_redirects.h */; };
-		D162C85521371F6E00E8B927 /* multipart.cpp in Headers */ = {isa = PBXBuildFile; fileRef = D162C83221371F6E00E8B927 /* multipart.cpp */; };
-		D162C85621371F6E00E8B927 /* multipart.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C83321371F6E00E8B927 /* multipart.h */; };
-		D162C85721371F6E00E8B927 /* parameters.cpp in Headers */ = {isa = PBXBuildFile; fileRef = D162C83421371F6E00E8B927 /* parameters.cpp */; };
-		D162C85821371F6E00E8B927 /* parameters.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C83521371F6E00E8B927 /* parameters.h */; };
-		D162C85921371F6E00E8B927 /* payload.cpp in Headers */ = {isa = PBXBuildFile; fileRef = D162C83621371F6E00E8B927 /* payload.cpp */; };
-		D162C85A21371F6E00E8B927 /* payload.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C83721371F6E00E8B927 /* payload.h */; };
-		D162C85B21371F6E00E8B927 /* proxies.cpp in Headers */ = {isa = PBXBuildFile; fileRef = D162C83821371F6E00E8B927 /* proxies.cpp */; };
-		D162C85C21371F6E00E8B927 /* proxies.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C83921371F6E00E8B927 /* proxies.h */; };
-		D162C85D21371F6E00E8B927 /* response.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C83A21371F6E00E8B927 /* response.h */; };
-		D162C85E21371F6E00E8B927 /* session.cpp in Headers */ = {isa = PBXBuildFile; fileRef = D162C83B21371F6E00E8B927 /* session.cpp */; };
-		D162C85F21371F6E00E8B927 /* session.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C83C21371F6E00E8B927 /* session.h */; };
-		D162C86021371F6E00E8B927 /* ssl_options.cpp in Headers */ = {isa = PBXBuildFile; fileRef = D162C83D21371F6E00E8B927 /* ssl_options.cpp */; };
-		D162C86121371F6E00E8B927 /* ssl_options.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C83E21371F6E00E8B927 /* ssl_options.h */; };
-		D162C86221371F6E00E8B927 /* timeout.cpp in Headers */ = {isa = PBXBuildFile; fileRef = D162C83F21371F6E00E8B927 /* timeout.cpp */; };
-		D162C86321371F6E00E8B927 /* timeout.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C84021371F6E00E8B927 /* timeout.h */; };
-		D162C86421371F6E00E8B927 /* util.cpp in Headers */ = {isa = PBXBuildFile; fileRef = D162C84121371F6E00E8B927 /* util.cpp */; };
-		D162C86521371F6E00E8B927 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = D162C84221371F6E00E8B927 /* util.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,41 +40,6 @@
 		D162C7BC21357A1500E8B927 /* Holding.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Holding.hpp; sourceTree = "<group>"; };
 		D162C7D12135F89C00E8B927 /* Order.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Order.cpp; sourceTree = "<group>"; };
 		D162C7D22135F89C00E8B927 /* Order.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Order.hpp; sourceTree = "<group>"; };
-		D162C82021371F6E00E8B927 /* api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = api.h; path = cpr/api.h; sourceTree = "<group>"; };
-		D162C82121371F6E00E8B927 /* auth.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = auth.cpp; path = cpr/auth.cpp; sourceTree = "<group>"; };
-		D162C82221371F6E00E8B927 /* auth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = auth.h; path = cpr/auth.h; sourceTree = "<group>"; };
-		D162C82321371F6E00E8B927 /* body.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = body.h; path = cpr/body.h; sourceTree = "<group>"; };
-		D162C82421371F6E00E8B927 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = cpr/CMakeLists.txt; sourceTree = "<group>"; };
-		D162C82521371F6E00E8B927 /* cookies.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = cookies.cpp; path = cpr/cookies.cpp; sourceTree = "<group>"; };
-		D162C82621371F6E00E8B927 /* cookies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cookies.h; path = cpr/cookies.h; sourceTree = "<group>"; };
-		D162C82721371F6E00E8B927 /* cpr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cpr.h; path = cpr/cpr.h; sourceTree = "<group>"; };
-		D162C82821371F6E00E8B927 /* cprtypes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = cprtypes.cpp; path = cpr/cprtypes.cpp; sourceTree = "<group>"; };
-		D162C82921371F6E00E8B927 /* cprtypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cprtypes.h; path = cpr/cprtypes.h; sourceTree = "<group>"; };
-		D162C82A21371F6E00E8B927 /* curlholder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = curlholder.h; path = cpr/curlholder.h; sourceTree = "<group>"; };
-		D162C82B21371F6E00E8B927 /* defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = defines.h; path = cpr/defines.h; sourceTree = "<group>"; };
-		D162C82C21371F6E00E8B927 /* digest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = digest.cpp; path = cpr/digest.cpp; sourceTree = "<group>"; };
-		D162C82D21371F6E00E8B927 /* digest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = digest.h; path = cpr/digest.h; sourceTree = "<group>"; };
-		D162C82E21371F6E00E8B927 /* error.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = error.cpp; path = cpr/error.cpp; sourceTree = "<group>"; };
-		D162C82F21371F6E00E8B927 /* error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = error.h; path = cpr/error.h; sourceTree = "<group>"; };
-		D162C83021371F6E00E8B927 /* low_speed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = low_speed.h; path = cpr/low_speed.h; sourceTree = "<group>"; };
-		D162C83121371F6E00E8B927 /* max_redirects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = max_redirects.h; path = cpr/max_redirects.h; sourceTree = "<group>"; };
-		D162C83221371F6E00E8B927 /* multipart.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = multipart.cpp; path = cpr/multipart.cpp; sourceTree = "<group>"; };
-		D162C83321371F6E00E8B927 /* multipart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = multipart.h; path = cpr/multipart.h; sourceTree = "<group>"; };
-		D162C83421371F6E00E8B927 /* parameters.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = parameters.cpp; path = cpr/parameters.cpp; sourceTree = "<group>"; };
-		D162C83521371F6E00E8B927 /* parameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = parameters.h; path = cpr/parameters.h; sourceTree = "<group>"; };
-		D162C83621371F6E00E8B927 /* payload.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = payload.cpp; path = cpr/payload.cpp; sourceTree = "<group>"; };
-		D162C83721371F6E00E8B927 /* payload.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = payload.h; path = cpr/payload.h; sourceTree = "<group>"; };
-		D162C83821371F6E00E8B927 /* proxies.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = proxies.cpp; path = cpr/proxies.cpp; sourceTree = "<group>"; };
-		D162C83921371F6E00E8B927 /* proxies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = proxies.h; path = cpr/proxies.h; sourceTree = "<group>"; };
-		D162C83A21371F6E00E8B927 /* response.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = response.h; path = cpr/response.h; sourceTree = "<group>"; };
-		D162C83B21371F6E00E8B927 /* session.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = session.cpp; path = cpr/session.cpp; sourceTree = "<group>"; };
-		D162C83C21371F6E00E8B927 /* session.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = session.h; path = cpr/session.h; sourceTree = "<group>"; };
-		D162C83D21371F6E00E8B927 /* ssl_options.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ssl_options.cpp; path = cpr/ssl_options.cpp; sourceTree = "<group>"; };
-		D162C83E21371F6E00E8B927 /* ssl_options.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ssl_options.h; path = cpr/ssl_options.h; sourceTree = "<group>"; };
-		D162C83F21371F6E00E8B927 /* timeout.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = timeout.cpp; path = cpr/timeout.cpp; sourceTree = "<group>"; };
-		D162C84021371F6E00E8B927 /* timeout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = timeout.h; path = cpr/timeout.h; sourceTree = "<group>"; };
-		D162C84121371F6E00E8B927 /* util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = util.cpp; path = cpr/util.cpp; sourceTree = "<group>"; };
-		D162C84221371F6E00E8B927 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = util.h; path = cpr/util.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,41 +56,6 @@
 		D146E0972134DDFE0005027D = {
 			isa = PBXGroup;
 			children = (
-				D162C82021371F6E00E8B927 /* api.h */,
-				D162C82121371F6E00E8B927 /* auth.cpp */,
-				D162C82221371F6E00E8B927 /* auth.h */,
-				D162C82321371F6E00E8B927 /* body.h */,
-				D162C82421371F6E00E8B927 /* CMakeLists.txt */,
-				D162C82521371F6E00E8B927 /* cookies.cpp */,
-				D162C82621371F6E00E8B927 /* cookies.h */,
-				D162C82721371F6E00E8B927 /* cpr.h */,
-				D162C82821371F6E00E8B927 /* cprtypes.cpp */,
-				D162C82921371F6E00E8B927 /* cprtypes.h */,
-				D162C82A21371F6E00E8B927 /* curlholder.h */,
-				D162C82B21371F6E00E8B927 /* defines.h */,
-				D162C82C21371F6E00E8B927 /* digest.cpp */,
-				D162C82D21371F6E00E8B927 /* digest.h */,
-				D162C82E21371F6E00E8B927 /* error.cpp */,
-				D162C82F21371F6E00E8B927 /* error.h */,
-				D162C83021371F6E00E8B927 /* low_speed.h */,
-				D162C83121371F6E00E8B927 /* max_redirects.h */,
-				D162C83221371F6E00E8B927 /* multipart.cpp */,
-				D162C83321371F6E00E8B927 /* multipart.h */,
-				D162C83421371F6E00E8B927 /* parameters.cpp */,
-				D162C83521371F6E00E8B927 /* parameters.h */,
-				D162C83621371F6E00E8B927 /* payload.cpp */,
-				D162C83721371F6E00E8B927 /* payload.h */,
-				D162C83821371F6E00E8B927 /* proxies.cpp */,
-				D162C83921371F6E00E8B927 /* proxies.h */,
-				D162C83A21371F6E00E8B927 /* response.h */,
-				D162C83B21371F6E00E8B927 /* session.cpp */,
-				D162C83C21371F6E00E8B927 /* session.h */,
-				D162C83D21371F6E00E8B927 /* ssl_options.cpp */,
-				D162C83E21371F6E00E8B927 /* ssl_options.h */,
-				D162C83F21371F6E00E8B927 /* timeout.cpp */,
-				D162C84021371F6E00E8B927 /* timeout.h */,
-				D162C84121371F6E00E8B927 /* util.cpp */,
-				D162C84221371F6E00E8B927 /* util.h */,
 				D146E0A22134DDFE0005027D /* myAlgo */,
 				D146E0A12134DDFE0005027D /* Products */,
 			);
@@ -207,41 +102,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D162C84321371F6E00E8B927 /* api.h in Headers */,
-				D162C84421371F6E00E8B927 /* auth.cpp in Headers */,
-				D162C84521371F6E00E8B927 /* auth.h in Headers */,
-				D162C84621371F6E00E8B927 /* body.h in Headers */,
-				D162C84721371F6E00E8B927 /* CMakeLists.txt in Headers */,
-				D162C84821371F6E00E8B927 /* cookies.cpp in Headers */,
-				D162C84921371F6E00E8B927 /* cookies.h in Headers */,
-				D162C84A21371F6E00E8B927 /* cpr.h in Headers */,
-				D162C84B21371F6E00E8B927 /* cprtypes.cpp in Headers */,
-				D162C84C21371F6E00E8B927 /* cprtypes.h in Headers */,
-				D162C84D21371F6E00E8B927 /* curlholder.h in Headers */,
-				D162C84E21371F6E00E8B927 /* defines.h in Headers */,
-				D162C84F21371F6E00E8B927 /* digest.cpp in Headers */,
-				D162C85021371F6E00E8B927 /* digest.h in Headers */,
-				D162C85121371F6E00E8B927 /* error.cpp in Headers */,
-				D162C85221371F6E00E8B927 /* error.h in Headers */,
-				D162C85321371F6E00E8B927 /* low_speed.h in Headers */,
-				D162C85421371F6E00E8B927 /* max_redirects.h in Headers */,
-				D162C85521371F6E00E8B927 /* multipart.cpp in Headers */,
-				D162C85621371F6E00E8B927 /* multipart.h in Headers */,
-				D162C85721371F6E00E8B927 /* parameters.cpp in Headers */,
-				D162C85821371F6E00E8B927 /* parameters.h in Headers */,
-				D162C85921371F6E00E8B927 /* payload.cpp in Headers */,
-				D162C85A21371F6E00E8B927 /* payload.h in Headers */,
-				D162C85B21371F6E00E8B927 /* proxies.cpp in Headers */,
-				D162C85C21371F6E00E8B927 /* proxies.h in Headers */,
-				D162C85D21371F6E00E8B927 /* response.h in Headers */,
-				D162C85E21371F6E00E8B927 /* session.cpp in Headers */,
-				D162C85F21371F6E00E8B927 /* session.h in Headers */,
-				D162C86021371F6E00E8B927 /* ssl_options.cpp in Headers */,
-				D162C86121371F6E00E8B927 /* ssl_options.h in Headers */,
-				D162C86221371F6E00E8B927 /* timeout.cpp in Headers */,
-				D162C86321371F6E00E8B927 /* timeout.h in Headers */,
-				D162C86421371F6E00E8B927 /* util.cpp in Headers */,
-				D162C86521371F6E00E8B927 /* util.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
