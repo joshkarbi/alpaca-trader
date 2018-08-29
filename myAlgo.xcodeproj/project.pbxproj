@@ -252,9 +252,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_VARIANTS = normal;
+				"HEADER_SEARCH_PATHS[arch=*]" = /Users/joshuakarbi/Desktop/trader/cpr/;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = /Users/joshuakarbi/Desktop/trader/cpr/;
 			};
 			name = Debug;
 		};
@@ -262,9 +264,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_VARIANTS = normal;
+				"HEADER_SEARCH_PATHS[arch=*]" = /Users/joshuakarbi/Desktop/trader/cpr/;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = /Users/joshuakarbi/Desktop/trader/cpr/;
 			};
 			name = Release;
 		};

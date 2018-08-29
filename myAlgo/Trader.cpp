@@ -5,6 +5,7 @@
 #include "Trader.hpp"
 
 // Dependency: cpr networking library
+// TODO: use angle include
 #include "../cpr/cpr.h"
 
 namespace trading
