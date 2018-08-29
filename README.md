@@ -6,4 +6,4 @@ Relies on CPR networking library.
 Is being built to work with brokerage API's that use https GET requests (ie. Tradier).
 
 # Running the Trader
-An executable for x86 UNIX systems can be found under Product
+An executable for x86 UNIX-based systems can be found under Build/Products/Debug/ .
