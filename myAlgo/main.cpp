@@ -3,7 +3,7 @@
 //
 
 #include <fstream>
-#include "Trader.hpp"
+#include "trading/Trader.hpp"
 
 int main() {
     trading::Trader app;

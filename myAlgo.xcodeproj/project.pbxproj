@@ -72,7 +72,15 @@
 		D146E0A22134DDFE0005027D /* myAlgo */ = {
 			isa = PBXGroup;
 			children = (
+				D162C81E21371B1200E8B927 /* trading */,
 				D146E0A32134DDFE0005027D /* main.cpp */,
+			);
+			path = myAlgo;
+			sourceTree = "<group>";
+		};
+		D162C81E21371B1200E8B927 /* trading */ = {
+			isa = PBXGroup;
+			children = (
 				D162C7B2213577B200E8B927 /* Trader.cpp */,
 				D162C7B3213577B200E8B927 /* Trader.hpp */,
 				D162C7B5213578A700E8B927 /* Stats.cpp */,
@@ -84,7 +92,7 @@
 				D162C7D12135F89C00E8B927 /* Order.cpp */,
 				D162C7D22135F89C00E8B927 /* Order.hpp */,
 			);
-			path = myAlgo;
+			path = trading;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
