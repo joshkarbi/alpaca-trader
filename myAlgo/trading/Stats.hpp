@@ -31,7 +31,7 @@ namespace trading
         
         // Could throw if file doesn't exist
         // @return true on success
-        bool logStats(const std::string& file_path, const Portfolio& holdings) const;
+        void logStats(const Portfolio& holdings) const;
         
     private:
         // updates to portfolios "market value"

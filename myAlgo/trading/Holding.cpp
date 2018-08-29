@@ -24,5 +24,21 @@ namespace trading
         }
         return false;
     }
+    
+    std::string Holding::getStringExchange() const
+    {
+        if (exchange == NYSE)
+        {
+            return "NYSE";
+        }
+        else if (exchange == NASDAQ)
+        {
+            return "NASDAQ";
+        }
+        else
+        {
+            return "TSX";
+        }
+    }
 
 }

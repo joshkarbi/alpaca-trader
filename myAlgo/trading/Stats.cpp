@@ -4,14 +4,17 @@
 
 #include "Stats.hpp"
 
+#include <string>
+
 namespace trading
 {
-    bool Stats::logStats(const std::string& file_path, const Portfolio& holdings) const
+    void Stats::logStats(const Portfolio& port) const
     {
-        bool result = false;
-        
-        // TODO: write this method
-        
-        return result;
+        std::string log_message = "";
+        for (const Holding& holding : port.getHoldings())
+        {
+            log_message.append(holding.getStringExchange() + ":" + holding.getSymbol() + "\n");
+            log_message.append(std::to_string(holding.getNumShares()) + " shares at $" + std::to_string(holding.getPrice()) + "\n");
+        }
     }
 }

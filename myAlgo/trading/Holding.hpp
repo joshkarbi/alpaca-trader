@@ -38,6 +38,7 @@ namespace trading
         
         // getters
         std::string getSymbol() const { return symbol; };
+        std::string getStringExchange() const;
         size_t getExchange() const { return exchange; };
         size_t getNumShares() const { return num_shares; };
         double getPrice() const { return purchase_price; };
