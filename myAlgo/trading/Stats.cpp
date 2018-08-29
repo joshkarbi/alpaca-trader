@@ -3,7 +3,7 @@
 //
 
 #include "Stats.hpp"
-
+#include "Logger.hpp"
 #include <string>
 
 namespace trading
@@ -16,5 +16,6 @@ namespace trading
             log_message.append(holding.getStringExchange() + ":" + holding.getSymbol() + "\n");
             log_message.append(std::to_string(holding.getNumShares()) + " shares at $" + std::to_string(holding.getPrice()) + "\n");
         }
+        tools::log(log_message);
     }
 }
