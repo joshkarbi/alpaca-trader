@@ -14,9 +14,6 @@ namespace trading
     // default constructor
     Trader::Trader()
     {
-        // look for user authorization code in file
-        AUTH_CODE_FILE_PATH = "/tmp/auth_code.txt";
-        
         try
         {
             findAuthCode();
@@ -39,9 +36,14 @@ namespace trading
     
     void Trader::initialize()
     {
-        auto r = cpr::Post(cpr::Url{"https://api.tradier.com/v1/oauth/accesstoken"},
-                 cpr::Multipart{{"grant_type", "authorization_code"}, {"code", auth_code}});
-        std::string url = r.url;
+        std::string post_body = "grant_type=authorization_code&code=";
+        post_body.append(auth_code);
+        cpr::Url address = "https://api.tradier.com/v1/oauth/accesstoken/";
+        auto r = cpr::Post( address,
+                            cpr::Body{post_body},
+                            cpr::Header{{"Content-Type", "application/json"}}
+                          );
+        
         std::string response = r.text;
     }
 

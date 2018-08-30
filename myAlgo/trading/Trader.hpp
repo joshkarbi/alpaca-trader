@@ -11,6 +11,8 @@
 
 namespace trading
 {
+    const std::string AUTH_CODE_FILE_PATH = "/tmp/auth_code.txt";
+    
     /**
      * Main application object.
      *
@@ -19,8 +21,6 @@ namespace trading
     class Trader
     {
     public:
-        static std::string AUTH_CODE_FILE_PATH;
-        
         Trader();
         
         ~Trader()
@@ -31,6 +31,11 @@ namespace trading
         // called by main method
         void run();
         
+    private:
+        
+        // look for code in file
+        void findAuthCode();
+        
         // set everything up, query for current user holdings, etc.
         void initialize();
         
@@ -40,10 +45,6 @@ namespace trading
         // save stuff to files if anything goes wrong
         void finishUp();
         
-    private:
-        
-        // look for code in file
-        void findAuthCode();
         
         // private variables
         std::string auth_code;
