@@ -28,10 +28,7 @@ namespace trading
         {
             // do nothing
         };
-        ~Holding()
-        {
-            // do nothing
-        };
+        ~Holding() = default;
         
         // main constructor
         Holding(const std::string& sym, size_t ex, size_t number, double price);

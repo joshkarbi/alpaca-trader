@@ -24,10 +24,7 @@ namespace trading
         {
             // do nothing
         }
-        ~Stats()
-        {
-            // do nothing
-        }
+        ~Stats() = default;
         
         // Could throw if file doesn't exist
         // @return true on success

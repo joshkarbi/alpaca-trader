@@ -3,10 +3,10 @@
 //
 
 #include "Trader.hpp"
-#include "FileReadingUtilities.hpp"
-#include "Logger.hpp"
+#include "tools/FileReadingUtilities.hpp"
+#include "tools/Logger.hpp"
 
-#include "/cpr/cpr.h"
+#include <cpr/cpr.h>
 #include <fstream>
 
 namespace trading
@@ -24,24 +24,14 @@ namespace trading
         }
     }
     
-    /**
-     * Read from config file.
-     */
-    void Trader::run()
-    {
-        initialize();
-        runTrader();
-        finishUp();
-    }
-    
     void Trader::initialize()
     {
         std::string post_body = "grant_type=authorization_code&code=";
         post_body.append(auth_code);
-        cpr::Url address = "https://api.tradier.com/v1/oauth/accesstoken/";
-        auto r = cpr::Post( address,
-                            cpr::Body{post_body},
-                            cpr::Header{{"Content-Type", "application/json"}}
+        auto r = cpr::Post(cpr::Url{"https://api.tradier.com/v1/oauth/accesstoken"},
+                           cpr::Header{{"Content-Type", "application/json"}},
+                           cpr::Payload{{"grant_type","authorization_code"},
+                                    {"code", auth_code} }
                           );
         
         std::string response = r.text;

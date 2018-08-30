@@ -3,7 +3,7 @@
 //
 
 #include "Stats.hpp"
-#include "Logger.hpp"
+#include "tools/Logger.hpp"
 #include <string>
 
 namespace trading

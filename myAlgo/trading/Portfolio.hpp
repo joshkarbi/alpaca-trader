@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
-#include <unordered_set>
+#include <vector>
 
 #include "Holding.hpp"
 
@@ -23,10 +23,7 @@ namespace trading
         {
             // do nothing
         };
-        ~Portfolio()
-        {
-            // do nothing
-        };
+        ~Portfolio() = default;
         
         // query Tradier API to retrieve current User data
         // return true on success
@@ -37,13 +34,13 @@ namespace trading
         size_t getNumHoldings() const { return holdings.size(); };
         
         // can use range-based for to write to files at end of each day or trade
-        std::unordered_set<Holding> getHoldings() const { return holdings; };
+        std::vector<Holding> getHoldings() const { return holdings; };
         
     private:
         // money in account
         uint32_t cash;
         
         // securities currently held
-        std::unordered_set<Holding> holdings;
+        std::vector<Holding> holdings;
     };
 }

@@ -23,13 +23,15 @@ namespace trading
     public:
         Trader();
         
-        ~Trader()
-        {
-            // do nothing
-        };
+        ~Trader() = default;
         
         // called by main method
-        void run();
+        void run()
+        {
+            initialize();
+            runTrader();
+            finishUp();
+        };
         
     private:
         
