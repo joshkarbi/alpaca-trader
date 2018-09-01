@@ -7,11 +7,20 @@
 
 namespace
 {
-    size_t writefunc(void *ptr, size_t size, size_t nmemb, char* s)
+    // libcurl callback
+    size_t writefunc(void *ptr, size_t size, size_t nmemb, void* s)
     {
-       // char* newPart;
-       // memcpy(&newPart, ptr, size*nmemb);
-        strcat(s, static_cast<char*>(ptr));
+        char* newPart = (char *)malloc(size*nmemb);
+        memcpy(&newPart, ptr, size*nmemb);
+        
+        char* concatenated = (char *)malloc(1 + strlen((char *)s) + size*nmemb);
+        
+        strcpy(concatenated, (char *)s);
+        strcat(concatenated, newPart);
+        
+        // concatenated has old stuff (s) with new stuff (ptr)
+        // redirect s to concatenated
+        s = concatenated;
         
         return size*nmemb;
     }
@@ -24,7 +33,7 @@ namespace tools
         CURL* curl;
         curl_global_init(CURL_GLOBAL_ALL);
         curl = curl_easy_init();
-        char* s = nullptr;
+        char* s = (char *)malloc(1);
         
         if (curl)
         {
@@ -32,7 +41,7 @@ namespace tools
             curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
             curl_easy_setopt(curl, CURLOPT_POSTFIELDS, params.c_str());
             curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, ::writefunc);
-            curl_easy_setopt(curl, CURLOPT_WRITEDATA, s);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)s);
             curl_easy_perform(curl);
             
             curl_easy_cleanup(curl);

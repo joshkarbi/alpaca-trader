@@ -86,12 +86,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "myAlgo/tools/NetworkingUtilities.cpp"
-            timestampString = "557500294.784833"
+            timestampString = "557526604.701421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "simplePost(const std::string&amp; url , const std::string&amp; params)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "myAlgo/tools/NetworkingUtilities.cpp"
+            timestampString = "557526887.12717"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
             landmarkName = "writefunc(void *ptr, size_t size, size_t nmemb, char* s)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "myAlgo/tools/NetworkingUtilities.cpp"
+            timestampString = "557527393.149223"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "simplePost(const std::string&amp; url , const std::string&amp; params)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
