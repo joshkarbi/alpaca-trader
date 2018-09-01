@@ -3,11 +3,13 @@
 //
 
 #include "Trader.hpp"
-#include "tools/FileReadingUtilities.hpp"
-#include "tools/Logger.hpp"
+#include "../tools/FileReadingUtilities.hpp"
+#include "../tools/Logger.hpp"
+#include "../tools/NetworkingUtilities.hpp"
 
-#include <cpr/cpr.h>
+//#include "/cpr/cpr.h"
 #include <fstream>
+#include <iostream>
 
 namespace trading
 {
@@ -20,21 +22,19 @@ namespace trading
         } catch (const std::runtime_error& e)
         {
             tools::log(e.what());
+            
+            // TODO: ask for command-line input if code not found, then write to file
+            
             return;
         }
     }
     
     void Trader::initialize()
     {
-        std::string post_body = "grant_type=authorization_code&code=";
-        post_body.append(auth_code);
-        auto r = cpr::Post(cpr::Url{"https://api.tradier.com/v1/oauth/accesstoken"},
-                           cpr::Header{{"Content-Type", "application/json"}},
-                           cpr::Payload{{"grant_type","authorization_code"},
-                                    {"code", auth_code} }
-                          );
+        const std::string params = "grant_type=authorization_code&code="+auth_code;
+        std::string response = tools::simplePost("https://api.tradier.com/v1/oauth/accesstoken", params);
         
-        std::string response = r.text;
+        // TODO: parse response to get access token
     }
 
     void Trader::runTrader()

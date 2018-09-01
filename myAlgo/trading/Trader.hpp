@@ -26,7 +26,7 @@ namespace trading
         ~Trader() = default;
         
         // called by main method
-        void run()
+        inline void run()
         {
             initialize();
             runTrader();
