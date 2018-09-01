@@ -1,9 +1,13 @@
 # Overview
-An algorithmic trading application written in C++ for small portfolios.
-
-# Dependencies
-Relies on CPR networking library.
+An algorithmic trading application being written in C++ for small portfolios.
 Is being built to work with brokerage API's that use https GET requests (ie. Tradier).
 
-# Running the Trader
-An executable for x86 UNIX-based systems can be found under Build/Products/Debug/ .
+# Contributions are Welcome!
+Please contribute by forking and creating pull requests.
+
+# Dependencies
+Relies on libcurl C networking library.
+
+# Compiling
+Required -lcurl linker flag, and having the curl library installed in your include directory.
+Refer to: https://github.com/curl/curl.
