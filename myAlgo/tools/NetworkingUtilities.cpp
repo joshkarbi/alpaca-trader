@@ -5,6 +5,7 @@
 #include "NetworkingUtilities.hpp"
 #include <stdlib.h>
 #include <iostream>
+#include <vector>
 
 namespace
 {
@@ -37,7 +38,9 @@ namespace
 
 namespace tools
 {
-    std::string simplePost(const std::string& url , const std::string& params)
+    std::string simplePost(const std::string& url,
+                           const std::string& params,
+                           const std::vector<std::string>& headers)
     {
         CURL* curl;
         curl_global_init(CURL_GLOBAL_ALL);
@@ -53,7 +56,14 @@ namespace tools
             curl_easy_setopt(curl, CURLOPT_POSTFIELDS, params.c_str());
             curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeMemoryCallback);
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
-            //curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
+            struct curl_slist *chunk = NULL;
+            
+            for (size_t i = 0; i < headers.size(); i++)
+            {
+                chunk = curl_slist_append(chunk, headers[i].c_str());
+            }
+            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, chunk);
+            
             curl_easy_perform(curl);
             
             curl_easy_cleanup(curl);

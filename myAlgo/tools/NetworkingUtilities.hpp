@@ -6,8 +6,10 @@
 
 #include <curl/curl.h>
 #include <string>
+#include <vector>
 
 namespace tools
 {
-    std::string simplePost(const std::string& url , const std::string& params = "");
+    std::string simplePost(const std::string& url , const std::string& params = "",
+                           const std::vector<std::string>& headers = {});
 }

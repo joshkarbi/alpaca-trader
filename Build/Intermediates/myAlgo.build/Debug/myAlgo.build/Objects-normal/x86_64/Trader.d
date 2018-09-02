@@ -6,4 +6,5 @@ dependencies: /Users/joshuakarbi/Desktop/trader/myAlgo/trading/Trader.cpp \
   /Users/joshuakarbi/Desktop/trader/myAlgo/trading/Order.hpp \
   /Users/joshuakarbi/Desktop/trader/myAlgo/trading/../tools/FileReadingUtilities.hpp \
   /Users/joshuakarbi/Desktop/trader/myAlgo/trading/../tools/Logger.hpp \
-  /Users/joshuakarbi/Desktop/trader/myAlgo/trading/../tools/NetworkingUtilities.hpp
+  /Users/joshuakarbi/Desktop/trader/myAlgo/trading/../tools/NetworkingUtilities.hpp \
+  /Users/joshuakarbi/Desktop/trader/myAlgo/trading/../tools/BasicAuthorization.hpp

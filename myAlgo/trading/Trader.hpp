@@ -51,6 +51,8 @@ namespace trading
         // private variables
         std::string auth_code;
         std::string token;
+        std::string user_name;
+        std::string password;
         Stats trading_stats;
         Portfolio current_portfolio;
     };

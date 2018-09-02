@@ -6,6 +6,7 @@
 #include "../tools/FileReadingUtilities.hpp"
 #include "../tools/Logger.hpp"
 #include "../tools/NetworkingUtilities.hpp"
+#include "../tools/BasicAuthorization.hpp"
 
 //#include "/cpr/cpr.h"
 #include <fstream>
@@ -26,13 +27,21 @@ namespace trading
             // TODO: save to file after
             std::cout << "Enter authorization code: ";
             std::cin >> auth_code;
+            std::cout << "Enter username: ";
+            std::cin >> user_name;
+            std::cout << "Enter password: ";
+            std::cin >> password;
         }
     }
     
     void Trader::initialize()
     {
         const std::string params = "grant_type=authorization_code&code="+auth_code;
-        std::string response = tools::simplePost("https://sandbox.tradier.com/v1/oauth/accesstoken", params);
+        std::vector<std::string> headers = {"Content-Type: application/x-www-form-urlencoded"};
+        std::string auth_info = user_name+":"+password;
+        headers.push_back("Authentication: Basic " + tools::base64_encode(reinterpret_cast<unsigned char const*>(auth_info.c_str()), auth_info.size()));
+        
+        std::string response = tools::simplePost("https://sandbox.tradier.com/v1/oauth/accesstoken", params, headers);
         
         // TODO: parse response to get access token
     }

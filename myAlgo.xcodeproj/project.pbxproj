@@ -10,6 +10,8 @@
 		D146E0A42134DDFE0005027D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D146E0A32134DDFE0005027D /* main.cpp */; };
 		D14F3C43213AC25C0064D6DB /* NetworkingUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D14F3C41213AC25C0064D6DB /* NetworkingUtilities.cpp */; };
 		D14F3C44213AC25C0064D6DB /* NetworkingUtilities.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D14F3C42213AC25C0064D6DB /* NetworkingUtilities.hpp */; };
+		D14F3C47213B89740064D6DB /* BasicAuthorization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D14F3C45213B89740064D6DB /* BasicAuthorization.cpp */; };
+		D14F3C48213B89740064D6DB /* BasicAuthorization.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D14F3C46213B89740064D6DB /* BasicAuthorization.hpp */; };
 		D162C7B4213577B200E8B927 /* Trader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D162C7B2213577B200E8B927 /* Trader.cpp */; };
 		D162C7B7213578A700E8B927 /* Stats.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D162C7B5213578A700E8B927 /* Stats.cpp */; };
 		D162C7BA213578CE00E8B927 /* Portfolio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D162C7B8213578CE00E8B927 /* Portfolio.cpp */; };
@@ -45,6 +47,8 @@
 		D146E0A32134DDFE0005027D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D14F3C41213AC25C0064D6DB /* NetworkingUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkingUtilities.cpp; sourceTree = "<group>"; };
 		D14F3C42213AC25C0064D6DB /* NetworkingUtilities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkingUtilities.hpp; sourceTree = "<group>"; };
+		D14F3C45213B89740064D6DB /* BasicAuthorization.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicAuthorization.cpp; sourceTree = "<group>"; };
+		D14F3C46213B89740064D6DB /* BasicAuthorization.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BasicAuthorization.hpp; sourceTree = "<group>"; };
 		D162C7B2213577B200E8B927 /* Trader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trader.cpp; sourceTree = "<group>"; };
 		D162C7B3213577B200E8B927 /* Trader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Trader.hpp; sourceTree = "<group>"; };
 		D162C7B5213578A700E8B927 /* Stats.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stats.cpp; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 				D162C874213744E100E8B927 /* Logger.hpp */,
 				D14F3C41213AC25C0064D6DB /* NetworkingUtilities.cpp */,
 				D14F3C42213AC25C0064D6DB /* NetworkingUtilities.hpp */,
+				D14F3C45213B89740064D6DB /* BasicAuthorization.cpp */,
+				D14F3C46213B89740064D6DB /* BasicAuthorization.hpp */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -161,6 +167,7 @@
 				D162C8792138742B00E8B927 /* Trader.hpp in Headers */,
 				D162C8782138742500E8B927 /* FileReadingUtilities.hpp in Headers */,
 				D162C8772138741F00E8B927 /* Logger.hpp in Headers */,
+				D14F3C48213B89740064D6DB /* BasicAuthorization.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D14F3C47213B89740064D6DB /* BasicAuthorization.cpp in Sources */,
 				D162C7BD21357A1500E8B927 /* Holding.cpp in Sources */,
 				D162C875213744E100E8B927 /* Logger.cpp in Sources */,
 				D162C7BA213578CE00E8B927 /* Portfolio.cpp in Sources */,
