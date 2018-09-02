@@ -23,16 +23,16 @@ namespace trading
         {
             tools::log(e.what());
             
-            // TODO: ask for command-line input if code not found, then write to file
-            
-            return;
+            // TODO: save to file after
+            std::cout << "Enter authorization code: ";
+            std::cin >> auth_code;
         }
     }
     
     void Trader::initialize()
     {
         const std::string params = "grant_type=authorization_code&code="+auth_code;
-        std::string response = tools::simplePost("https://api.tradier.com/v1/oauth/accesstoken", params);
+        std::string response = tools::simplePost("https://sandbox.tradier.com/v1/oauth/accesstoken", params);
         
         // TODO: parse response to get access token
     }
