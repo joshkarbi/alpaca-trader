@@ -63,7 +63,6 @@
 		D162C87121373E0E00E8B927 /* FileReadingUtilities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = FileReadingUtilities.hpp; path = myAlgo/tools/FileReadingUtilities.hpp; sourceTree = SOURCE_ROOT; };
 		D162C873213744E100E8B927 /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Logger.cpp; path = myAlgo/tools/Logger.cpp; sourceTree = SOURCE_ROOT; };
 		D162C874213744E100E8B927 /* Logger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Logger.hpp; path = myAlgo/tools/Logger.hpp; sourceTree = SOURCE_ROOT; };
-		D162C87F2138747200E8B927 /* cpr */ = {isa = PBXFileReference; lastKnownFileType = folder; name = cpr; path = ../../../../cpr; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +81,6 @@
 			children = (
 				D146E0A22134DDFE0005027D /* myAlgo */,
 				D146E0A12134DDFE0005027D /* Products */,
-				D162C87E2138747200E8B927 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,14 +140,6 @@
 				D14F3C46213B89740064D6DB /* BasicAuthorization.hpp */,
 			);
 			path = tools;
-			sourceTree = "<group>";
-		};
-		D162C87E2138747200E8B927 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D162C87F2138747200E8B927 /* cpr */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

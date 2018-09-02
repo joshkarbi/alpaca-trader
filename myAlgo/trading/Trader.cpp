@@ -23,25 +23,35 @@ namespace trading
         } catch (const std::runtime_error& e)
         {
             tools::log(e.what());
+            std::string user_name, password;
             
-            // TODO: save to file after
             std::cout << "Enter authorization code: ";
             std::cin >> auth_code;
             std::cout << "Enter username: ";
             std::cin >> user_name;
             std::cout << "Enter password: ";
             std::cin >> password;
+            std::string concatenated_auth_info = user_name+":"+password;
+            
+            // TODO: save to file after
+            user_pass_encoded = tools::base64_encode(reinterpret_cast<unsigned char const*>(concatenated_auth_info.c_str()), concatenated_auth_info.size());
         }
+        
+#ifdef SANDBOX
+        api_url = "https://sandbox.tradier.com";
+#endif
+#ifdef REAL
+        api_url = "https://api.tradier.com";
+#endif
     }
     
     void Trader::initialize()
     {
         const std::string params = "grant_type=authorization_code&code="+auth_code;
         std::vector<std::string> headers = {"Content-Type: application/x-www-form-urlencoded"};
-        std::string auth_info = user_name+":"+password;
-        headers.push_back("Authentication: Basic " + tools::base64_encode(reinterpret_cast<unsigned char const*>(auth_info.c_str()), auth_info.size()));
+        headers.push_back("Authentication: Basic " + user_pass_encoded);
         
-        std::string response = tools::simplePost("https://sandbox.tradier.com/v1/oauth/accesstoken", params, headers);
+        std::string response = tools::simplePost(api_url+"/v1/oauth/accesstoken", params, headers);
         
         // TODO: parse response to get access token
     }

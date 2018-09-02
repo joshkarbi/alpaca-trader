@@ -5,6 +5,9 @@
 #include <fstream>
 #include "trading/Trader.hpp"
 
+#define SANDBOX
+// #define REAL
+
 int main() {
     trading::Trader app;
     app.run();

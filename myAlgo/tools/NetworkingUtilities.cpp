@@ -48,6 +48,7 @@ namespace tools
         struct MemoryStruct chunk;
         chunk.memory = (char *)malloc(1);
         chunk.size = 0;
+        struct curl_slist *header_list = NULL;
         
         if (curl)
         {
@@ -56,18 +57,20 @@ namespace tools
             curl_easy_setopt(curl, CURLOPT_POSTFIELDS, params.c_str());
             curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeMemoryCallback);
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
-            struct curl_slist *chunk = NULL;
+            struct curl_slist *header_list = NULL;
             
             for (size_t i = 0; i < headers.size(); i++)
             {
-                chunk = curl_slist_append(chunk, headers[i].c_str());
+                header_list = curl_slist_append(header_list, headers[i].c_str());
             }
-            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, chunk);
+            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, header_list);
             
             curl_easy_perform(curl);
             
             curl_easy_cleanup(curl);
         }
+        
+        curl_slist_free_all(header_list); /* free the list again */
         curl_global_cleanup();
         
         std::string result(chunk.memory, chunk.size);
