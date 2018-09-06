@@ -16,7 +16,7 @@ Refer to: https://github.com/curl/curl.
 To contribute towards an issue, first clone the repository (git clone https://github.com/joshuakarbi/algorithmic_trader.git), and then follow these steps:
   
   1. Assign the issue to yourself.
-  2. Make a branch off of master following the format trader-<issue number> (ie. trader-2).
+  2. Make a branch off of master following the format trader-ISSUE_NUMBER (ie. trader-2).
   3. Do a git fetch and git pull on your local copy (git fetch && git pull).
   4. Checkout your new branch (git checkout <branch name>)
   5. Write and test your new code.
