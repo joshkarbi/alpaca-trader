@@ -1,0 +1,4 @@
+# Ignore xCode specific directories
+Build/*
+.DS_Store
+myAlgo.xcodeproj
