@@ -18,10 +18,10 @@ To contribute towards an issue, first clone the repository (git clone https://gi
   1. Assign the issue to yourself.
   2. Make a branch off of master following the format trader-ISSUE_NUMBER (ie. trader-2).
   3. Do a git fetch and git pull on your local copy (git fetch && git pull).
-  4. Checkout your new branch (git checkout <branch name>)
+  4. Checkout your new branch (git checkout BRANCH_NAME)
   5. Write and test your new code.
-  6. Commit your code to git (git commit -a OR git add <changed file> && git commit).
-  7. Push your code to your remote branch (git push <branch name>).
-  8. Create a pull request to merge <branch name> into master.
+  6. Commit your code to git (git commit -a OR git add CHANGED_FILE && git commit).
+  7. Push your code to your remote branch (git push BRANCH_NAME).
+  8. Create a pull request to merge BRANCH_NAME into master.
   
 Note that some development environments can do all of this for you through their GUI.
