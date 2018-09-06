@@ -22,7 +22,10 @@ namespace trading
         {
             // do nothing
         }
-        ~Order() = default;
+        ~Order()
+        {
+            // default
+        }
         
         // main constructor
         Order(const Holding& hold);

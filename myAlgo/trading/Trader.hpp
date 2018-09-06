@@ -23,7 +23,10 @@ namespace trading
     public:
         Trader();
         
-        ~Trader() = default;
+        ~Trader()
+        {
+            // default
+        }
         
         // called by main method
         inline void run()

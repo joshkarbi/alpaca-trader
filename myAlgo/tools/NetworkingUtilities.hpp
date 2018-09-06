@@ -11,5 +11,5 @@
 namespace tools
 {
     std::string simplePost(const std::string& url , const std::string& params = "",
-                           const std::vector<std::string>& headers = {});
+                           const std::vector<std::string>& headers = std::vector<std::string>());
 }
