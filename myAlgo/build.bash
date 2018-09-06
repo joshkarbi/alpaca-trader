@@ -6,4 +6,4 @@ g++ -std=c++11 main.cpp trading/Order.cpp trading/Holding.cpp trading/Portfolio.
 
 # For TEST files (ie. using Boost Test) 
 # include compiler flag "-I /usr/local/lib/boost_1_68_0"
-# and linker flag /usr/local/lib/boost_1_68_0/stage/lib
+# and linker flag "-L /usr/local/lib/boost_1_68_0/stage/lib"
