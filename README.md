@@ -1,15 +1,10 @@
 # Overview
 An algorithmic trading application being written in C++ for small portfolios.
-Is being built to work with brokerage API's that use https GET requests (ie. Tradier).
-
-# Contributions are Welcome!
-Please contribute by forking and creating pull requests.
+Is being built to work with the Tradier brokerage API.
 
 # Dependencies
-Relies on libcurl C networking library.
-
-# Compiling
-Required -lcurl linker flag, and having the curl library installed in your include directory.
+Relies on the libcurl C networking library.
+Install the library and compile with the -lcurl linker flag.
 Refer to: https://github.com/curl/curl.
 
 # GitHub Crash Course
