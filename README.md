@@ -7,6 +7,9 @@ Relies on the libcurl C networking library.
 Install the library and compile with the -lcurl linker flag.
 Refer to: https://github.com/curl/curl.
 
+# Building
+The application can be compiled by running the myAlgo/build.bash script.
+
 # GitHub Crash Course
 To contribute towards an issue, first clone the repository (git clone https://github.com/joshuakarbi/algorithmic_trader.git), and then follow these steps:
   
