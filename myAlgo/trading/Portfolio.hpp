@@ -23,7 +23,10 @@ namespace trading
         {
             // do nothing
         };
-        ~Portfolio() = default;
+        ~Portfolio()
+        {
+            // default
+        }
         
         // query Tradier API to retrieve current User data
         // return true on success

@@ -2,3 +2,5 @@
 Build/*
 .DS_Store
 myAlgo.xcodeproj/*
+
+*.gch
