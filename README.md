@@ -7,6 +7,9 @@ Relies on the libcurl C networking library.
 Install the library and compile with the -lcurl linker flag.
 Refer to: https://github.com/curl/curl.
 
+Also makes use of the Boost C++ library.
+Refer to https://www.boost.org/ for download instructions.
+
 # Building
 The application can be compiled by running the myAlgo/build.bash script.
 
