@@ -4,3 +4,4 @@ Build/*
 myAlgo.xcodeproj/*
 
 *.gch
+myAlgo/a.out

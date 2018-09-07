@@ -39,6 +39,7 @@ namespace
 namespace tools
 {
     std::string simplePost(const std::string& url,
+                           const std::string& user_pass,
                            const std::string& params,
                            const std::vector<std::string>& headers)
     {
@@ -54,6 +55,8 @@ namespace tools
         {
             
             curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+            curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_easy_setopt(curl, CURLOPT_USERPWD, user_pass.c_str());
             curl_easy_setopt(curl, CURLOPT_POSTFIELDS, params.c_str());
             curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeMemoryCallback);
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);

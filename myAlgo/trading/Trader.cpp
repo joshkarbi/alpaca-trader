@@ -51,7 +51,7 @@ namespace trading
         std::vector<std::string> headers = {"Content-Type: application/x-www-form-urlencoded"};
         headers.push_back("Authentication: Basic " + user_pass_encoded);
         
-        std::string response = tools::simplePost(api_url+"/v1/oauth/accesstoken", params, headers);
+       // std::string response = tools::simplePost(api_url+"/v1/oauth/accesstoken", params, headers);
         
         // TODO: parse response to get access token
     }
