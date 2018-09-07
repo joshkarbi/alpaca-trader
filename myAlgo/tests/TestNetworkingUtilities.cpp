@@ -5,7 +5,7 @@
 #define BOOST_TEST_DYN_LINK
 #endif
 #define BOOST_TEST_MAIN
-#define BOOST_TEST_MODULE Main
+#define BOOST_TEST_MODULE test_networking_utilities
 
 #include <boost/test/unit_test.hpp>
 #include "../tools/NetworkingUtilities.hpp"
