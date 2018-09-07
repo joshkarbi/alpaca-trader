@@ -5,3 +5,4 @@ myAlgo.xcodeproj/*
 
 *.gch
 myAlgo/a.out
+*.exe
