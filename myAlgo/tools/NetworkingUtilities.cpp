@@ -38,6 +38,7 @@ namespace
 
 namespace tools
 {
+    // return the whole response as a string
     std::string simplePost(const std::string& url,
                            const std::string& user_pass,
                            const std::string& params,
@@ -66,6 +67,48 @@ namespace tools
             {
                 header_list = curl_slist_append(header_list, headers[i].c_str());
             }
+            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, header_list);
+            
+            curl_easy_perform(curl);
+            
+            curl_easy_cleanup(curl);
+        }
+        
+        curl_slist_free_all(header_list); /* free the list again */
+        curl_global_cleanup();
+        
+        std::string result(chunk.memory, chunk.size);
+        std::cout << result << std::endl;
+        return result;
+    }
+    
+    std::string simpleGet(const std::string& url,
+                          const std::string& user_pass,
+                          const std::vector<std::string>& headers)
+    {
+        CURL* curl;
+        curl_global_init(CURL_GLOBAL_ALL);
+        curl = curl_easy_init();
+        struct MemoryStruct chunk;
+        chunk.memory = (char *)malloc(1);
+        chunk.size = 0;
+        struct curl_slist *header_list = NULL;
+        
+        if (curl)
+        {
+            
+            curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+            curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_easy_setopt(curl, CURLOPT_USERPWD, user_pass.c_str());
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeMemoryCallback);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
+            struct curl_slist *header_list = NULL;
+            
+            for (size_t i = 0; i < headers.size(); i++)
+            {
+                header_list = curl_slist_append(header_list, headers[i].c_str());
+            }
+            
             curl_easy_setopt(curl, CURLOPT_HTTPHEADER, header_list);
             
             curl_easy_perform(curl);

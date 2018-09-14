@@ -24,5 +24,15 @@ BOOST_AUTO_TEST_CASE(simple_post)
     // test simplePost works with test server
     BOOST_CHECK_EQUAL(response, "Thank you for this dump. I hope you have a lovely day!");
 }
+
+BOOST_AUTO_TEST_CASE(simple_get)
+{
+    std::string get_test_url = "http://httpbin.org/get";
     
+    const std::string response = tools::simpleGet(get_test_url);
+    
+    // test response is as expected
+    BOOST_CHECK(response.find("http://httpbin.org/get") != std::string::npos);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
