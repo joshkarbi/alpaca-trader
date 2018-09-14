@@ -7,6 +7,7 @@
 #include "../tools/Logger.hpp"
 #include "../tools/NetworkingUtilities.hpp"
 #include "../tools/BasicAuthorization.hpp"
+#include "../tools/PreprocessorOptions.hpp"
 
 //#include "/cpr/cpr.h"
 #include <fstream>

@@ -3,6 +3,7 @@
 //
 
 #include "NetworkingUtilities.hpp"
+#include "PreprocessorOptions.hpp"
 #include <stdlib.h>
 #include <iostream>
 #include <vector>
@@ -78,7 +79,11 @@ namespace tools
         curl_global_cleanup();
         
         std::string result(chunk.memory, chunk.size);
+        
+#ifdef DEBUG_MODE
         std::cout << result << std::endl;
+#endif
+        
         return result;
     }
     
@@ -120,7 +125,10 @@ namespace tools
         curl_global_cleanup();
         
         std::string result(chunk.memory, chunk.size);
+        
+#ifdef DEBUG_MODE
         std::cout << result << std::endl;
+#endif
         return result;
     }
 }
