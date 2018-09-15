@@ -3,7 +3,7 @@
 # TODO: use CMake
 
 # MAIN APPLICATION EXECUTABLE
-g++ -std=c++11 -o trader.exe main.cpp trading/Order.cpp trading/Holding.cpp trading/Portfolio.cpp trading/Trader.cpp trading/Stats.cpp tools/BasicAuthorization.cpp tools/FileReadingUtilities.cpp tools/Logger.cpp tools/NetworkingUtilities.cpp -lcurl
+g++ -std=c++11 -o trader.exe main.cpp trading/Order.cpp trading/Holding.cpp trading/Portfolio.cpp trading/Trader.cpp trading/Stats.cpp tools/FileReadingUtilities.cpp tools/Logger.cpp tools/NetworkingUtilities.cpp -lcurl
 
 
 # For TEST files (ie. using Boost Test) 

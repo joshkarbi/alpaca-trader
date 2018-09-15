@@ -6,7 +6,6 @@
 #include "../tools/FileReadingUtilities.hpp"
 #include "../tools/Logger.hpp"
 #include "../tools/NetworkingUtilities.hpp"
-#include "../tools/BasicAuthorization.hpp"
 #include "../tools/PreprocessorOptions.hpp"
 
 //#include "/cpr/cpr.h"
@@ -35,7 +34,6 @@ namespace trading
             std::string concatenated_auth_info = user_name+":"+password;
             
             // TODO: save to file after
-            user_pass_encoded = tools::base64_encode(reinterpret_cast<unsigned char const*>(concatenated_auth_info.c_str()), concatenated_auth_info.size());
         }
         
 #ifdef SANDBOX
@@ -50,7 +48,6 @@ namespace trading
     {
         const std::string params = "grant_type=authorization_code&code="+auth_code;
         std::vector<std::string> headers = {"Content-Type: application/x-www-form-urlencoded"};
-        headers.push_back("Authentication: Basic " + user_pass_encoded);
         
        // std::string response = tools::simplePost(api_url+"/v1/oauth/accesstoken", params, headers);
         
