@@ -8,9 +8,9 @@
 #include "../tools/NetworkingUtilities.hpp"
 #include "../tools/PreprocessorOptions.hpp"
 
-//#include "/cpr/cpr.h"
 #include <fstream>
 #include <iostream>
+#include <ctime>
 
 namespace trading
 {
@@ -19,22 +19,22 @@ namespace trading
     {
         try
         {
-            findAuthCode();
+            findClientID();
         } catch (const std::runtime_error& e)
         {
             tools::log(e.what());
-            std::string user_name, password;
-            
-            std::cout << "Enter authorization code: ";
-            std::cin >> auth_code;
-            std::cout << "Enter username: ";
-            std::cin >> user_name;
-            std::cout << "Enter password: ";
-            std::cin >> password;
-            std::string concatenated_auth_info = user_name+":"+password;
-            
-            // TODO: save to file after
         }
+        std::string user_name, password;
+        
+        std::cout << "Enter username: ";
+        std::cin >> user_name;
+        std::cout << "Enter password: ";
+        std::cin >> password;
+        user_pass = user_name+":"+password;
+            
+        // write account info to file
+        tools::appendMessage(user_pass, AUTH_CODE_FILE_PATH);
+        
         
 #ifdef SANDBOX
         api_url = "https://sandbox.tradier.com";
@@ -46,12 +46,19 @@ namespace trading
     
     void Trader::initialize()
     {
-        const std::string params = "grant_type=authorization_code&code="+auth_code;
-        std::vector<std::string> headers = {"Content-Type: application/x-www-form-urlencoded"};
+        srand(time(NULL));
         
-       // std::string response = tools::simplePost(api_url+"/v1/oauth/accesstoken", params, headers);
+        // OBTAIN AUTHORIZATION CODE
+        std::string unique_string = {(char)(rand()%35+65), (char)(rand()%35+65), (char)(rand()%35+65), (char)(rand()%35+65)};
+        std::string url = api_url + "/v1/oauth/authorize?client_id=" + client_id + "&scope=trade&state=" + unique_string;
         
-        // TODO: parse response to get access token
+#ifdef DEBUG_MODE
+        std::cout << "GET AUTH_CODE URL: " << url << std::endl;
+#endif
+        
+        std::string reponse = tools::simpleGet(url);
+        
+        // EXCHANGE FOR ACCESS TOKEN
     }
 
     void Trader::runTrader()
@@ -70,7 +77,7 @@ namespace trading
         // ie. trading_stats.logStats(file_path);
     }
     
-    void Trader::findAuthCode()
+    void Trader::findClientID()
     {
         // get user auth_code
         if ( ! tools::fileExists(AUTH_CODE_FILE_PATH))
@@ -80,7 +87,11 @@ namespace trading
         else
         {
             // parse out the auth code
-            auth_code = tools::getLines(AUTH_CODE_FILE_PATH)[0];
+            client_id = tools::getLines(AUTH_CODE_FILE_PATH)[0];
+            
+#ifdef DEBUG_MODE
+            std::cout << "FOUND CLIENT_ID: " << client_id << std::endl;
+#endif
         }
     }
 

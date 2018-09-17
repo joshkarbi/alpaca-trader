@@ -16,4 +16,10 @@ namespace tools
         logFile << message << std::endl;
         logFile << "---------------------------------------------\n";
     }
+    
+    void appendMessage(const std::string& file, const std::string& message)
+    {
+        std::ofstream outFile(file);
+        outFile << message;
+    }
 }

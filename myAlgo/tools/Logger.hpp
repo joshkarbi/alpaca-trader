@@ -12,4 +12,7 @@ namespace tools
     
     // write logs at runtime
     void log(const std::string& message);
+    
+    // append message to file
+    void appendMessage(const std::string& file, const std::string& message);
 }

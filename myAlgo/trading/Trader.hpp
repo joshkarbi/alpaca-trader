@@ -39,7 +39,7 @@ namespace trading
     private:
         
         // look for code in file
-        void findAuthCode();
+        void findClientID();
         
         // set everything up, query for current user holdings, etc.
         void initialize();
@@ -52,9 +52,10 @@ namespace trading
         
         
         // private variables
-        std::string auth_code;
+        std::string client_id;
         std::string token;
         std::string api_url;
+        std::string user_pass;
         Stats trading_stats;
         Portfolio current_portfolio;
     };
