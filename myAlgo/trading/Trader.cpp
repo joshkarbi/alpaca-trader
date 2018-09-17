@@ -33,7 +33,7 @@ namespace trading
         user_pass = user_name+":"+password;
             
         // write account info to file
-        tools::appendMessage(user_pass, AUTH_CODE_FILE_PATH);
+        tools::appendMessage(AUTH_CODE_FILE_PATH, user_pass);
         
         
 #ifdef SANDBOX
