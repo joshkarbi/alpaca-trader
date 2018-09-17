@@ -33,7 +33,7 @@ namespace trading
         user_pass = user_name+":"+password;
             
         // write account info to file
-        tools::appendMessage(AUTH_CODE_FILE_PATH, user_pass);
+        //tools::appendMessage(AUTH_CODE_FILE_PATH, user_pass);
         
         
 #ifdef SANDBOX
@@ -46,19 +46,24 @@ namespace trading
     
     void Trader::initialize()
     {
+        std::string url = "";
+#ifdef REAL
         srand(time(NULL));
         
         // OBTAIN AUTHORIZATION CODE
-        std::string unique_string = {(char)(rand()%35+65), (char)(rand()%35+65), (char)(rand()%35+65), (char)(rand()%35+65)};
-        std::string url = api_url + "/v1/oauth/authorize?client_id=" + client_id + "&scope=trade&state=" + unique_string;
+        std::string unique_string = "ABCD";
+        url = api_url + "/v1/oauth/authorize?client_id=" + client_id + "&scope=trade&state=" + unique_string;
+#endif
         
 #ifdef DEBUG_MODE
         std::cout << "GET AUTH_CODE URL: " << url << std::endl;
 #endif
         
+#ifdef REAL
         std::string reponse = tools::simpleGet(url);
         
         // EXCHANGE FOR ACCESS TOKEN
+#endif
     }
 
     void Trader::runTrader()
@@ -69,6 +74,13 @@ namespace trading
         
         // update stats by appending to Orders vector
         // update portfolio (cash left and holdings)
+        
+#ifdef DEBUG_MODE
+        std::string quote_url = api_url+"/v1/markets/quotes?symbols=SPY,SPY140627C00195500";
+        std::vector<std::string> headers = {"Authorization: Bearer "+client_id, "Accept: application/json"};
+        std::cout << "ACCESS TOKEN: " << client_id << std::endl;
+        std::string response = tools::simpleGet(quote_url, "", headers);
+#endif
     }
 
     void Trader::finishUp()
