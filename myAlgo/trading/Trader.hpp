@@ -8,6 +8,7 @@
 
 #include "Stats.hpp"
 #include "Portfolio.hpp"
+#include "Strategy.hpp"
 
 namespace trading
 {
@@ -56,7 +57,10 @@ namespace trading
         std::string token;
         std::string api_url;
         std::string user_pass;
+
+        // large-scale objects
         Stats trading_stats;
         Portfolio current_portfolio;
+        Strategy current_strategy;
     };
 }
