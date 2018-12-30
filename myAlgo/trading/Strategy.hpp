@@ -22,6 +22,15 @@ namespace trading
 			// Note: expects config file to be formatted with <param><space><value> on each line
 			bool setup(const std::string& fileName);
 
+			// check map
+			std::string getValue(const std::string& key) {
+				auto it = parameters.find(key);
+				if (it != parameters.end()) {
+					return it->second;
+				}
+				return "NULL";
+			}
+
 		private:
 			// contains key-value pairs of trading parameters and limits
 			// ie. "buyLimit" -> "$500"

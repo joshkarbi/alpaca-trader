@@ -2,12 +2,12 @@
 
 #include "Strategy.hpp"
 
-#include "FileReadingUtilities.hpp"
+#include "../tools/FileReadingUtilities.hpp"
 #include <cstddef>
 
 namespace trading
 {
-	bool shouldBuy(const Order& buy)
+	bool Strategy::shouldBuy(const Order& buy)
 	{
 		bool result = false;
 
@@ -16,7 +16,7 @@ namespace trading
 		return result;
 	}
 
-	bool shouldSell(const Order& sell)
+	bool Strategy::shouldSell(const Order& sell)
 	{
 		bool result = false;
 
@@ -25,19 +25,22 @@ namespace trading
 		return result;
 	}
 
-	bool setup(const std::string& fileName) 
+	bool Strategy::setup(const std::string& fileName) 
 	{
-		if (fileExists(fileName)) 
+		if (tools::fileExists(fileName)) 
 		{
-			std::vector<std::string> fileLines = getLines(fileName);
+			std::vector<std::string> fileLines = tools::getLines(fileName);
 			for (std::string& line : fileLines) 
 			{
+				// skip blank lines or lines starting with #
+				if (line.empty() || line[0] == '#') { continue; }
+
 				// split lines on space and insert key value
 				size_t splitIndex = line.find_first_of(" ");
 				while (splitIndex != std::string::npos)
   				{
-    				std::string key = splitIndex.substr(0, splitIndex);
-    				std::string value = splitIndex.substr(splitIndex);
+    				std::string key = line.substr(0, splitIndex);
+    				std::string value = line.substr(splitIndex);
     				parameters.insert(parameters.begin(), std::pair<std::string, std::string>(key, value));
   				}
 			}
