@@ -6,17 +6,15 @@
 
 #include <fstream>
 #include <string>
+#include <sys/stat.h>
+#include <unistd.h>
 
 namespace tools
 {
     bool fileExists(const std::string& name)
     {
-        if (FILE *file = fopen(name.c_str(), "r"))
-        {
-            fclose(file);
-            return true;
-        }
-        return false;
+        std::ifstream ifile(name.c_str());
+        return (bool)ifile;
     }
     
     std::vector<std::string> getLines(const std::string& name)

@@ -37,10 +37,10 @@ namespace trading
 
 				// split lines on space and insert key value
 				size_t splitIndex = line.find_first_of(" ");
-				while (splitIndex != std::string::npos)
-  				{
+				if (splitIndex != std::string::npos)
+  				{	
     				std::string key = line.substr(0, splitIndex);
-    				std::string value = line.substr(splitIndex);
+    				std::string value = line.substr(splitIndex+1);
     				parameters.insert(parameters.begin(), std::pair<std::string, std::string>(key, value));
   				}
 			}
