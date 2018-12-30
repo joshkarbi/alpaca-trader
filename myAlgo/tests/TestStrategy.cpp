@@ -21,8 +21,9 @@ trading::Strategy stratObj;
 // Tradier-supported holding parameters
 BOOST_AUTO_TEST_CASE(file_parse)
 {
-    // run the parser
-    stratObj.setup("resources/strategy.config");
+    // run the parser -> should return true if file exists and parsing is successful
+    // NOTE: file path is full here since executable is run from myAlgo/ directory
+    BOOST_CHECK_EQUAL(stratObj.setup("tests/resources/strategy.config"), true);
 
     // test parameters in config file
     BOOST_CHECK_EQUAL(stratObj.getValue("profit-margin"), "0.02");
