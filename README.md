@@ -4,17 +4,17 @@ Is being built to work with the Tradier brokerage API.
 
 # Building
 The application can be running the following:
-'''
+```
 cd myAlgo/
 bash build.bash
-'''
+```
 
 # Tests
 Function suites are tested in Unit Tests under the tests/ directory (using C++ Boost Unit Test Framework).
 To run a test after building project (ie. one for NetworkingUtilities):
-'''
+```
 ./TestNetworkingUtilities.exe
-'''
+```
 
 # Dependencies
 Relies on the libcurl C networking library.
