@@ -8,7 +8,7 @@
 
 namespace tools
 {
-    const std::string MAIN_LOG_FILE = "/tmp/trader.log";
+    const std::string MAIN_LOG_FILE = "trader.log";
     
     // write logs at runtime
     void log(const std::string& message);

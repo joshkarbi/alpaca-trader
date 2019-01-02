@@ -3,7 +3,6 @@
 //
 
 #include "Logger.hpp"
-#include "FileReadingUtilities.hpp"
 
 #include <fstream>
 
@@ -15,6 +14,8 @@ namespace tools
         logFile << "---------------------------------------------\n";
         logFile << message << std::endl;
         logFile << "---------------------------------------------\n";
+
+        // closing the file is done implicitly by ofstream destructor
     }
     
     void appendMessage(const std::string& file, const std::string& message)

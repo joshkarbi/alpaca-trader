@@ -35,6 +35,8 @@ namespace trading
         // write account info to file
         //tools::appendMessage(AUTH_CODE_FILE_PATH, user_pass);
         
+        // We should ask for the app consumer key through console input
+        // then fetch an auth_code and access_token (see tools/Authentication.hpp)
         
 #ifdef SANDBOX
         api_url = "https://sandbox.tradier.com";
