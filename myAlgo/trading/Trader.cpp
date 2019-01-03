@@ -4,7 +4,7 @@
 
 #include "Trader.hpp"
 #include "../tools/FileReadingUtilities.hpp"
-#include "../tools/Logger.hpp"
+#include "../tools/FileWritingUtilities.hpp"
 #include "../tools/NetworkingUtilities.hpp"
 #include "../tools/PreprocessorOptions.hpp"
 

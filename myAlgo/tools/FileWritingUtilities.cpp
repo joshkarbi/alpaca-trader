@@ -2,7 +2,7 @@
 //  Created by Joshua Karbi on 2018-08-29.
 //
 
-#include "Logger.hpp"
+#include "FileWritingUtilities.hpp"
 
 #include <fstream>
 
@@ -29,7 +29,7 @@ namespace tools
     {
         // trunc flag deletes old contents
         // app flag appends message
-        std::ofstream file(file, std::ofstream::trunc | std::ofstream::app);
-        file << message;
+        std::ofstream outFile(file, std::ofstream::trunc | std::ofstream::app);
+        outFile << message;
     }
 }
