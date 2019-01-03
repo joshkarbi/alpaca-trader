@@ -8,6 +8,8 @@
 #include <stdexcept>
 #include <cstdlib>
 #include <ctime>
+#include <stdlib.h>
+#include <string.h>
 
 namespace tools
 {
@@ -15,7 +17,7 @@ namespace tools
 	{
 		// GET https://api.tradier.com/v1/oauth/authorize
 		// with params: client_id=<app key>&scope=trade&state=<any random string>
-		const std::string url = https://api.tradier.com/v1/oauth/authorize
+		const std::string url = "https://api.tradier.com/v1/oauth/authorize";
 
 		// unique state string
 		unsigned seed = time(0);
@@ -28,7 +30,8 @@ namespace tools
 
 		// this invokes a shell command to open a chrome window 
 		// and redirect to Tradier front-end to register
-		system("open -a \"Google Chrome\" " +url+"?client_id="+app_key+"&scope=trade&state=" + uniqueString);
+		std::string command = "open -a \"Google Chrome\" " +url+"?client_id="+app_key+"&scope=trade&state=" + uniqueString;
+		system(command.c_str());
 
 		// after registeration Tradier will hit our Flask API
 		// which will write the info to auth.txt
@@ -40,12 +43,13 @@ namespace tools
 			fileLines = getLines("../auth.txt");
 		} while (fileLines.empty());
 		rapidjson::Document jsonWithCode = getDOMTree(fileLines[0]);
-		auth_code = jsonWithCode["code"];
+		auth_code = jsonWithCode["code"].GetString();
+		std::string state = jsonWithCode["state"].GetString();
 
 		// check for unsafe condition
 		if (state != uniqueString)
 		{
-			throw std::runtime_error("Tradier access token failed due to 'state' variable being malformed.")
+			throw std::runtime_error("Tradier access token failed due to 'state' variable being malformed.");
 		}
 
 		// finally delete contents from auth.txt
@@ -66,11 +70,20 @@ namespace tools
 
 		rapidjson::Document jsonWithToken = getDOMTree(response);
 
-		access_token = jsonWithToken["access_token"];
+		access_token = jsonWithToken["access_token"].GetString();
 
-		if(jsonWithToken["status"] != "approved")
+
+		std::string app = "approved";
+		std::string status = jsonWithToken["status"].GetString();
+		if(strncmp(status.c_str(), app.c_str(), 8) != 0)
 		{
 			throw std::runtime_error("Failed to fetch new Trader API access token.");
 		}
 	}
+
+	// required for linking
+	std::string Authentication::access_token = "";
+	std::string Authentication::auth_code = "";
+	std::string Authentication::app_key = "";
+
 }

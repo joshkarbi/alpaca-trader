@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "NetworkingUtilties.hpp"
+#include "NetworkingUtilities.hpp"
 
 #include <string>
 

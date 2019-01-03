@@ -108,8 +108,13 @@ namespace tools
         {
             
             curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-            curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-            curl_easy_setopt(curl, CURLOPT_USERPWD, user_pass.c_str());
+            
+            if (!user_pass.empty())
+            {
+                curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+                curl_easy_setopt(curl, CURLOPT_USERPWD, user_pass.c_str());
+            }
+
             curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeMemoryCallback);
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
             struct curl_slist *header_list = NULL;

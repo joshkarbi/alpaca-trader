@@ -19,3 +19,5 @@ g++ tests/TestStrategy.cpp -std=c++11 -o TestStrategy.exe trading/Strategy.cpp t
 g++ tests/TestFileReadingUtilities.cpp -std=c++11 -o TestFileReadingUtilities.exe tools/FileReadingUtilities.cpp -I /usr/local/lib/boost_1_68_0/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl
 
 g++ tests/TestJSONUtilities.cpp -std=c++11 -o TestJSONUtilities.exe tools/JSONUtilities.cpp -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl
+
+g++ tests/TestMarketData.cpp -std=c++11 -o TestMarketData.exe tools/MarketData.cpp tools/FileWritingUtilities.cpp tools/Authentication.cpp tools/JSONUtilities.cpp tools/NetworkingUtilities.cpp tools/FileReadingUtilities.cpp -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl
