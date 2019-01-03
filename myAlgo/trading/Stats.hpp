@@ -6,8 +6,8 @@
 
 #include <vector>
 
-#include "Portfolio.hpp"
 #include "Order.hpp"
+#include "Holding.hpp"
 
 namespace trading
 {
@@ -31,7 +31,7 @@ namespace trading
         
         // Could throw if file doesn't exist
         // @return true on success
-        void logStats(const Portfolio& holdings) const;
+        void logStats(const std::vector<Holding>& holdings) const;
         
     private:
         // updates to portfolios "market value"

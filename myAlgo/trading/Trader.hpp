@@ -7,7 +7,6 @@
 #include <string>
 
 #include "Stats.hpp"
-#include "Portfolio.hpp"
 #include "Strategy.hpp"
 
 namespace trading
@@ -60,7 +59,7 @@ namespace trading
 
         // large-scale objects
         Stats trading_stats;
-        Portfolio current_portfolio;
+        // Portfolio current_portfolio;
         Strategy current_strategy;
     };
 }
