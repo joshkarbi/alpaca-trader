@@ -15,6 +15,10 @@ To run a test after building project (ie. one for NetworkingUtilities):
 ```
 ./TestNetworkingUtilities.exe
 ```
+Or to run all unit tests:
+```
+bash run-tests.bash
+```
 
 # Dependencies
 Relies on the libcurl C networking library.
