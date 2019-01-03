@@ -33,6 +33,7 @@ namespace tools
 		// 
 		// Get the auth_code and then get an access_token.
 		// Note: this API relies on the caller to call fetchNewAccessToken() after
+		// @throw if return token is malformed
 		void fetchNewAuthCode();
 
 		// Should be done each day at market open.

@@ -1,9 +1,13 @@
 // Authentication.cpp
 
 #include "Authentication.hpp"
-
+#include "FileReadingUtilities.hpp"
+#include "FileWritingUtilities.hpp"
 #include "JSONUtilities.hpp"
+
 #include <stdexcept>
+#include <cstdlib>
+#include <ctime>
 
 namespace tools
 {
@@ -13,24 +17,39 @@ namespace tools
 		// with params: client_id=<app key>&scope=trade&state=<any random string>
 		const std::string url = https://api.tradier.com/v1/oauth/authorize
 
+		// unique state string
+		unsigned seed = time(0);
+		srand(seed);
+		std::string uniqueString = "";
+		for(int i = 0; i < 10; i++)
+		{
+			uniqueString.append(1, 'a' + rand()%26);
+		}
+
 		// this invokes a shell command to open a chrome window 
 		// and redirect to Tradier front-end to register
-		system("open -a \"Google Chrome\" " +url+"?client_id="+app_key+"&scope=trade&state=myAlgoTrader");
+		system("open -a \"Google Chrome\" " +url+"?client_id="+app_key+"&scope=trade&state=" + uniqueString);
 
-		/** From Tradier documentation:
+		// after registeration Tradier will hit our Flask API
+		// which will write the info to auth.txt
+		// (this is bad but the code expires in 10 minutes)
+		// TODO: change this
+		std::vector<std::string> fileLines;
+		do
+		{
+			fileLines = getLines("../auth.txt");
+		} while (fileLines.empty());
+		rapidjson::Document jsonWithCode = getDOMTree(fileLines[0]);
+		auth_code = jsonWithCode["code"];
 
-			If the user authorizes your application, 
-			a call will be made to the callback URL 
-			registered with your application. 
-			That callback will look something like:
+		// check for unsafe condition
+		if (state != uniqueString)
+		{
+			throw std::runtime_error("Tradier access token failed due to 'state' variable being malformed.")
+		}
 
-			http://mycallbackurl.example.com?code={authcode}&state={state}
-
-			code - Your authorization code
-			state - The same unique string you sent in the request above
-		*/
-
-		// We have to run a 
+		// finally delete contents from auth.txt
+		update("../auth.txt", "");
 	}
 
 	/**
