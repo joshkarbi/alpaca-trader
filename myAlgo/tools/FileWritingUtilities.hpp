@@ -15,4 +15,7 @@ namespace tools
     
     // append message to file
     void appendMessage(const std::string& file, const std::string& message);
+
+    // update contents of file (erasing old and replacing with new data)
+    void update(const std::string& file, const std::string& message);
 }

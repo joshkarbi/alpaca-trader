@@ -6,3 +6,6 @@ myAlgo.xcodeproj/*
 *.gch
 myAlgo/a.out
 *.exe
+
+# ignore log files
+*.txt
