@@ -13,10 +13,12 @@ bash build.bash
 Function suites are tested in Unit Tests under the tests/ directory (using C++ Boost Unit Test Framework).
 To run a test after building project (ie. one for NetworkingUtilities):
 ```
+cd myAlgo/
 ./TestNetworkingUtilities.exe
 ```
 Or to run all unit tests:
 ```
+cd myAlgo/
 bash run-tests.bash
 ```
 
