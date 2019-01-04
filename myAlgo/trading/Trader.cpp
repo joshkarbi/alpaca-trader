@@ -48,7 +48,7 @@ namespace trading
     
     void Trader::initialize()
     {
-        
+        // setup Strategy
     }
 
     void Trader::runTrader()

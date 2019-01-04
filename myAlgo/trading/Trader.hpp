@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include <string>
-
 #include "Stats.hpp"
 #include "Strategy.hpp"
+
+#include <string>
 
 namespace trading
 {
