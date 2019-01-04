@@ -7,7 +7,7 @@
 namespace trading
 {
     // main constructor
-    Holding::Holding(const std::string& sym, size_t ex, size_t number, double price)
+    Holding::Holding(const std::string& sym, size_t number, double price, size_t ex)
     {
         symbol = sym;
         exchange = ex;

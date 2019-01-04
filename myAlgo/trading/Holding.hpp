@@ -34,7 +34,7 @@ namespace trading
         }
         
         // main constructor
-        Holding(const std::string& sym, size_t ex, size_t number, double price);
+        Holding(const std::string& sym, size_t number, double price, size_t ex=0);
         
         // getters
         std::string getSymbol() const { return symbol; };

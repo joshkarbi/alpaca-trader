@@ -19,5 +19,11 @@ namespace tools
 
 		// @return if trading is open
 		static bool isOpen();
+
+	private:
+		// querying is very similar across other functions
+		// @param endOfUrl - part of endpoint after /v1/markets/
+		// @return whole response as string
+		static std::string marketQuery(const std::string& endOfUrl);
 	};
 }

@@ -14,7 +14,7 @@
 
 namespace tools
 {
-	double MarketData::getPrice(const std::string& symbol)
+	std::string MarketData::marketQuery(const std::string& endOfUrl)
 	{
 		std::string auth = ("Authorization: Bearer "+Authentication::access_token);
 
@@ -22,15 +22,19 @@ namespace tools
 		std::vector<std::string> headers = {auth, accept};
 
 		// debug endpoint
-		std::string url = ("https://sandbox.tradier.com/v1/markets/quotes?symbols="+symbol);
+		std::string url = ("https://sandbox.tradier.com/v1/markets/"+endOfUrl);
 
 #ifdef  REAL
 		// real endpoint
-		url = ("https://api.tradier.com/v1/markets/quotes?symbols="+symbol);
+		url = ("https://api.tradier.com/v1/markets/"+endOfUrl);
 #endif
 
-		std::string tradierResponse = simpleGet(url, "", headers);
+		return (simpleGet(url, "", headers));
+	}
 
+	double MarketData::getPrice(const std::string& symbol)
+	{
+		std::string tradierResponse = marketQuery("quotes?symbols="+symbol);
 		rapidjson::Document domTree = getDOMTree(tradierResponse);
 
 		// return avg between bid and ask
@@ -46,7 +50,7 @@ namespace tools
 
 	bool MarketData::isOpen()
 	{
-		// first check using local time
+		// first check using local time (to prevent rate limiting)
         std::time_t now = std::time(NULL);
 		std::tm * ptm = std::localtime(&now);
 		char buffer[32];
@@ -67,18 +71,7 @@ namespace tools
 		}
 
   		// query if necessary
-		std::string auth = ("Authorization: Bearer "+Authentication::access_token);
-		std::string accept = "Accept: application/json";
-		std::vector<std::string> headers = {auth, accept};
-		// debug endpoint
-		std::string url = "https://sandbox.tradier.com/v1/markets/clock";
-
-#ifdef  REAL
-		// real endpoint
-		url = ("https://api.tradier.com/v1/markets/clock";
-#endif
-
-		std::string response = simpleGet(url, "", headers);
+		std::string response = marketQuery("clock");
 		rapidjson::Document domTree = getDOMTree(response);
 		std::string state = domTree["clock"]["state"].GetString();
 		if (state != "open")
