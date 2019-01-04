@@ -21,3 +21,5 @@ g++ tests/TestFileReadingUtilities.cpp -std=c++11 -o TestFileReadingUtilities.ex
 g++ tests/TestJSONUtilities.cpp -std=c++11 -o TestJSONUtilities.exe tools/JSONUtilities.cpp -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl
 
 g++ tests/TestMarketData.cpp -std=c++11 -o TestMarketData.exe tools/MarketData.cpp tools/FileWritingUtilities.cpp tools/Authentication.cpp tools/JSONUtilities.cpp tools/NetworkingUtilities.cpp tools/FileReadingUtilities.cpp -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl
+
+g++ tests/TestAuthentication.cpp -std=c++11 -o TestAuthentication.exe tools/FileReadingUtilities.cpp tools/FileWritingUtilities.cpp tools/Authentication.cpp tools/JSONUtilities.cpp tools/NetworkingUtilities.cpp -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl

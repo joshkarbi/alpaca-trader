@@ -4,12 +4,14 @@
 #include "FileReadingUtilities.hpp"
 #include "FileWritingUtilities.hpp"
 #include "JSONUtilities.hpp"
+#include "PreprocessorOptions.hpp"
 
 #include <stdexcept>
 #include <cstdlib>
 #include <ctime>
 #include <stdlib.h>
 #include <string.h>
+#include <iostream>
 
 namespace tools
 {
@@ -17,8 +19,11 @@ namespace tools
 	{
 		// GET https://api.tradier.com/v1/oauth/authorize
 		// with params: client_id=<app key>&scope=trade&state=<any random string>
-		const std::string url = "https://api.tradier.com/v1/oauth/authorize";
+		std::string url = "https://api.tradier.com/v1/oauth/authorize";
 
+#ifdef SANDBOX
+		url = "https://sandbox.tradier.com/v1/oauth/authorize";
+#endif
 		// unique state string
 		unsigned seed = time(0);
 		srand(seed);
@@ -31,7 +36,10 @@ namespace tools
 		// this invokes a shell command to open a chrome window 
 		// and redirect to Tradier front-end to register
 		std::string command = "open -a \"Google Chrome\" " +url+"?client_id="+app_key+"&scope=trade&state=" + uniqueString;
-		system(command.c_str());
+		std::cout << "Executing command: " << command << std::endl;
+		
+		// return val required not to hang app
+		int a = system(command.c_str());
 
 		// after registeration Tradier will hit our Flask API
 		// which will write the info to auth.txt
@@ -63,8 +71,11 @@ namespace tools
 	{
 		// POST to            https://api.tradier.com/v1/oauth/accesstoken
 		// with parameters:   grant_type=authorization_code&code=<AUTH_CODE>
-		const std::string url = "https://api.tradier.com/v1/oauth/accesstoken?grant_type=authorization_code&code=";
+		std::string url = "https://api.tradier.com/v1/oauth/accesstoken?grant_type=authorization_code&code=";
 
+#ifdef SANDBOX
+		url = "https://sandbox.tradier.com/v1/oauth/accesstoken?grant_type=authorization_code&code=";
+#endif
 		// response is JSON
 		std::string response = simplePost(url+auth_code);
 
