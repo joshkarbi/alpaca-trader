@@ -48,24 +48,7 @@ namespace trading
     
     void Trader::initialize()
     {
-        std::string url = "";
-#ifdef REAL
-        srand(time(NULL));
         
-        // OBTAIN AUTHORIZATION CODE
-        std::string unique_string = "ABCD";
-        url = api_url + "/v1/oauth/authorize?client_id=" + client_id + "&scope=trade&state=" + unique_string;
-#endif
-        
-#ifdef DEBUG_MODE
-        std::cout << "GET AUTH_CODE URL: " << url << std::endl;
-#endif
-        
-#ifdef REAL
-        std::string reponse = tools::simpleGet(url);
-        
-        // EXCHANGE FOR ACCESS TOKEN
-#endif
     }
 
     void Trader::runTrader()
@@ -76,13 +59,6 @@ namespace trading
         
         // update stats by appending to Orders vector
         // update portfolio (cash left and holdings)
-        
-#ifdef DEBUG_MODE
-        std::string quote_url = api_url+"/v1/markets/quotes?symbols=SPY,SPY140627C00195500";
-        std::vector<std::string> headers = {"Authorization: Bearer "+client_id, "Accept: application/json"};
-        std::cout << "ACCESS TOKEN: " << client_id << std::endl;
-        std::string response = tools::simpleGet(quote_url, "", headers);
-#endif
     }
 
     void Trader::finishUp()
@@ -93,20 +69,7 @@ namespace trading
     
     void Trader::findClientID()
     {
-        // get user auth_code
-        if ( ! tools::fileExists(AUTH_CODE_FILE_PATH))
-        {
-            throw std::runtime_error("ERROR: Cannot find authorization code file.");
-        }
-        else
-        {
-            // parse out the auth code
-            client_id = tools::getLines(AUTH_CODE_FILE_PATH)[0];
-            
-#ifdef DEBUG_MODE
-            std::cout << "FOUND CLIENT_ID: " << client_id << std::endl;
-#endif
-        }
+        
     }
 
 }

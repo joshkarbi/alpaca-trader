@@ -16,5 +16,8 @@ namespace tools
 		// @param symbol - (i.e. "APPL", "AAPL150117C00440000", etc.)
 		// @return current market price of equity
 		static double getPrice(const std::string& symbol);
+
+		// @return if trading is open
+		static bool isOpen();
 	};
 }

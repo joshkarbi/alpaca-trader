@@ -23,11 +23,16 @@ BOOST_AUTO_TEST_CASE(price_check)
 
 	// check Apple
 	BOOST_CHECK_NO_THROW(tools::MarketData::getPrice("AAPL"));
-	std::cout << "AAPL: " << tools::MarketData::getPrice("AAPL");
+	std::cout << "AAPL: " << tools::MarketData::getPrice("AAPL") << std::endl;
 
 	// check Boeing
 	BOOST_CHECK_NO_THROW(tools::MarketData::getPrice("BA"));
-	std::cout << "BA: " << tools::MarketData::getPrice("BA");
+	std::cout << "BA: " << tools::MarketData::getPrice("BA") << std::endl;
+
+	// there's no good way of confirming this is correct
+	// so just output this and confirm there's no segfault or abort
+	// in the JSON or time_t string parsing involved
+	std::cout << "Market open? " << tools::MarketData::isOpen() << std::endl;
 }
 
 BOOST_AUTO_TEST_SUITE_END()
