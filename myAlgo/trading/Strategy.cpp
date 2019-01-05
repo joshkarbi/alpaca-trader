@@ -3,6 +3,7 @@
 #include "Strategy.hpp"
 
 #include "../tools/FileReadingUtilities.hpp"
+#include "../tools/JSONUtilities.hpp"
 
 #include <cstddef>
 #include <boost/algorithm/string.hpp>
@@ -11,25 +12,37 @@
 
 namespace trading
 {
-	bool Strategy::shouldBuy(const Order& buy)
+	bool Strategy::shouldBuy(const std::string& symbol)
 	{
 		bool result = false;
 
-		// ... //
+		// we should buy when we see a stock is oversold
+		// RSI below 30 generally but this will be configurable (see settings/strategy.config)
+		// 5-day EMA crossing 10 EMA from below to above
+
+		// not concerned with cash in account or other factors
 
 		return result;
 	}
 
-	bool Strategy::shouldSell(const Order& sell)
+	bool Strategy::shouldSell(const std::string& sell)
 	{
 		bool result = false;
 
-		// ... //
+		// sell when a stock is overbought
+		// 5 EMA crossing from above to below the 10 EMA indicates overbought
+		// RSI over 70 but this is configurable
 
+		// we may also sell if we hit a profit margin
+		// we are satisfied with (ie. 10%)
+
+		// or if we have lost a significant amount
+		// ie. 15% (configurable)
+		
 		return result;
 	}
 
-	// parse out key:value strategy parameters from file
+	// parse out json strategy parameters from file
 	// also store list of stocks to track from config file
 	bool Strategy::setup(const std::string& params, const std::string& stocks) 
 	{
@@ -38,34 +51,28 @@ namespace trading
 
 		if (tools::fileExists(paramFile) && tools::fileExists(stockFile)) 
 		{
-			std::vector<std::string> paramLines = tools::getLines(paramFile);
+			rapidjson::Document strategyJSON = tools::getDOMTree(tools::getWholeFile(paramFile));
 			std::vector<std::string> stockLines = tools::getLines(stockFile);
 
-			for (std::string& line : paramLines) 
-			{
-				// skip blank lines or lines starting with #
-				if (line.empty() || line[0] == '#') { continue; }
+			// parse out sell-when conditions
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[0], strategyJSON["sell-when"]["num-tests-met"].GetDouble()));
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[1], strategyJSON["sell-when"]["profit-margin-over"].GetDouble()));
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[2], strategyJSON["sell-when"]["RSI-over"].GetDouble()));
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[3], strategyJSON["sell-when"]["5-10-EMA-cross-from-above"].GetDouble()));
 
-				// split lines on space and insert key value
-				size_t splitIndex = line.find_first_of(" ");
-				if (splitIndex != std::string::npos)
-  				{	
-    				std::string key = line.substr(0, splitIndex);
-    				std::string value = line.substr(splitIndex+1);
+			// parse out buy conditions
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[0], strategyJSON["buy-when"]["num-tests-met"].GetDouble()));
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[1], strategyJSON["buy-when"]["RSI-below"].GetDouble()));
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[2], strategyJSON["buy-when"]["min-market-cap-billions"].GetDouble()));
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[3], strategyJSON["buy-when"]["5-10-EMA-cross-from-below"].GetDouble()));
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[4], strategyJSON["buy-when"]["PE-greater-than"].GetDouble()));
 
-    				boost::algorithm::trim(key);
-    				boost::algorithm::trim(value);
-
-    				parameters.insert(parameters.begin(), std::pair<std::string, std::string>(key, value));
-  				}
-			}
-
+			// parse out watchlist
 			for (std::string& line : stockLines)
 			{
 				if (line.empty() || line[0] == '#') { continue; }
 
 				std::vector<std::string> lineElements;
-
 				boost::split(lineElements,line,boost::is_any_of(","));
 				boost::algorithm::trim(lineElements[0]);
 				
@@ -103,9 +110,13 @@ namespace trading
 	// are static
 	const std::string Strategy::PARAM_CONFIG_FILE = "settings/strategy.config";
 	const std::string Strategy::WATCHLIST_CONFIG_FILE = "settings/stocks.config";
+	const std::string Strategy::SELL_WHEN[] = 
+	{"sell-num-tests-met", "sell-profit-margin-over", "sell-RSI-over", "sell-5-10-cross-above"};
+	const std::string Strategy::BUY_WHEN[] =
+	{"buy-num-tests-met", "buy-RSI-below", "buy-min-market-cap", "buy-5-10-cross-below", "buy-PE-greater-than"};
 
 	// for linking with static members
-	std::map<std::string, std::string> Strategy::parameters;
+	std::map<std::string, double> Strategy::parameters;
 	std::vector<Stock> Strategy::watchlist;
 
 }

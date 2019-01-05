@@ -14,5 +14,8 @@ namespace tools
     
     // @return all the lines from the file
     std::vector<std::string> getLines(const std::string& file);
-    
+
+    // @return whole file as one string (ie. for JSON config files)
+    // Note: lines will be stripped of newline and whitespace character
+    std::string getWholeFile(const std::string& file);
 }

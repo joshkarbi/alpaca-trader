@@ -8,6 +8,7 @@
 #include <string>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <boost/algorithm/string/erase.hpp>
 
 namespace tools
 {
@@ -32,5 +33,23 @@ namespace tools
         }
         
         return results;
+    }
+
+    std::string getWholeFile(const std::string& name)
+    {
+        std::ifstream file(name);
+
+        std::string line;
+        std::string fileAsString;
+        
+        while (std::getline(file, line))
+        {
+            boost::algorithm::erase_all(line, " ");
+            boost::algorithm::erase_all(line, "\n");
+            fileAsString += line;
+            line.clear();
+        }
+        
+        return fileAsString;
     }
 }
