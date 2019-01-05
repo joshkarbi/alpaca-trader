@@ -5,7 +5,7 @@ Is being built to work with the Alpaca Markets paper trading API.
 # Building
 The application can be built by running the following:
 ```
-cd myAlgo/
+cd trader/
 bash build.bash
 ```
 
@@ -13,12 +13,12 @@ bash build.bash
 Function suites are tested in Unit Tests under the tests/ directory (using C++ Boost Unit Test Framework).
 To run a test after building project (ie. one for NetworkingUtilities):
 ```
-cd myAlgo/
+cd trader/
 ./TestNetworkingUtilities.exe
 ```
 Or to run all unit tests:
 ```
-cd myAlgo/
+cd trader/
 bash run-tests.bash
 ```
 
@@ -43,6 +43,6 @@ Strategy.config contains parameters than can be adjusted. See trading/Strategy.h
 
 # Running
 ```
-cd myAlgo/
+cd trader/
 ./trader.exe
 ```
