@@ -1,9 +1,9 @@
 # Overview
 An algorithmic trading application being written in C++ for small portfolios.
-Is being built to work with the Tradier brokerage API.
+Is being built to work with the Alpaca Markets paper trading API.
 
 # Building
-The application can be running the following:
+The application can be built by running the following:
 ```
 cd myAlgo/
 bash build.bash
@@ -24,26 +24,25 @@ bash run-tests.bash
 
 # Dependencies
 Relies on the libcurl C networking library.
-Install the library and compile with the -lcurl linker flag.
 Refer to: https://github.com/curl/curl.
 
 Also makes use of the Boost C++ library.
 Refer to https://www.boost.org/ for download instructions.
 
-There's a Flask callback for collection OAuth tokens.
-Relies on Flask version 0.12.2
+# Settings
+A "key-id.txt" config file must be made under settings/ and format as following:
 ```
-pip install flask==0.12.2
+{
+  "paper-trading-id":"KEY"
+}
 ```
+Stocks.config contains the stocks you want to have the algorithm track. 
+By default is set to the current S&P 500 companies. See trading/Strategy.hpp for formatting details.
+
+Strategy.config contains parameters than can be adjusted. See trading/Strategy.hpp for details.
 
 # Running
-In one shell:
 ```
 cd myAlgo/
 ./trader.exe
-```
-In another shell:
-```
-cd myAlgo/server/
-flask run
 ```
