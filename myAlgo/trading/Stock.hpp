@@ -13,7 +13,7 @@ namespace trading
 	class Stock
 	{
 	public:
-		Stock(const std::string& s, const std::string& c, const std::string& i="")
+		Stock(const std::string& s, const std::string& c="UNSPECIFIED", const std::string& i="UNSPECIFIED")
 		{
 			symbol = s;
 			company = c;

@@ -38,6 +38,9 @@ namespace trading
 				return "NULL";
 			}
 
+			// Note: is reference
+			static std::vector<Stock>& getWatchlist() { return watchlist; }
+
 		private:
 			// contains key-value pairs of trading parameters and limits
 			// ie. "buyLimit" -> "$500"
@@ -46,7 +49,4 @@ namespace trading
 			// list of stock symbols to track
 			static std::vector<Stock> watchlist;
 	};
-
-	const std::string Strategy::PARAM_CONFIG_FILE = "parameters.config";
-	const std::string Strategy::WATCHLIST_CONFIG_FILE = "stocks.config";
 }
