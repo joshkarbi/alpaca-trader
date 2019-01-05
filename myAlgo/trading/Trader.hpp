@@ -19,15 +19,6 @@ namespace trading
     class Trader
     {
     public:
-        static const std::string KEY_FILE;
-
-        Trader();
-        
-        ~Trader()
-        {
-            // default
-        }
-        
         // called by main method
         inline void run()
         {
@@ -37,10 +28,6 @@ namespace trading
         };
         
     private:
-        
-        // look for code in file
-        void findKeyID();
-        
         // set everything up, query for current user holdings, etc.
         void initialize();
         

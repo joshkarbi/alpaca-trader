@@ -10,22 +10,7 @@ namespace tools
 {
 	void AccountData::fetchAccountNumber()
 	{
-		std::string auth = ("Authorization: Bearer "+Authentication::access_token);
-
-		std::string accept = "Accept: application/json";
-		std::vector<std::string> headers = {auth, accept};
-
-		// debug endpoint
-		std::string url = "https://sandbox.tradier.com/v1/user/profile";
-
-#ifdef  REAL
-		// real endpoint
-		url = "https://api.tradier.com/v1/user/profile";
-#endif
-
-		std::string response = simpleGet(url, "", headers);
-		rapidjson::Document doc = getDOMTree(response);
-		account_number = doc["profile"]["account"]["account_number"].GetString();
+		
 	}
 
 	std::string AccountData::accountQuery(const std::string& endOfUrl)
@@ -33,44 +18,29 @@ namespace tools
 		if (account_number.empty()) { fetchAccountNumber(); }
 		if (account_type.empty()) { fetchAccountType(); }
 
-		std::string auth = ("Authorization: Bearer "+Authentication::access_token);
+		std::string auth = ("APCA-API-KEY-ID: " + Authentication::key);
+		std::string secret = ("APCA-API-SECRET-KEY: " + Authentication::key);
+		std::vector<std::string> headers = {auth, secret};
 
-		std::string accept = "Accept: application/json";
-		std::vector<std::string> headers = {auth, accept};
-
-		// debug endpoint
-		std::string url = ("https://sandbox.tradier.com/v1/accounts/"+account_number+"/"+endOfUrl);
-
-#ifdef  REAL
-		// real endpoint
-		url = ("https://api.tradier.com/v1/accounts/"+account_number+"/"+endOfUrl);
-#endif
+		std::string url = PAPER_DOMAIN+endOfUrl;
 
 		return (simpleGet(url, "", headers));
 	}
 
 	double AccountData::getAccountCashBalance()
 	{
-		std::string response = accountQuery("balances");
+		std::string response = accountQuery("account");
 		rapidjson::Document doc = getDOMTree(response);
 
-		return doc["balances"]["total_cash"].GetDouble();
+		return doc["cash"].GetDouble();
 	}
 
 	double AccountData::getEquityValue()
 	{
-		std::string response = accountQuery("balances");
+		std::string response = accountQuery("acount");
 		rapidjson::Document doc = getDOMTree(response);
 
-		return doc["balances"]["equity"].GetDouble();
-	}
-
-	int AccountData::getPendingOrders()
-	{
-		std::string response = accountQuery("balances");
-		rapidjson::Document doc = getDOMTree(response);
-
-		return doc["balances"]["pending_orders_count"].GetInt();
+		return doc["portfolio_value"].GetDouble() - doc["cash"].GetDouble();
 	}
 
 	std::vector<trading::Holding> AccountData::getAccountPositions()

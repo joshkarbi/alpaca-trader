@@ -4,12 +4,24 @@
 
 #pragma once
 
+#include "PreprocessorOptions.hpp"
+
 #include <curl/curl.h>
 #include <string>
 #include <vector>
 
 namespace tools
 {
+
+	// globals
+#ifdef PAPER
+	const std::string PAPER_DOMAIN = "https://paper-api.alpaca.markets/v1/";
+#endif
+#ifndef PAPER
+	const std::string PAPER_DOMAIN = "https://api.alpaca.markets/v1/";
+#endif
+	const std::string MARKET_DATA_DOMAIN = "https://data.alpaca.markets/v1/";
+
     std::string simplePost(const std::string& url,
                            const std::string& user_pass = "",
                            const std::string& params = "",

@@ -25,16 +25,13 @@ namespace tools
 		// @return value of equities in account
 		static double getEquityValue();
 
-		// @return number of orders awaiting execution
-		static int getPendingOrders();
-
 		// This will need to be done on start-up
 		// @return list of all holdings
 		// Note: Holding objects contain price, quantity, symbol, and exchange information
 		static std::vector<trading::Holding> getAccountPositions();
 
 	private:
-		// @param endOfUrl - portion of endpoint after /v1/accounts/{account_id}/
+		// @param endOfUrl - portion of endpoint after /v1/
 		// @return response from API
 		static std::string accountQuery(const std::string& endOfUrl);
 

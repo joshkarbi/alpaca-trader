@@ -18,16 +18,12 @@
 #include <ctime>
 
 namespace trading
-{
-    // default constructor
-    Trader::Trader()
-    {
-        findKeyID();
-    }
-    
+{   
     void Trader::initialize()
     {
-        // setup Strategy
+        tools::Authentication::setup();
+
+        // returns true on success
         assert(Strategy::setup());
     }
 
@@ -46,16 +42,4 @@ namespace trading
         // write the trading day's stats to a file.
         // ie. trading_stats.logStats(file_path);
     }
-    
-    void Trader::findKeyID()
-    {
-        std::cout << "finding key id\n";
-
-        rapidjson::Document doc = tools::getDOMTree(tools::getWholeFile(KEY_FILE));
-        tools::Authentication::access_token = doc["paper-trading-id"].GetString();
-
-        std::cout << "found token: " << tools::Authentication::access_token << std::endl;
-    }
-
-    const std::string Trader::KEY_FILE = "settings/key-id.txt";
 }

@@ -18,16 +18,16 @@ BOOST_AUTO_TEST_SUITE(test_market_data)
 
 BOOST_AUTO_TEST_CASE(price_check)
 {
-	// we need to see the access token first
-	tools::Authentication::access_token = tools::getLines("tests/resources/access_token.txt")[0];
+	// we need to set the access token first
+	tools::Authentication::setup();
 
 	// check Apple
-	BOOST_CHECK_NO_THROW(tools::MarketData::getPrice("AAPL"));
-	std::cout << "AAPL: " << tools::MarketData::getPrice("AAPL") << std::endl;
+	BOOST_CHECK_NO_THROW(tools::MarketData::getPrices({"AAPL"}));
+	std::cout << "AAPL: " << tools::MarketData::getPrices({"AAPL"})[0] << std::endl;
 
 	// check Boeing
-	BOOST_CHECK_NO_THROW(tools::MarketData::getPrice("BA"));
-	std::cout << "BA: " << tools::MarketData::getPrice("BA") << std::endl;
+	BOOST_CHECK_NO_THROW(tools::MarketData::getPrices({"BA"}));
+	std::cout << "BA: " << tools::MarketData::getPrices({"BA"})[0] << std::endl;
 
 	// there's no good way of confirming this is correct
 	// so just output this and confirm there's no segfault or abort

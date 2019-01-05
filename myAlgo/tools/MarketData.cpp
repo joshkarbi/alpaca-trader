@@ -14,38 +14,39 @@
 
 namespace tools
 {
-	std::string MarketData::marketQuery(const std::string& endOfUrl)
+	std::string MarketData::marketQuery(const std::string& endOfUrl, const std::vector<std::string>& symbols)
 	{
-		std::string auth = ("Authorization: Bearer "+Authentication::access_token);
+		std::string auth = ("APCA-API-KEY-ID: " + Authentication::key);
+		std::string secret = ("APCA-API-SECRET-KEY: " + Authentication::key);
+		std::vector<std::string> headers = {auth, secret};
 
-		std::string accept = "Accept: application/json";
-		std::vector<std::string> headers = {auth, accept};
+		// used for pricing info
+		if ( ! symbols.empty())
+		{
+			std::string list = "";
+			for (size_t i = 0; i < symbols.size(); i++)
+			{
+				list = list+symbols[i];
+				if (i != symbols.size()-1) { list = list+","; }
+			}
+			headers.push_back("symbols: "+list);
+		}
 
-		// debug endpoint
-		std::string url = ("https://sandbox.tradier.com/v1/markets/"+endOfUrl);
-
-#ifdef  REAL
-		// real endpoint
-		url = ("https://api.tradier.com/v1/markets/"+endOfUrl);
-#endif
-
-		return (simpleGet(url, "", headers));
+		return (simpleGet(MARKET_DATA_DOMAIN+endOfUrl, "", headers));
 	}
 
-	double MarketData::getPrice(const std::string& symbol)
+	std::vector<double> MarketData::getPrices(const std::vector<std::string>& symbols)
 	{
-		std::string tradierResponse = marketQuery("quotes?symbols="+symbol);
+		std::vector<double> results;
+		results.reserve(symbols.size());
+		
+		std::string tradierResponse = marketQuery("bars/minute", symbols);
 		rapidjson::Document domTree = getDOMTree(tradierResponse);
 
-		// return avg between bid and ask
-		if (domTree["quotes"]["quote"]["last"].IsDouble())
-		{
-			return (domTree["quotes"]["quote"]["last"].GetDouble());
-		}
-		else
-		{
-			throw std::runtime_error("Failed to parse Tradier API response: " + tradierResponse);
-		}
+		// ... //
+
+		// placeholder for now
+		return results;
 	}
 
 	bool MarketData::isOpen()
@@ -73,11 +74,6 @@ namespace tools
   		// query if necessary
 		std::string response = marketQuery("clock");
 		rapidjson::Document domTree = getDOMTree(response);
-		std::string state = domTree["clock"]["state"].GetString();
-		if (state != "open")
-		{
-			return false;
-		}
-		return true;
+		return domTree["is_open"].GetBool();
 	}
 }
