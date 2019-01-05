@@ -1,11 +1,12 @@
 //
-//  Created by Joshua Karbi on 2018-08-28.
+//  no logic - just main method
 //
 
 #include <fstream>
 #include "trading/Trader.hpp"
 
-int main() {
+int main() 
+{
     trading::Trader app;
     app.run();
     return 0;

@@ -40,5 +40,6 @@ namespace tools
 
 		// Invoked by accountQuery if account_number is null
 		static void fetchAccountNumber();
+		static void fetchAccountType();
 	};
 }

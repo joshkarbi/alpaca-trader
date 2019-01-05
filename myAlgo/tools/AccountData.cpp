@@ -31,7 +31,7 @@ namespace tools
 	std::string AccountData::accountQuery(const std::string& endOfUrl)
 	{
 		if (account_number.empty()) { fetchAccountNumber(); }
-		if (account_type.empty()) { account_type = doc["balances"]["account_type"].GetString(); }
+		if (account_type.empty()) { fetchAccountType(); }
 
 		std::string auth = ("Authorization: Bearer "+Authentication::access_token);
 
@@ -73,23 +73,23 @@ namespace tools
 		return doc["balances"]["pending_orders_count"].GetInt();
 	}
 
-	std::vector<trading::Holding> getAccountPositions()
+	std::vector<trading::Holding> AccountData::getAccountPositions()
 	{
 		std::vector<trading::Holding> results;
 
 		std::string response = accountQuery("positions");
 		rapidjson::Document doc = getDOMTree(response);
 
-		auto positions = doc["positions"];
-		for (auto& position : positions.GetArray())
-		{
-			double cost = position["position"]["cost_basis"].GetDouble();
-			size_t amount = position["position"]["quantity"].GetUint64();
-			std::string symbol = position["position"]["symbol"].GetString();
-			trading::Holding stock(symbol, amount, cost/amount);
-			results.push_back(stock);
-		}
+		// ... //
 
 		return results;
 	}
+
+	void AccountData::fetchAccountType()
+	{
+		// ... //
+	}
+
+	std::string AccountData::account_number;
+	std::string AccountData::account_type;
 }
