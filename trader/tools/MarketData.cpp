@@ -14,38 +14,55 @@
 
 namespace tools
 {
-	std::string MarketData::marketQuery(const std::string& endOfUrl, const std::vector<std::string>& symbols)
+	std::string MarketData::marketQuery(const std::string& endOfUrl,
+	 const std::vector<std::string>& symbols, const std::vector<std::string>& otherParams)
 	{
 		std::string auth = ("APCA-API-KEY-ID: " + Authentication::key);
 		std::string secret = ("APCA-API-SECRET-KEY: " + Authentication::key);
 		std::vector<std::string> headers = {auth, secret};
 
 		// used for pricing info
+		std::string list = "";
 		if ( ! symbols.empty())
 		{
-			std::string list = "";
 			for (size_t i = 0; i < symbols.size(); i++)
 			{
 				list = list+symbols[i];
 				if (i != symbols.size()-1) { list = list+","; }
 			}
-			headers.push_back("symbols: "+list);
 		}
 
-		return (simpleGet(MARKET_DATA_DOMAIN+endOfUrl, "", headers));
+		// ie. for pricing
+		std::string url = MARKET_DATA_DOMAIN+endOfUrl+"?symbols="+list;
+		if ( ! otherParams.empty())
+		{
+			for (const std::string& param : otherParams)
+			{
+				url = url+"&"+param;
+			}
+		}
+		return (simpleGet(url, "", headers));
 	}
 
 	std::vector<double> MarketData::getPrices(const std::vector<std::string>& symbols)
 	{
+		const std::vector<std::string> otherParameters = {"limit=1"};
+
 		std::vector<double> results;
 		results.reserve(symbols.size());
 		
-		std::string tradierResponse = marketQuery("bars/minute", symbols);
+		std::string tradierResponse = marketQuery("bars/minute", symbols, otherParameters);
+
 		rapidjson::Document domTree = getDOMTree(tradierResponse);
 
-		// ... //
+		// parse out price for each stock and push to result vector
+		for (const std::string& symbol : symbols)
+		{
+			// [0] means grab first price Bar object
+			// ["c"] means grab closing price in past 1 minute (ie. price now)
+			results.push_back(domTree[symbol.c_str()][0]["c"].GetDouble());
+		}
 
-		// placeholder for now
 		return results;
 	}
 
@@ -57,8 +74,7 @@ namespace tools
 		char buffer[32];
 
 		// Format: Mo, 15.06.2009 20:20:00
-		std::strftime(buffer, 32, "%a, %d.%m.%Y %H:%M:%S", ptm); 
-		std::cout << buffer;
+		std::strftime(buffer, 32, "%a, %d.%m.%Y %H:%M:%S", ptm);
 		if (buffer[0] == 'S')
 		{
 			// Saturday or Sunday
