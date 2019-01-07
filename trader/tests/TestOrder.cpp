@@ -31,4 +31,12 @@ BOOST_AUTO_TEST_CASE(post_new_order)
 	std::cout << "LOGGED: " << fileText << std::endl;
 }
 
+BOOST_AUTO_TEST_CASE(get_list_of_orders)
+{
+	// we need to set the access token first
+	tools::Authentication::setup();
+
+	BOOST_CHECK_NO_THROW(trading::Order::getAllOrders()); 
+}
+
 BOOST_AUTO_TEST_SUITE_END()

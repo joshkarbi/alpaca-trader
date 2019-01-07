@@ -71,6 +71,9 @@ namespace tools
             
             for (size_t i = 0; i < headers.size(); i++)
             {
+#ifdef DEBUG_MODE
+                std::cout << "Header " << i << " " << headers[i] << std::endl;
+#endif
                 header_list = curl_slist_append(header_list, headers[i].c_str());
             }
             curl_easy_setopt(curl, CURLOPT_HTTPHEADER, header_list);
@@ -86,7 +89,8 @@ namespace tools
         std::string result(chunk.memory, chunk.size);
         
 #ifdef DEBUG_MODE
-      //  std::cout << result << std::endl;
+    std::cout << "POST URL: " << url << " with params: " << params << std::endl;
+    std::cout << result << std::endl;
 #endif
         
         return result;
@@ -137,7 +141,8 @@ namespace tools
         std::string result(chunk.memory, chunk.size);
         
 #ifdef DEBUG_MODE
-        //std::cout << result << std::endl;
+        std::cout << "GET to " << url << std::endl;
+        std::cout << result << std::endl;
 #endif
         return result;
     }

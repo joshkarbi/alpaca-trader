@@ -33,7 +33,9 @@ namespace tools
 		}
 
 		// ie. for pricing
-		std::string url = MARKET_DATA_DOMAIN+endOfUrl+"?symbols="+list;
+		std::string url = MARKET_DATA_DOMAIN+endOfUrl;
+		if (! list.empty()) { url = url+"?symbols="+list;}
+		
 		if ( ! otherParams.empty())
 		{
 			for (const std::string& param : otherParams)

@@ -57,5 +57,23 @@ namespace trading
 		tools::log("Filled order " + security->toString() + " at " + timestamp);
     }
 
+    std::vector<Order> Order::getAllOrders()
+    {
+    	std::string url = tools::PAPER_DOMAIN+"orders";
+    	std::string auth = ("APCA-API-KEY-ID: " + tools::Authentication::key);
+		std::string secret = ("APCA-API-SECRET-KEY: " + tools::Authentication::key);
+		std::vector<std::string> headers = {auth, secret};
+
+		std::string apiResponse = tools::simpleGet(url, "", headers);
+
+		rapidjson::Document doc = tools::getDOMTree(apiResponse);
+		auto a = doc[0].GetArray();
+
+		std::vector<Order> res;
+
+		// ... //
+
+		return res;
+    }
 
 }

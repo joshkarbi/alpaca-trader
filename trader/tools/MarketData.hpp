@@ -25,7 +25,9 @@ namespace tools
 		static bool isOpen();
 
 		// TODO: https://iextrading.com/developer/docs/#relevant
+		// https://github.com/alpacahq/pipeline-live/blob/master/pipeline_live/data/iex/fundamentals.py
 		static double getRSI();
+		static double getPE();
 
 	private:
 		// querying is very similar across other functions

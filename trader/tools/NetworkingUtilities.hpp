@@ -21,6 +21,7 @@ namespace tools
 	const std::string PAPER_DOMAIN = "https://api.alpaca.markets/v1/";
 #endif
 	const std::string MARKET_DATA_DOMAIN = "https://data.alpaca.markets/v1/";
+  const std::string IEX_DOMAIN = "https://api.iextrading.com/1.0";
 
     // @param url - url to POST to
     // @param user_pass - see HTTP basic authentication
@@ -30,7 +31,7 @@ namespace tools
                            const std::string& user_pass = "",
                            const std::string& params = "",
                            const std::vector<std::string>& headers = std::vector<std::string>());
-    
+
     std::string simpleGet(const std::string& url,
                           const std::string& user_pass = "",
                           const std::vector<std::string>& headers = std::vector<std::string>());
