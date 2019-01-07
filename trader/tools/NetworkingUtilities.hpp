@@ -22,6 +22,10 @@ namespace tools
 #endif
 	const std::string MARKET_DATA_DOMAIN = "https://data.alpaca.markets/v1/";
 
+    // @param url - url to POST to
+    // @param user_pass - see HTTP basic authentication
+    // @param params - ie. "param1=value&other=val"
+    // @param headers - any HTTP headers to append to the POST
     std::string simplePost(const std::string& url,
                            const std::string& user_pass = "",
                            const std::string& params = "",

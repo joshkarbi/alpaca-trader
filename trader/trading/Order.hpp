@@ -18,21 +18,17 @@ namespace trading
     class Order
     {
     public:
-        Order()
-        {
-            // do nothing
-        }
-        ~Order()
-        {
-            // default
-        }
-        
         // main constructor
         Order(const Holding& hold);
+
+        // place an order
+        // NOTE: for now will only do market orders, good until cancelled, on NASDAQ
+        // @param action - "sell" or "buy"
+        Order(const std::string& action, const std::string& symbol, const size_t quantity);
         
     private:
         // One order has one "holding" which can have multiple shares
-        Holding security;
-        std::string time;
+        Holding* security;
+        std::string timestamp;
     };
 }

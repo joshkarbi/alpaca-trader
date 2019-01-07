@@ -4,6 +4,8 @@
 
 #include "Holding.hpp"
 
+#include <sstream>
+
 namespace trading
 {
     // main constructor
@@ -39,6 +41,13 @@ namespace trading
         {
             return "TSX";
         }
+    }
+
+    std::string Holding::toString() const
+    {
+        std::stringstream res;
+        res << num_shares << " of " << symbol << " on the " << getStringExchange() << "@ "<< purchase_price;
+        return res.str();
     }
 
 }

@@ -1,20 +1,27 @@
-//
-//  Created by Joshua Karbi on 2018-08-29.
-//
+// FileWritingUtilities.cpp
 
 #include "FileWritingUtilities.hpp"
+#include "PreprocessorOptions.hpp"
 
 #include <fstream>
+#include <iostream>
 
 namespace tools
 {
     void log(const std::string& message)
     {
         // ofstream::out means create file if it doesn't exist
+#ifndef DEBUG
         std::ofstream logFile(MAIN_LOG_FILE, std::ofstream::out);
+#endif
+#ifdef DEBUG
+        std::ofstream logFile("debug_"+MAIN_LOG_FILE, std::ofstream::out);
+#endif
         logFile << "---------------------------------------------\n";
         logFile << message << std::endl;
         logFile << "---------------------------------------------\n";
+
+        std::cout << "LOGGING: " << message << std::endl;
     }
     
     void appendMessage(const std::string& file, const std::string& message)

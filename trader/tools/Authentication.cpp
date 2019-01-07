@@ -20,6 +20,10 @@ namespace tools
     {
         rapidjson::Document doc = tools::getDOMTree(tools::getWholeFile(KEY_FILE));
         key = doc["paper-trading-id"].GetString();
+
+#ifdef DEBUG
+        std::cout << "Found API key: " << key << std::endl;
+#endif
     }
 
 	// required for linking

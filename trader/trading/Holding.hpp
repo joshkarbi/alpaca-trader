@@ -24,21 +24,13 @@ namespace trading
         static const size_t NASDAQ = 1;
         static const size_t TSX = 2;
         
-        Holding()
-        {
-            // do nothing
-        };
-        ~Holding()
-        {
-            // default
-        }
-        
         // main constructor
         Holding(const std::string& sym, size_t number, double price, size_t ex=0);
         
         // getters
         std::string getSymbol() const { return symbol; };
         std::string getStringExchange() const;
+        std::string toString() const;
         size_t getExchange() const { return exchange; };
         size_t getNumShares() const { return num_shares; };
         double getPrice() const { return purchase_price; };
@@ -60,7 +52,7 @@ namespace trading
     };
 } // namespace
 
-// overload hash method to store in unordered sets (see Portfolio)
+// overload hash method to store in unordered sets
 namespace std {
     template <> struct hash<trading::Holding>
     {

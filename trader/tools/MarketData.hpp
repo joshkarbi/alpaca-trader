@@ -24,6 +24,9 @@ namespace tools
 		// @return if trading is open
 		static bool isOpen();
 
+		// TODO: https://iextrading.com/developer/docs/#relevant
+		static double getRSI();
+
 	private:
 		// querying is very similar across other functions
 		// @param endOfUrl - part of endpoint after /v1/markets/
