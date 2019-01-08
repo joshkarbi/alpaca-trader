@@ -17,7 +17,7 @@ namespace trading
 {
     Order::Order(const Holding& hold)
     {
-        *security = hold;
+        *security = new Holding(hold.getSymbol(), hold.getNumShares(), hold.getPrice(), hold.getExchange());
         
         // set time to time in human-readable string form
         std::time_t num_time = std::time(nullptr);

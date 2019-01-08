@@ -4,7 +4,7 @@
 
 # MAIN APPLICATION EXECUTABLE
 echo "Main executable"
-g++ main.cpp -std=c++11 -o trader.exe trading/Order.cpp trading/Strategy.cpp trading/Holding.cpp trading/Trader.cpp trading/Stats.cpp tools/FileReadingUtilities.cpp tools/FileWritingUtilities.cpp tools/JSONUtilities.cpp tools/NetworkingUtilities.cpp tools/MarketData.cpp tools/AccountData.cpp tools/Authentication.cpp -lcurl -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/
+g++ -O main.cpp -std=c++11 -o trader.exe trading/Order.cpp trading/Strategy.cpp trading/Holding.cpp trading/Trader.cpp trading/Stats.cpp tools/FileReadingUtilities.cpp tools/FileWritingUtilities.cpp tools/JSONUtilities.cpp tools/NetworkingUtilities.cpp tools/MarketData.cpp tools/AccountData.cpp tools/Authentication.cpp -lcurl -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/
 
 
 # For TEST files (ie. using Boost Test) 

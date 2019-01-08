@@ -19,6 +19,13 @@ namespace trading
     class Order
     {
     public:
+        ~Order()
+        {
+            if (security != nullptr)
+            {
+                delete security;
+            }
+        }
         // place an order
         // NOTE: for now will only do market orders, good until cancelled, on NASDAQ
         // @param action - "sell" or "buy"
