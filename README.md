@@ -1,6 +1,6 @@
 # Overview
-An algorithmic trading application being written in C++ for small portfolios.
-Is being built to work with the Alpaca Markets paper trading API.
+An algorithmic trading application and C++ Alpaca Markets client.
+Uses the open IEX API to fetch stock financial information and current prices.
 
 # Building
 The application can be built by running the following:
@@ -16,33 +16,51 @@ To run a test after building project (ie. one for NetworkingUtilities):
 cd trader/
 ./TestNetworkingUtilities.exe
 ```
-Or to run all unit tests:
-```
-cd trader/
-bash run-tests.bash
-```
 
 # Dependencies
-Relies on the libcurl C networking library.
-Refer to: https://github.com/curl/curl.
-
-Also makes use of the Boost C++ library.
-Refer to https://www.boost.org/ for download instructions.
+Relies on the libcurl C networking library, as well as C++ Boost.
+Refer to: https://github.com/curl/curl and https://www.boost.org/.
 
 # Settings
-A "key-id.txt" config file must be made under settings/ and format as following:
+A "key-id.txt" config file must be made under settings/ and formatted as following:
 ```
 {
-  "paper-trading-id":"KEY"
+  "paper-trading-id":"{your Alpaca Markets key}",
+  "secret-key":"{your Alpaca Markets secret key}"
 }
 ```
 Stocks.config contains the stocks you want to have the algorithm track. 
-By default is set to the current S&P 500 companies. See trading/Strategy.hpp for formatting details.
+Currently set to the S&P 500 indexed companies, but this can be configured.
+See trading/Strategy.hpp for formatting details.
 
-Strategy.config contains parameters than can be adjusted. See trading/Strategy.hpp for details.
+Strategy.config contains parameters than can be adjusted (sell-when and buy-when parameters).
+See trading/Strategy.hpp for details.
 
 # Running
 ```
 cd trader/
 ./trader.exe
+```
+# Using this as a C++ Alpaca Markets client library
+Required setup (parsing account details out of settings/key-id.txt):
+```
+trading::Authentication::setup();
+```
+Placing orders:
+```
+std::string symbol = "AAPL";
+trading::Order* buyOrder = new trading::Order("buy", symbol, numSharesToBuy);
+trading::Order* sellOrder = new trading::Order("sell", symbol, numSharesToSell);
+```
+Querying for market prices:
+```
+std::vector<double> prices;
+std::vector<std::string> stocks = {"AMZN", "AAPL", "BA", "VGT"};
+prices = tools::MarketData::getPrices(stocks));
+```
+Getting any key stats available form IEX API:
+```
+std::vector<double> keyStats;
+std::vector<std::string> interestedFields = {"marketcap", "dividendYield", "peRatioHigh"};
+keyStats = tools::MarketData::getKeyStats("AAPL", interestedFields);
 ```
