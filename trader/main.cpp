@@ -7,8 +7,10 @@
 
 #include "trading/Trader.hpp"
 #include "tools/FileWritingUtilities.hpp"
+#include "tools/PreprocessorOptions.hpp"
 
 #include <fstream>
+#include <iostream>
 
 int main() 
 {
@@ -17,9 +19,13 @@ int main()
     	trading::Trader app;
     	app.run();
     	return 0;
-    } catch (Exception e)
+    } catch (const std::exception& e)
     {
     	// log any errors thrown up to main
-    	log(e.what()+"\n");
+    	tools::log(e.what());
+
+#ifdef DEBUG
+    	std::cout << "Logging: " << e.what() << std::endl;
+#endif
     }
 }

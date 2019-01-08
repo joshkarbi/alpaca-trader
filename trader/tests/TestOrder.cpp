@@ -22,13 +22,12 @@ BOOST_AUTO_TEST_CASE(post_new_order)
 	tools::Authentication::setup();
 
 	// test buying one share of apple (can reset w/ Alpaca website after)
-	trading::Order apple("buy", "AAPL", 1);
+	BOOST_CHECK_NO_THROW(trading::Order apple("buy", "AAPL", 1));
 
 	// if successful, this should have been logged to debug_trader.log
 	std::string fileText = tools::getWholeFile("debug_trader.log");
 
 	BOOST_CHECK(fileText.find("AAPL") != std::string::npos);
-	std::cout << "LOGGED: " << fileText << std::endl;
 }
 
 BOOST_AUTO_TEST_CASE(get_list_of_orders)

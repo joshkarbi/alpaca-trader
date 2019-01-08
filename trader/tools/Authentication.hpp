@@ -22,5 +22,8 @@ namespace tools
 
 		// parse out token from settings file
 		static void setup();
+
+		// check if we've already done this
+		static bool alreadySetup() { return !key.empty(); }
 	};
 }

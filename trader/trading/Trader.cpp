@@ -16,6 +16,7 @@
 #include <fstream>
 #include <iostream>
 #include <ctime>
+#include <assert.h>
 
 namespace trading
 {   
@@ -24,7 +25,9 @@ namespace trading
         tools::Authentication::setup();
 
         // returns true on success
-        assert(Strategy::setup());
+        if ( ! Strategy::setup()) {
+            throw std::runtime_error("ERROR: Failed to initialize Strategy in Trader initializer().");
+        }
     }
 
     void Trader::runTrader()
