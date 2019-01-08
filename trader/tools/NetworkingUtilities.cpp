@@ -142,6 +142,11 @@ namespace tools
         
 #ifdef DEBUG_MODE
         std::cout << "GET to " << url << std::endl;
+        std::cout << "With headers: " << std::endl;
+        for (const std::string& header : headers)
+        {
+            std::cout << header << std::endl;
+        }
         std::cout << result << std::endl;
 #endif
         return result;

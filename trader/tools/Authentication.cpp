@@ -20,6 +20,7 @@ namespace tools
     {
         rapidjson::Document doc = tools::getDOMTree(tools::getWholeFile(KEY_FILE));
         key = doc["paper-trading-id"].GetString();
+        secretKey = doc["secret-key"].GetString();
 
 #ifdef DEBUG
         std::cout << "Found API key: " << key << std::endl;
@@ -28,5 +29,6 @@ namespace tools
 
 	// required for linking
 	std::string Authentication::key = "";
+	std::string Authentication::secretKey = "";
 	const std::string Authentication::KEY_FILE = "settings/key-id.txt";
 }

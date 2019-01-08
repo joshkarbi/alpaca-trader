@@ -21,30 +21,41 @@ BOOST_AUTO_TEST_CASE(price_check)
 	// we need to set the access token first
 	tools::Authentication::setup();
 
-	// check Apple
-	BOOST_CHECK_NO_THROW(tools::MarketData::getPrices({"AAPL"}));
-	std::cout << "AAPL: " << tools::MarketData::getPrices({"AAPL"})[0] << std::endl;
-
-	// check Boeing
-	BOOST_CHECK_NO_THROW(tools::MarketData::getPrices({"BA"}));
-	std::cout << "BA: " << tools::MarketData::getPrices({"BA"})[0] << std::endl;
-
 	// check multiple stocks at once
 	std::vector<double> prices;
 
-	// MUST BE SORTED
 	std::vector<std::string> stocks = {"AMZN", "AAPL", "BA", "VGT"};
 	BOOST_CHECK_NO_THROW(prices = tools::MarketData::getPrices(stocks));
 
 	for (size_t i = 0; i < prices.size(); i++)
 	{
-		std::cout << stocks[i] << " " << prices[i] << std::endl;
+		std::cout << stocks[i] << ": $" << prices[i] << std::endl;
 	}
+}
 
-	// there's no good way of confirming this is correct
-	// so just output this and confirm there's no segfault or abort
-	// in the JSON or time_t string parsing involved
-	std::cout << "Market open? " << tools::MarketData::isOpen() << std::endl;
+BOOST_AUTO_TEST_CASE(market_is_open)
+{
+	bool result;
+
+	// will throw on malformed JSON response
+	BOOST_CHECK_NO_THROW(result = tools::MarketData::isOpen());
+
+	std::cout << "Market open? " << result << std::endl;
+}
+
+
+BOOST_AUTO_TEST_CASE(IEX_key_stats)
+{
+	std::vector<double> keyStats;
+	std::vector<std::string> interestedFields = {"marketcap", "dividendYield", "peRatioHigh", "peRatioLow"};
+
+	BOOST_CHECK_NO_THROW(keyStats = tools::MarketData::getKeyStats("AAPL", interestedFields));
+
+	// print results
+	for (size_t i = 0; i < keyStats.size(); i++)
+	{
+		std::cout << interestedFields[i] << ": " << keyStats[i] << std::endl;
+	}
 }
 
 BOOST_AUTO_TEST_SUITE_END()

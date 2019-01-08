@@ -14,11 +14,11 @@
 
 namespace tools
 {
-	std::string MarketData::marketQuery(const std::string& endOfUrl,
+	std::string MarketData::marketQueryAlpaca(std::string url,
 	 const std::vector<std::string>& symbols, const std::vector<std::string>& otherParams)
 	{
 		std::string auth = ("APCA-API-KEY-ID: " + Authentication::key);
-		std::string secret = ("APCA-API-SECRET-KEY: " + Authentication::key);
+		std::string secret = ("APCA-API-SECRET-KEY: " + Authentication::secretKey);
 		std::vector<std::string> headers = {auth, secret};
 
 		// used for pricing info
@@ -31,10 +31,6 @@ namespace tools
 				if (i != symbols.size()-1) { list = list+","; }
 			}
 		}
-
-		// ie. for pricing
-		std::string url = MARKET_DATA_DOMAIN+endOfUrl;
-		if (! list.empty()) { url = url+"?symbols="+list;}
 		
 		if ( ! otherParams.empty())
 		{
@@ -46,23 +42,22 @@ namespace tools
 		return (simpleGet(url, "", headers));
 	}
 
+	// @param url after https://api.iextrading.com/1.0/
+	std::string MarketData::marketQueryIEX(const std::string& endOfUrl)
+	{
+		return (simpleGet(IEX_DOMAIN+endOfUrl));
+	}
+
 	std::vector<double> MarketData::getPrices(const std::vector<std::string>& symbols)
 	{
-		const std::vector<std::string> otherParameters = {"limit=1"};
-
 		std::vector<double> results;
-		results.reserve(symbols.size());
-		
-		std::string tradierResponse = marketQuery("bars/minute", symbols, otherParameters);
 
-		rapidjson::Document domTree = getDOMTree(tradierResponse);
-
-		// parse out price for each stock and push to result vector
 		for (const std::string& symbol : symbols)
 		{
-			// [0] means grab first price Bar object
-			// ["c"] means grab closing price in past 1 minute (ie. price now)
-			results.push_back(domTree[symbol.c_str()][0]["c"].GetDouble());
+			std::string iexResponse = marketQueryIEX("stock/"+symbol+"/price");
+			
+			// response is just a number (no JSON)
+			results.push_back(std::stod(iexResponse));
 		}
 
 		return results;
@@ -90,8 +85,26 @@ namespace tools
 		}
 
   		// query if necessary
-		std::string response = marketQuery("clock");
+		std::string response = marketQueryAlpaca(PAPER_DOMAIN+"clock");
 		rapidjson::Document domTree = getDOMTree(response);
 		return domTree["is_open"].GetBool();
+	}
+
+	// return back vector of doubles containing key stats from IEX
+	// Refer to: https://iextrading.com/developer/docs/#key-stats
+	std::vector<double> MarketData::getKeyStats(const std::string& symbol, const std::vector<std::string>& fields)
+	{
+		std::vector<double> results;
+		results.reserve(fields.size());
+
+		std::string iexResponse = marketQueryIEX("stock/"+symbol+"/stats");
+		rapidjson::Document doc = getDOMTree(iexResponse);
+
+		for (const std::string& field : fields)
+		{
+			results.push_back(doc[field.c_str()].GetDouble());
+		}
+
+		return results;
 	}
 }

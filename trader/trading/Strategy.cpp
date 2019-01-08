@@ -58,15 +58,16 @@ namespace trading
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[0], strategyJSON["sell-when"]["num-tests-met"].GetDouble()));
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[1], strategyJSON["sell-when"]["profit-margin-over"].GetDouble()));
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[2], strategyJSON["sell-when"]["RSI-over"].GetDouble()));
-			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[3], strategyJSON["sell-when"]["5-10-EMA-cross-from-above"].GetDouble()));
 
 			// parse out buy conditions
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[0], strategyJSON["buy-when"]["num-tests-met"].GetDouble()));
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[1], strategyJSON["buy-when"]["RSI-below"].GetDouble()));
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[2], strategyJSON["buy-when"]["min-market-cap-billions"].GetDouble()));
-			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[3], strategyJSON["buy-when"]["5-10-EMA-cross-from-below"].GetDouble()));
-			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[4], strategyJSON["buy-when"]["PE-greater-than"].GetDouble()));
-
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[3], strategyJSON["buy-when"]["PE-greater-than"].GetDouble()));
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[4], strategyJSON["buy-when"]["PE-less-than"].GetDouble()));
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[5], strategyJSON["buy-when"]["min-dividend"].GetDouble()));
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[6], strategyJSON["buy-when"]["min-ytd-change"].GetDouble()));
+			
 			// parse out watchlist
 			for (std::string& line : stockLines)
 			{
@@ -111,9 +112,9 @@ namespace trading
 	const std::string Strategy::PARAM_CONFIG_FILE = "settings/strategy.config";
 	const std::string Strategy::WATCHLIST_CONFIG_FILE = "settings/stocks.config";
 	const std::string Strategy::SELL_WHEN[] = 
-	{"sell-num-tests-met", "sell-profit-margin-over", "sell-RSI-over", "sell-5-10-cross-above"};
+	{"sell-num-tests-met", "sell-profit-margin-over", "sell-RSI-over"};
 	const std::string Strategy::BUY_WHEN[] =
-	{"buy-num-tests-met", "buy-RSI-below", "buy-min-market-cap", "buy-5-10-cross-below", "buy-PE-greater-than"};
+	{"buy-num-tests-met", "buy-RSI-below", "buy-min-market-cap", "buy-PE-greater-than", "buy-PE-less-than", "buy-min-dividend", "buy-min-ytd-change"};
 
 	// for linking with static members
 	std::map<std::string, double> Strategy::parameters;

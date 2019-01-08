@@ -16,8 +16,10 @@ namespace tools
 	class Authentication
 	{
 	public:
-		// alpaca API key
+		// alpaca API keys
 		static std::string key;
+		static std::string secretKey;
+		
 		static const std::string KEY_FILE;
 
 		// parse out token from settings file

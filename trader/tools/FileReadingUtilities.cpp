@@ -44,6 +44,8 @@ namespace tools
         
         while (std::getline(file, line))
         {
+            if (line[0] == '#' || line.empty()) { continue; }
+
             boost::algorithm::erase_all(line, " ");
             boost::algorithm::erase_all(line, "\n");
             fileAsString += line;
