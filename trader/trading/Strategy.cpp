@@ -68,6 +68,9 @@ namespace trading
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[5], strategyJSON["buy-when"]["min-dividend"].GetDouble()));
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[6], strategyJSON["buy-when"]["min-ytd-change"].GetDouble()));
 			
+			// parse out reserve cash
+			reserveCash = strategyJSON["min-cash"].GetDouble();
+
 			// parse out watchlist
 			for (std::string& line : stockLines)
 			{
@@ -119,5 +122,6 @@ namespace trading
 	// for linking with static members
 	std::map<std::string, double> Strategy::parameters;
 	std::vector<Stock> Strategy::watchlist;
+	double Strategy::reserveCash;
 
 }

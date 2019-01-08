@@ -40,6 +40,8 @@ BOOST_AUTO_TEST_CASE(file_parse)
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-min-market-cap"), 5);
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-PE-greater-than"), 15);
 
+    BOOST_CHECK_EQUAL(trading::Strategy::getMinCash(), 75.0);
+    
     // 2. Test stocks.config parsing
     std::vector<trading::Stock>& watchlist = trading::Strategy::getWatchlist();
 
