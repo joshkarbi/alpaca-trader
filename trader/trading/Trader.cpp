@@ -25,11 +25,16 @@ namespace trading
         // MUST BE DONE FIRST
         tools::Authentication::setup();
 
-        // initialize current positions
-        currentPortfolio = tools::AccountData::getAccountPositions();
+        if (! tools::AccountData::accountIsActive())
+        {
+            throw std::runtime_error("ERROR: Account is not in \"ACTIVE\" state.");
+        }
+
+        currentHoldings = tools::AccountData::getAccountPositions();
 
         // returns true on success
-        if ( ! Strategy::setup()) {
+        if ( ! Strategy::setup())
+        {
             throw std::runtime_error("ERROR: Failed to initialize Strategy in Trader::initialize().");
         }
     }

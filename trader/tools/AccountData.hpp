@@ -16,9 +16,11 @@ namespace tools
 	class AccountData
 	{
 	public:
+		// @return true if account is in ACTIVE state
+		static bool accountIsActive();
 
 		// @return cash available
-		static double getAccountCashBalance();
+		static double getCashBalance();
 
 		// @return value of equities in account
 		static double getEquityValue();

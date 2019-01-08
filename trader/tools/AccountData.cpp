@@ -19,20 +19,20 @@ namespace tools
 		return (simpleGet(url, "", headers));
 	}
 
-	double AccountData::getAccountCashBalance()
+	double AccountData::getCashBalance()
 	{
 		std::string response = accountQuery("account");
 		rapidjson::Document doc = getDOMTree(response);
 
-		return doc["cash"].GetDouble();
+		return std::stod(doc["cash"].GetString());
 	}
 
 	double AccountData::getEquityValue()
 	{
-		std::string response = accountQuery("acount");
+		std::string response = accountQuery("account");
 		rapidjson::Document doc = getDOMTree(response);
 
-		return doc["portfolio_value"].GetDouble() - doc["cash"].GetDouble();
+		return std::stod(doc["portfolio_value"].GetString()) - std::stod(doc["cash"].GetString());
 	}
 
 	std::vector<trading::Holding> AccountData::getAccountPositions()
@@ -57,6 +57,15 @@ namespace tools
 		}
 
 		return results;
+	}
+
+	bool AccountData::accountIsActive()
+	{
+		std::string response = accountQuery("account");
+		rapidjson::Document doc = getDOMTree(response);
+
+		std::string activeState = "ACTIVE";
+		return (doc["status"].GetString() == activeState);
 	}
 
 }

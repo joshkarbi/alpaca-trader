@@ -36,4 +36,18 @@ BOOST_AUTO_TEST_CASE(get_account_positions)
 	}
 }
 
+BOOST_AUTO_TEST_CASE(get_account_info)
+{
+	double cash, equityValue;
+
+	BOOST_CHECK_NO_THROW(cash = tools::AccountData::getCashBalance());
+	BOOST_CHECK_NO_THROW(equityValue = tools::AccountData::getEquityValue());
+	bool accountActivated;
+	BOOST_CHECK_NO_THROW(accountActivated = tools::AccountData::accountIsActive());
+
+	std::cout << "Cash: " << cash << std::endl;
+	std::cout << "Equity value: " << equityValue << std::endl;
+	std::cout << "Is account active? " << accountActivated << std::endl;
+}
+
 BOOST_AUTO_TEST_SUITE_END()
