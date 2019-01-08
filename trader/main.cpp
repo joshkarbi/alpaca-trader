@@ -2,7 +2,7 @@
 // An algorithmic trading application built to work with the
 // Alpaca Markets brokerage API.
 // 
-// Main
+// Main method -> no logic, just startup and log any errors
 // 
 
 #include "trading/Trader.hpp"

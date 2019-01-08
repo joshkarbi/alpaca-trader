@@ -1,6 +1,4 @@
-//
-//  Created by Joshua Karbi on 2018-08-28.
-//
+// Stats.cpp
 
 #include "Stats.hpp"
 #include "../tools/FileWritingUtilities.hpp"

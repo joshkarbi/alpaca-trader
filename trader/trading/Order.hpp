@@ -1,6 +1,4 @@
-//
-//  Created by Joshua Karbi on 2018-08-28.
-//
+// Order.hpp
 
 #pragma once
 

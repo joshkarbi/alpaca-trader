@@ -11,15 +11,10 @@ namespace tools
     void log(const std::string& message)
     {
         // ofstream::out means create file if it doesn't exist
-#ifndef DEBUG
-        std::ofstream logFile(MAIN_LOG_FILE, std::ofstream::out);
-#endif
-#ifdef DEBUG
-        std::ofstream logFile("debug_"+MAIN_LOG_FILE, std::ofstream::out);
-#endif
-        logFile << "--------------------------------------------------------------\n";
+        std::ofstream logFile(MAIN_LOG_FILE, std::ofstream::out | std::ofstream::app);
+        logFile << "-------------------------------------------------------------------\n";
         logFile << message << std::endl;
-        logFile << "--------------------------------------------------------------\n";
+        logFile << "-------------------------------------------------------------------\n";
 
         std::cout << "LOGGING: " << message << std::endl;
     }

@@ -1,6 +1,4 @@
-//
-//  Created by Joshua Karbi on 2018-09-01.
-//
+// NetworkingUtilities.hpp
 
 #pragma once
 

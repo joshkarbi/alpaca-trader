@@ -32,7 +32,7 @@ namespace trading
 			// @return true on success, false on failure (ie. file does not exist)
 			// Note: expects param config file to be formatted with <param><space><value>
 			// Note: stocks.config should be formatted with <symbol>,<company name>,<industry> on each line
-			static bool setup(const std::string& paramFile="", const std::string& stockFile="");
+			static bool setup(const std::string& paramFile=PARAM_CONFIG_FILE, const std::string& stockFile=WATCHLIST_CONFIG_FILE);
 
 			// check map (return -1 if not found)
 			static double getParamValue(const std::string& key) {

@@ -1,6 +1,5 @@
-//
-//  Created by Joshua Karbi on 2018-08-28.
-//
+// Trader.cpp
+// Main algo logic
 
 #include "Trader.hpp"
 

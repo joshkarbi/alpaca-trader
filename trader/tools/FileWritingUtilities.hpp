@@ -1,15 +1,21 @@
-//
-//  Created by Joshua Karbi on 2018-08-29.
-//
+// FileWritingUtilities.hpp
 
 #pragma once
+
+#include "PreprocessorOptions.hpp"
 
 #include <string>
 
 namespace tools
 {
+	
+#ifndef DEBUG
     const std::string MAIN_LOG_FILE = "trader.log";
-    
+#endif
+#ifdef DEBUG
+    const std::string MAIN_LOG_FILE = "debug_trader.log";
+#endif    
+
     // write logs at runtime
     void log(const std::string& message);
     

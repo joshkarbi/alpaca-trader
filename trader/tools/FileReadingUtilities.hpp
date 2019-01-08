@@ -1,6 +1,4 @@
-//
-//  Created by Joshua Karbi on 2018-08-29.
-//
+// FileReadingUtilities.cpp
 
 #pragma once
 
