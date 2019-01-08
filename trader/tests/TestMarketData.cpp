@@ -58,4 +58,12 @@ BOOST_AUTO_TEST_CASE(IEX_key_stats)
 	}
 }
 
+BOOST_AUTO_TEST_CASE(calculate_RSI)
+{
+	double rsi;
+
+	BOOST_CHECK_NO_THROW(rsi = tools::MarketData::getRSI("AAPL"));
+
+	std::cout << "RSI of AAPL: " << rsi << std::endl;
+}
 BOOST_AUTO_TEST_SUITE_END()

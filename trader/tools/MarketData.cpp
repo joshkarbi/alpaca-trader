@@ -107,4 +107,35 @@ namespace tools
 
 		return results;
 	}
+
+	// calculate RSI based on past month of gain/losses
+	double MarketData::getRSI(const std::string& symbol)
+	{
+		double numLosses = 0, totalLoss = 0, numGains = 0, totalGain = 0;
+
+		std::string iexResponse = marketQueryIEX("stock/"+symbol+"/chart/1m");
+
+		rapidjson::Document lastMonthPrices = getDOMTree(iexResponse);
+		for (auto& day : lastMonthPrices.GetArray())
+		{
+			double dayDelta = day["changePercent"].GetDouble();
+
+			if  (dayDelta < 0) 
+			{ 
+				numLosses++;
+				totalLoss += dayDelta;
+			}
+			else 
+			{ 
+				numGains++;
+				totalGain += dayDelta;
+		 	}
+		}
+
+		double avgGain = totalGain/numGains;
+		double avgLoss = (-1)*totalLoss/numLosses;
+		double rsi = (100.0 - (100.0)/(1+(avgGain/avgLoss)));
+
+		return rsi;
+	}
 }

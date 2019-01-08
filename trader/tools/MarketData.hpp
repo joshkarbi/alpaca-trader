@@ -23,7 +23,7 @@ namespace tools
 
 		// TODO: https://iextrading.com/developer/docs/#relevant
 		// https://github.com/alpacahq/pipeline-live/blob/master/pipeline_live/data/iex/fundamentals.py
-		static double getRSI();
+		static double getRSI(const std::string& symbol);
 
 		// get a bunch of key stats in one IEX query
 		// @param fields - i.e. "marketcap", "dividendYield", "peRatioHigh", "peRatioLow"
