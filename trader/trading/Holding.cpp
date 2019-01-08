@@ -46,7 +46,17 @@ namespace trading
     std::string Holding::toString() const
     {
         std::stringstream res;
-        res << num_shares << " of " << symbol << " on the " << getStringExchange() << "@ "<< purchase_price;
+        std::string p;
+        if (purchase_price == UNKNOWN_PRICE) 
+        { 
+            p = " UNKNOWN PRICE (order to be filled)."; 
+        }
+        else
+        {
+            p = std::to_string(purchase_price);
+        }
+
+        res << num_shares << " of " << symbol << " on the " << getStringExchange() << " @ "<< p;
         return res.str();
     }
 

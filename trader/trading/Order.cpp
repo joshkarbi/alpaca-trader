@@ -30,46 +30,57 @@ namespace trading
     {
     	std::string url = (tools::PAPER_DOMAIN+"orders");
 
+        // NOTE: Alpaca expects POST bodies in JSON format
+
     	std::stringstream ss;
-    	ss << "symbol=" << symbol << "&qty=" <<
-    		quantity << "&side=" << action << "&type=market&time_in_force=gtc";
+    	ss << "{\"symbol\":\"" << symbol << "\",\"qty\":\"" <<
+    		quantity << "\",\"side\":\"" << action << "\",\"type\":\"market\",\"time_in_force\":\"gtc\"}";
 		std::string params = ss.str();
 
+
     	std::string auth = ("APCA-API-KEY-ID: " + tools::Authentication::key);
-		std::string secret = ("APCA-API-SECRET-KEY: " + tools::Authentication::key);
+		std::string secret = ("APCA-API-SECRET-KEY: " + tools::Authentication::secretKey);
 		std::vector<std::string> headers = {auth, secret};
 
 		std::string apiResponse = tools::simplePost(url, "", params, headers);
 
-#ifdef DEBUG
-		std::cout << apiResponse << std::endl;
-#endif
 
 		// construct Order from JSON response
 		rapidjson::Document doc = tools::getDOMTree(apiResponse);
 
+
 		security = new Holding(doc["symbol"].GetString(), 
-			doc["qty"].GetUint64(), doc["filled_avg_price"].GetDouble(),
+			std::stoi(doc["qty"].GetString()), Holding::UNKNOWN_PRICE,
 			Holding::NASDAQ);
 
-		timestamp = doc["filled_at"].GetString();
-
-		tools::log("Filled order " + security->toString() + " at " + timestamp);
+        if (action == "buy") 
+        {
+		    tools::log("Bought " + security->toString());
+        }
+        else if (action == "sell")
+        {
+            tools::log("Sold " + security->toString());
+        }
     }
 
     std::vector<Order> Order::getAllOrders()
     {
     	std::string url = tools::PAPER_DOMAIN+"orders";
     	std::string auth = ("APCA-API-KEY-ID: " + tools::Authentication::key);
-		std::string secret = ("APCA-API-SECRET-KEY: " + tools::Authentication::key);
+		std::string secret = ("APCA-API-SECRET-KEY: " + tools::Authentication::secretKey);
 		std::vector<std::string> headers = {auth, secret};
 
 		std::string apiResponse = tools::simpleGet(url, "", headers);
 
+        std::vector<Order> res;
+        if (apiResponse == "[]") 
+        {
+            // no open orders
+            return res;
+        }
+
 		rapidjson::Document doc = tools::getDOMTree(apiResponse);
 		auto a = doc[0].GetArray();
-
-		std::vector<Order> res;
 
 		// ... //
 

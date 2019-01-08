@@ -26,7 +26,7 @@ namespace trading
                 delete security;
             }
         }
-        // place an order
+        // place an order (buy or sell)
         // NOTE: for now will only do market orders, good until cancelled, on NASDAQ
         // @param action - "sell" or "buy"
         Order(const std::string& action, const std::string& symbol, const size_t quantity);

@@ -23,6 +23,8 @@ namespace trading
         static const size_t NYSE = 0;
         static const size_t NASDAQ = 1;
         static const size_t TSX = 2;
+
+        static constexpr double UNKNOWN_PRICE = -1;
         
         // main constructor
         Holding(const std::string& sym, size_t number, double price, size_t ex=0);

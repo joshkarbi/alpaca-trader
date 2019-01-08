@@ -17,9 +17,9 @@ namespace tools
 #ifdef DEBUG
         std::ofstream logFile("debug_"+MAIN_LOG_FILE, std::ofstream::out);
 #endif
-        logFile << "---------------------------------------------\n";
+        logFile << "--------------------------------------------------------------\n";
         logFile << message << std::endl;
-        logFile << "---------------------------------------------\n";
+        logFile << "--------------------------------------------------------------\n";
 
         std::cout << "LOGGING: " << message << std::endl;
     }

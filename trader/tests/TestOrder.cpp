@@ -14,9 +14,15 @@
 #include <string>
 #include <iostream>
 
+
+/**
+ * Paper trading account should be reset 
+ * and demo log file cleared
+ * after running this test.
+ */
 BOOST_AUTO_TEST_SUITE(test_order)
 
-BOOST_AUTO_TEST_CASE(post_new_order)
+BOOST_AUTO_TEST_CASE(place_buy_order)
 {
 	// we need to set the access token first
 	tools::Authentication::setup();
@@ -27,7 +33,19 @@ BOOST_AUTO_TEST_CASE(post_new_order)
 	// if successful, this should have been logged to debug_trader.log
 	std::string fileText = tools::getWholeFile("debug_trader.log");
 
-	BOOST_CHECK(fileText.find("AAPL") != std::string::npos);
+	BOOST_CHECK(fileText.find("Bought 1 of AAPL") != std::string::npos);
+}
+
+BOOST_AUTO_TEST_CASE(place_sell_order)
+{
+	// sell the AAPL we just bought above
+	BOOST_CHECK_NO_THROW(trading::Order apple("sell", "AAPL", 1));
+
+
+	std::string fileText = tools::getWholeFile("debug_trader.log");
+
+	// check logging
+	BOOST_CHECK(fileText.find("Sold 1 of AAPL") != std::string::npos);
 }
 
 BOOST_AUTO_TEST_CASE(get_list_of_orders)
