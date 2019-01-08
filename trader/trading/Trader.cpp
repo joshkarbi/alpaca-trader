@@ -9,6 +9,7 @@
 #include "../tools/PreprocessorOptions.hpp"
 #include "../tools/Authentication.hpp"
 #include "../tools/JSONUtilities.hpp"
+#include "../tools/AccountData.hpp"
 
 #include "Strategy.hpp"
 
@@ -24,8 +25,9 @@ namespace trading
         // MUST BE DONE FIRST
         tools::Authentication::setup();
 
-        // set currentPortfolio to AccountData::getPositions()
-        
+        // initialize current positions
+        currentPortfolio = tools::AccountData::getAccountPositions();
+
         // returns true on success
         if ( ! Strategy::setup()) {
             throw std::runtime_error("ERROR: Failed to initialize Strategy in Trader::initialize().");
