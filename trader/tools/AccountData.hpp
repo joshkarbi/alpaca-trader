@@ -16,8 +16,6 @@ namespace tools
 	class AccountData
 	{
 	public:
-		static std::string account_number;
-		static std::string account_type;
 
 		// @return cash available
 		static double getAccountCashBalance();
@@ -34,9 +32,5 @@ namespace tools
 		// @param endOfUrl - portion of endpoint after /v1/
 		// @return response from API
 		static std::string accountQuery(const std::string& endOfUrl);
-
-		// Invoked by accountQuery if account_number is null
-		static void fetchAccountNumber();
-		static void fetchAccountType();
 	};
 }

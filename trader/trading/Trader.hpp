@@ -4,8 +4,10 @@
 
 #include "Stats.hpp"
 #include "Strategy.hpp"
+#include "Holding.hpp"
 
 #include <string>
+#include <vector>
 
 namespace trading
 {   
@@ -35,9 +37,8 @@ namespace trading
         // save stuff to files if anything goes wrong
         void finishUp();
 
-        // large-scale objects
-        Stats trading_stats;
-        // Portfolio current_portfolio;
-        Strategy current_strategy;
+        // big logic objects
+        std::vector<Holding> currentHoldings;
+        Stats tradingStats;
     };
 }

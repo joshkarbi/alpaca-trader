@@ -24,6 +24,7 @@ namespace tools
 
 #ifdef DEBUG
         std::cout << "Found API key: " << key << std::endl;
+        std::cout << "Found secret key: " << secretKey << std::endl;
 #endif
     }
 

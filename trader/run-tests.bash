@@ -5,3 +5,4 @@
 ./TestNetworkingUtilities.exe --log_level=all
 ./TestMarketData.exe --log_level=all
 ./TestStrategy.exe --log_level=all
+./TestAccountData.exe --log_level=all

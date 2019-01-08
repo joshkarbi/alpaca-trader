@@ -29,3 +29,6 @@ g++ tests/TestMarketData.cpp -std=c++11 -o TestMarketData.exe tools/MarketData.c
 
 echo "TestOrder"
 g++ tests/TestOrder.cpp -std=c++11 -o TestOrder.exe tools/Authentication.cpp tools/FileWritingUtilities.cpp tools/FileReadingUtilities.cpp tools/JSONUtilities.cpp tools/NetworkingUtilities.cpp trading/Order.cpp trading/Holding.cpp -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl
+
+echo "TestAccountData"
+g++ tests/TestAccountData.cpp -std=c++11 -o TestAccountData.exe tools/Authentication.cpp tools/FileWritingUtilities.cpp tools/FileReadingUtilities.cpp tools/AccountData.cpp tools/JSONUtilities.cpp tools/NetworkingUtilities.cpp trading/Order.cpp trading/Holding.cpp -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl

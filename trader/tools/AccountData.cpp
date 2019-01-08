@@ -8,18 +8,10 @@
 
 namespace tools
 {
-	void AccountData::fetchAccountNumber()
-	{
-		
-	}
-
 	std::string AccountData::accountQuery(const std::string& endOfUrl)
 	{
-		if (account_number.empty()) { fetchAccountNumber(); }
-		if (account_type.empty()) { fetchAccountType(); }
-
 		std::string auth = ("APCA-API-KEY-ID: " + Authentication::key);
-		std::string secret = ("APCA-API-SECRET-KEY: " + Authentication::key);
+		std::string secret = ("APCA-API-SECRET-KEY: " + Authentication::secretKey);
 		std::vector<std::string> headers = {auth, secret};
 
 		std::string url = PAPER_DOMAIN+endOfUrl;
@@ -48,18 +40,23 @@ namespace tools
 		std::vector<trading::Holding> results;
 
 		std::string response = accountQuery("positions");
-		rapidjson::Document doc = getDOMTree(response);
 
-		// ... //
+		if (response == "[]")
+		{
+			// no open positions
+			return results;
+		}
+
+		rapidjson::Document doc = getDOMTree(response);
+		for (auto& positionObj : doc.GetArray())
+		{
+			// const std::string& sym, size_t number, double price, size_t ex=0
+			trading::Holding pos(positionObj["symbol"].GetString(), std::stoi(positionObj["qty"].GetString()),
+				std::stod(positionObj["avg_entry_price"].GetString()), trading::Holding::NASDAQ);
+			results.push_back(pos);
+		}
 
 		return results;
 	}
 
-	void AccountData::fetchAccountType()
-	{
-		// ... //
-	}
-
-	std::string AccountData::account_number;
-	std::string AccountData::account_type;
 }

@@ -21,11 +21,14 @@ namespace trading
 {   
     void Trader::initialize()
     {
+        // MUST BE DONE FIRST
         tools::Authentication::setup();
 
+        // set currentPortfolio to AccountData::getPositions()
+        
         // returns true on success
         if ( ! Strategy::setup()) {
-            throw std::runtime_error("ERROR: Failed to initialize Strategy in Trader initializer().");
+            throw std::runtime_error("ERROR: Failed to initialize Strategy in Trader::initialize().");
         }
     }
 
