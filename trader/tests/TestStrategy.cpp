@@ -33,13 +33,11 @@ BOOST_AUTO_TEST_CASE(file_parse)
     // test parameters in config file
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("sell-num-tests-met"), 1);
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("sell-RSI-over"), 70);
-    BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("sell-5-10-cross-above"), 1);
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("sell-profit-margin-over"), 0.1);
 
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-num-tests-met"), 3);
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-RSI-below"), 40);
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-min-market-cap"), 5);
-    BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-5-10-cross-below"), 1);
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-PE-greater-than"), 15);
 
     // 2. Test stocks.config parsing
