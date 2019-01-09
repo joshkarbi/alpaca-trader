@@ -1,10 +1,10 @@
 # Overview
-An algorithmic trading application and C++ Alpaca Markets client.
+A Linux algorithmic trading application and C++ Alpaca Markets client.
 Uses the open IEX API to fetch stock financial information and current prices.
 
 # Building
 The application can be built by running the following:
-```
+```bash
 cd trader/
 bash build.bash
 ```
@@ -12,7 +12,7 @@ bash build.bash
 # Tests
 Function suites are tested in Unit Tests under the tests/ directory (using C++ Boost Unit Test Framework).
 To run a test after building project (ie. one for NetworkingUtilities):
-```
+```bash
 cd trader/
 ./TestNetworkingUtilities.exe
 ```
@@ -37,7 +37,7 @@ Strategy.config contains parameters than can be adjusted (sell-when and buy-when
 See trading/Strategy.hpp for details.
 
 # Running
-```
+```bash
 cd trader/
 ./trader.exe
 ```
