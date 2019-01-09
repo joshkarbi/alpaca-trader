@@ -108,18 +108,19 @@ namespace tools
 		return results;
 	}
 
-	// calculate RSI based on past month of gain/losses
+	// calculate RSI based on past 14 days of gain/losses
 	double MarketData::getRSI(const std::string& symbol)
 	{
 		double numLosses = 0, totalLoss = 0, numGains = 0, totalGain = 0;
 
 		std::string iexResponse = marketQueryIEX("stock/"+symbol+"/chart/1m");
+		rapidjson::Document recentStats = getDOMTree(iexResponse);
 
-		rapidjson::Document lastMonthPrices = getDOMTree(iexResponse);
-		for (auto& day : lastMonthPrices.GetArray())
+		constexpr size_t NUM_PERIODS = 14;
+		for (size_t i = 1; i <= NUM_PERIODS; i++)
 		{
-			double dayDelta = day["changePercent"].GetDouble();
-
+			double dayDelta = recentStats[recentStats.Size()-i]["changePercent"].GetDouble();
+			std::cout << "Day " << i << " changePercent: " << dayDelta << std::endl;
 			if  (dayDelta < 0) 
 			{ 
 				numLosses++;
@@ -131,11 +132,35 @@ namespace tools
 				totalGain += dayDelta;
 		 	}
 		}
-
 		double avgGain = totalGain/numGains;
 		double avgLoss = (-1)*totalLoss/numLosses;
-		double rsi = (100.0 - (100.0)/(1+(avgGain/avgLoss)));
+
+		double denominator = 1.0+(avgGain*NUM_PERIODS + getCurrentGain(symbol))/(avgLoss*NUM_PERIODS + getCurrentLoss(symbol));
+		double rsi = (100.0 - (100.0)/denominator);
 
 		return rsi;
+	}
+
+	double MarketData::getTodayChangePercentage(const std::string& symbol)
+	{
+		std::string response = marketQueryIEX("stock/"+symbol+"/quote");
+		rapidjson::Document doc = getDOMTree(response);
+		double res = doc["changePercent"].GetDouble();
+		std::cout << "Current change percent in " << symbol << ": " << res << std::endl;
+		return res;
+	}
+
+	double MarketData::getCurrentGain(const std::string& symbol)
+	{
+		double percent = getTodayChangePercentage(symbol);
+		if (percent < 0) { return 0; }
+		return percent;
+	}
+	
+	double MarketData::getCurrentLoss(const std::string& symbol)
+	{
+		double percent = getTodayChangePercentage(symbol);
+		if (percent > 0) { return 0; }
+		return percent;
 	}
 }

@@ -29,6 +29,8 @@ namespace tools
 		// @param fields - i.e. "marketcap", "dividendYield", "peRatioHigh", "peRatioLow"
 		static std::vector<double> getKeyStats(const std::string& symbol, const std::vector<std::string>& fields = {});
 
+		static double getTodayChangePercentage(const std::string& symbol);
+
 	private:
 		// querying is very similar across other functions
 		// @param url - entire URL (sometimes data.api.markets, others paper-api...)
@@ -44,5 +46,10 @@ namespace tools
 		// query the IEX open API
 		// @param url after https://api.iextrading.com/1.0/
 		static std::string marketQueryIEX(const std::string& endOfUrl);
+
+		// opposites of each other
+		// return change in percent from today
+		static double getCurrentGain(const std::string& symbol);
+		static double getCurrentLoss(const std::string& symbol);
 	};
 }
