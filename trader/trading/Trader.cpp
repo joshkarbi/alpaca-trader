@@ -41,12 +41,22 @@ namespace trading
 
     void Trader::runTrader()
     {
-        // get access token
-        // query prices
-        // change positions
-        
-        // update stats by appending to Orders vector
-        // update portfolio (cash left and holdings)
+        for (const Holding& stock : currentHoldings)
+        {
+            if (Strategy::shouldSell(stock.getSymbol()))
+            {
+                // place buy Order
+            }
+        }
+
+        std::vector<Stock>& watchlist = Strategy::getWatchlst();
+        for (const Stock& stock : watchlist)
+        {
+            if (Strategy::shouldBuy(stock.getSymbol()))
+            {
+                // place sell order
+            }
+        }
     }
 
     void Trader::finishUp()
