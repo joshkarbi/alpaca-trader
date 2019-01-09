@@ -16,7 +16,7 @@ echo "TestNetworkingUtilities"
 g++ tests/TestNetworkingUtilities.cpp -std=c++11 -o TestNetworkingUtilities.exe tools/NetworkingUtilities.cpp -I /usr/local/lib/boost_1_68_0/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl
 
 echo "TestStrategy"
-g++ tests/TestStrategy.cpp -std=c++11 -o TestStrategy.exe trading/Holding.cpp tools/AccountData.cpp trading/Strategy.cpp tools/NetworkingUtilities.cpp tools/Authentication.cpp tools/FileWritingUtilities.cpp tools/MarketData.cpp tools/FileReadingUtilities.cpp tools/JSONUtilities.cpp -I /usr/local/lib/boost_1_68_0/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/
+g++ tests/TestStrategy.cpp -std=c++11 -o TestStrategy.exe trading/Holding.cpp tools/AccountData.cpp trading/Strategy.cpp tools/NetworkingUtilities.cpp tools/Authentication.cpp tools/FileWritingUtilities.cpp tools/MarketData.cpp trading/Order.cpp tools/FileReadingUtilities.cpp tools/JSONUtilities.cpp -I /usr/local/lib/boost_1_68_0/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/
 
 echo "TestFileReadingUtilities"
 g++ tests/TestFileReadingUtilities.cpp -std=c++11 -o TestFileReadingUtilities.exe tools/FileReadingUtilities.cpp -I /usr/local/lib/boost_1_68_0/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl

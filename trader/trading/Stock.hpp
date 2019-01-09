@@ -20,9 +20,9 @@ namespace trading
 			industry = i;
 		}
 
-		std::string getSymbol() { return symbol; }
-		std::string getCompany() { return company; }
-		std::string getIndustry() { return industry; }
+		std::string getSymbol() const { return symbol; }
+		std::string getCompany() const { return company; }
+		std::string getIndustry() const { return industry; }
 
 	private:
 		std::string symbol, company, industry;

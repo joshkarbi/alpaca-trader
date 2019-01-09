@@ -49,7 +49,7 @@ namespace trading
             }
         }
 
-        std::vector<Stock>& watchlist = Strategy::getWatchlst();
+        std::vector<Stock>& watchlist = Strategy::getWatchlist();
         for (const Stock& stock : watchlist)
         {
             if (Strategy::shouldBuy(stock.getSymbol()))

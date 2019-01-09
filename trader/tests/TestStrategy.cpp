@@ -9,10 +9,14 @@
 
 #include "../trading/Strategy.hpp"
 #include "../trading/Stock.hpp"
+#include "../trading/Order.hpp"
+#include "../tools/Authentication.hpp"
+#include "../tools/PreprocessorOptions.hpp"
 
 #include <string>
 #include <iostream>
 #include <boost/test/unit_test.hpp>
+#include <unistd.h>
 
 BOOST_AUTO_TEST_SUITE(test_trade_strategy)
 
@@ -35,7 +39,7 @@ BOOST_AUTO_TEST_CASE(file_parse)
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("sell-RSI-over"), 70);
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("sell-profit-margin-over"), 0.1);
 
-    BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-num-tests-met"), 3);
+    BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-num-tests-met"), 5);
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-RSI-below"), 40);
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-min-market-cap"), 5);
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-PE-greater-than"), 15);
@@ -81,4 +85,33 @@ BOOST_AUTO_TEST_CASE(file_parse)
     BOOST_CHECK_EQUAL(watchlist[6].getIndustry(), "Manufacturing");
 }
 
+BOOST_AUTO_TEST_CASE(check_should_buy)
+{
+    tools::Authentication::setup();
+
+    bool result = false;
+    BOOST_CHECK_NO_THROW(result = trading::Strategy::shouldBuy("AAPL"));
+    std::cout << "Should buy AAPL? " << result << std::endl;
+
+    BOOST_CHECK_NO_THROW(result = trading::Strategy::shouldBuy("BA"));
+    std::cout << "Should buy BA? " << result << std::endl;
+}
+
+BOOST_AUTO_TEST_CASE(check_should_sell)
+{
+    // Strategy::shouldSell() will throw if we don't currently own a stock
+    // so first buy a stock and then sell it
+    trading::Order buyApple("buy", "AAPL", 1);
+
+    // wait for order to execute
+    usleep(1000);
+
+    bool sell;
+    BOOST_CHECK_NO_THROW(sell = trading::Strategy::shouldSell("AAPL"));
+
+    std::cout << "Should sell AAPL? " << sell << std::endl;
+
+    // sell once we're done
+    trading::Order sellApple("sell", "AAPL", 1);
+}
 BOOST_AUTO_TEST_SUITE_END()

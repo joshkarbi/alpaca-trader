@@ -138,6 +138,7 @@ namespace tools
 		double denominator = 1.0+(avgGain*NUM_PERIODS + getCurrentGain(symbol))/(avgLoss*NUM_PERIODS + getCurrentLoss(symbol));
 		double rsi = (100.0 - (100.0)/denominator);
 
+		std::cout << "RSI caluclated for " << symbol << ": " << rsi << std::endl;
 		return rsi;
 	}
 
