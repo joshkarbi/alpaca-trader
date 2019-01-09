@@ -123,6 +123,7 @@ namespace trading
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[1], strategyJSON["sell-when"]["profit-margin-over"].GetDouble()));
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[2], strategyJSON["sell-when"]["RSI-over"].GetDouble()));
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[3], strategyJSON["sell-when"]["loss-more-than"].GetDouble()));
+			std::cout << "SELL-WHEN conditions saved." << std::endl;
 
 			// parse out buy conditions
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[0], strategyJSON["buy-when"]["num-tests-met"].GetDouble()));
@@ -130,12 +131,17 @@ namespace trading
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[2], strategyJSON["buy-when"]["min-market-cap-billions"].GetDouble()));
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[3], strategyJSON["buy-when"]["PE-greater-than"].GetDouble()));
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[4], strategyJSON["buy-when"]["PE-less-than"].GetDouble()));
-			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[5], strategyJSON["buy-when"]["min-dividend"].GetDouble()));
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[5], strategyJSON["buy-when"]["min-dividend-yield"].GetDouble()));
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[6], strategyJSON["buy-when"]["min-ytd-change"].GetDouble()));
-			
+			std::cout << "BUY-WHEN conditions saved." << std::endl;
+			std::cout << "Parameter map filled!" << std::endl;
+
 			// parse out reserve cash and stocks to own
 			reserveCash = strategyJSON["min-cash"].GetDouble();
-			stocksToOwn = strategyJSON["stocks-to-own"].GetUint64();
+			std::cout << "Reserve cash saved." << std::endl;
+
+			stocksToOwn = strategyJSON["stocks-to-own"].GetUint();
+			std::cout << "Stocks to own parsed. " << std::endl;
 
 			// parse out watchlist
 			for (std::string& line : stockLines)

@@ -39,17 +39,17 @@ namespace tools
 
 	std::vector<trading::Holding> AccountData::getAccountPositions()
 	{
-		std::vector<trading::Holding> results;
-
 		std::string response = accountQuery("positions");
 
+		std::vector<trading::Holding> results;
 		if (response == "[]")
 		{
-			// no open positions
+			// no open positions -> empty vector
 			return results;
 		}
 
 		rapidjson::Document doc = getDOMTree(response);
+
 		for (auto& positionObj : doc.GetArray())
 		{
 			// const std::string& sym, size_t number, double price, size_t ex=0
@@ -96,4 +96,5 @@ namespace tools
 
 	// link and set default
 	double AccountData::cashInAccount = -1;
+	std::vector<trading::Holding> AccountData::portfolio = {};
 }

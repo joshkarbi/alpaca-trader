@@ -23,11 +23,16 @@ namespace trading
         inline void run()
         {
             initialize();
-            runTrader();
+
+            // app loop
+            while (true)
+            {
+                runTrader();
+            }
+
             finishUp();
         };
         
-    private:
         // set everything up, query for current user holdings, etc.
         void initialize();
         

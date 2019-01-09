@@ -26,7 +26,7 @@ namespace tools
 		static double getEquityValue();
 
 		// This will need to be done on start-up
-		// @return list of all holdings
+		// @return list of all holdings - return nullptr if none
 		// Note: Holding objects contain price, quantity, symbol, and exchange information
 		static std::vector<trading::Holding> getAccountPositions();
 
@@ -44,5 +44,7 @@ namespace tools
 
 		// as described
 		static double cashInAccount;
+
+		static std::vector<trading::Holding> portfolio;
 	};
 }
