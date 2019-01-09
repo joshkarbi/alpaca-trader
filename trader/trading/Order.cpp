@@ -10,6 +10,7 @@
 #include <ctime>
 #include <sstream>
 #include <iostream>
+#include <unistd.h>
 
 namespace trading
 {
@@ -27,7 +28,7 @@ namespace trading
      const std::string& symbol, const size_t quantity)
     {
     	std::string url = (tools::PAPER_DOMAIN+"orders");
-
+        std::string orderID = "";
         // NOTE: Alpaca expects POST bodies in JSON format
 
     	std::stringstream ss;
@@ -42,22 +43,28 @@ namespace trading
 
 		std::string apiResponse = tools::simplePost(url, "", params, headers);
 
-
 		// construct Order from JSON response
 		rapidjson::Document doc = tools::getDOMTree(apiResponse);
+        orderID = doc["id"].GetString();
 
+        // wait for order to execute
+        usleep(500);
+
+        // get execution price
+        std::string getPriceResponse = tools::simpleGet(tools::PAPER_DOMAIN+"orders/"+orderID, "", headers);
+        rapidjson::Document priceJSON = tools::getDOMTree(getPriceResponse);
 
 		security = new Holding(doc["symbol"].GetString(), 
-			std::stoi(doc["qty"].GetString()), Holding::UNKNOWN_PRICE,
+			std::stoi(doc["qty"].GetString()), std::stod(priceJSON["filled_avg_price"].GetString()),
 			Holding::NASDAQ);
 
         if (action == "buy") 
         {
-		    tools::log("Bought " + security->toString());
+		    tools::log("Bought " + security->toString() + " at " + priceJSON["filled_at"].GetString());
         }
         else if (action == "sell")
         {
-            tools::log("Sold " + security->toString());
+            tools::log("Sold " + security->toString() + priceJSON["filled_at"].GetString());
         }
     }
 

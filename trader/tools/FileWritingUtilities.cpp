@@ -6,15 +6,20 @@
 #include <fstream>
 #include <iostream>
 
+namespace {
+    std::string dashedLine() {
+        return "------------------------------------------------------------------------\n";
+    }
+}
 namespace tools
 {
     void log(const std::string& message)
     {
         // ofstream::out means create file if it doesn't exist
         std::ofstream logFile(MAIN_LOG_FILE, std::ofstream::out | std::ofstream::app);
-        logFile << "-------------------------------------------------------------------\n";
+        logFile << ::dashedLine();
         logFile << message << std::endl;
-        logFile << "-------------------------------------------------------------------\n";
+        logFile << ::dashedLine();
 
         std::cout << "LOGGING: " << message << std::endl;
     }
