@@ -26,10 +26,14 @@ namespace tools
 		static double getRSI(const std::string& symbol);
 
 		// get a bunch of key stats in one IEX query
-		// @param fields - i.e. "marketcap", "dividendYield", "peRatioHigh", "peRatioLow"
+		// @param fields - i.e. "marketcap", "dividendYield", "ytdChangePercent"
 		static std::vector<double> getKeyStats(const std::string& symbol, const std::vector<std::string>& fields = {});
 
+		// @return today's percentage move
 		static double getTodayChangePercentage(const std::string& symbol);
+
+		// @return P/E ratio
+		static double getPE(const std::string& symbol);
 
 	private:
 		// querying is very similar across other functions

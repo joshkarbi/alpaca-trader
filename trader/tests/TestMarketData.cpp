@@ -66,4 +66,19 @@ BOOST_AUTO_TEST_CASE(calculate_RSI)
 
 	std::cout << "RSI of AAPL: " << rsi << std::endl;
 }
+
+BOOST_AUTO_TEST_CASE(PE_ratio)
+{
+	double peRatio;
+	BOOST_CHECK_NO_THROW(peRatio = tools::MarketData::getPE("AAPL"));
+	std::cout << "PE of AAPL: " << peRatio << std::endl;
+}
+
+BOOST_AUTO_TEST_CASE(todays_change_in_percentage)
+{
+	double change;
+	BOOST_CHECK_NO_THROW(change = tools::MarketData::getTodayChangePercentage("AAPL"));
+	std::cout << "Today % change in AAPL: " << change << std::endl;
+}
+
 BOOST_AUTO_TEST_SUITE_END()

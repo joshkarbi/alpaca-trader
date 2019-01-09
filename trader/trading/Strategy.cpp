@@ -4,6 +4,8 @@
 
 #include "../tools/FileReadingUtilities.hpp"
 #include "../tools/JSONUtilities.hpp"
+#include "../tools/MarketData.hpp"
+#include "../tools/AccountData.hpp"
 
 #include <cstddef>
 #include <boost/algorithm/string.hpp>
@@ -14,32 +16,76 @@ namespace trading
 {
 	bool Strategy::shouldBuy(const std::string& symbol)
 	{
-		bool result = false;
+		// first check if we even have enough money or if we are under reserve cash
+		double cashInAccount = tools::AccountData::getCashBalance();
+		if (tools::MarketData::getPrices({symbol})[0] > cashInAccount || reserveCash >= cashInAccount)
+		{
+			return false;
+		}
 
-		// we should buy when we see a stock is oversold
-		// RSI below 30 generally but this will be configurable (see settings/strategy.config)
-		// 5-day EMA crossing 10 EMA from below to above
+		double testsToMeet = getParamValue("buy-num-tests-met");
 
-		// not concerned with cash in account or other factors
+		// 1. RSI
+		if (tools::MarketData::getRSI(symbol) <= getParamValue("buy-RSI-below"))
+		{
+			testsToMeet--;
+		}
 
-		return result;
+		std::vector<double> keyStats = tools::MarketData::getKeyStats(symbol, {"marketcap", "dividendYield", "ytdChangePercent"});
+		double peRatio = tools::MarketData::getPE(symbol);
+
+		// 2. P/E ratio
+		if (peRatio >= getParamValue("buy-PE-greater-than") && peRatio <= getParamValue("buy-PE-less-than"))
+		{
+			testsToMeet--;
+		}
+
+		// 3. Market cap
+		if (keyStats[0] >= getParamValue("buy-min-market-cap"))
+		{
+			testsToMeet--;
+		}
+
+		// 4. Dividend yield
+		if (keyStats[1] >= getParamValue("buy-min-dividend"))
+		{
+			testsToMeet--;
+		}
+
+		// 5. YTD percentage change
+		if (keyStats[2] >= getParamValue("buy-min-ytd-change"))
+		{
+			testsToMeet--;
+		}
+
+		return (testsToMeet<=0);
 	}
 
-	bool Strategy::shouldSell(const std::string& sell)
+	bool Strategy::shouldSell(const std::string& symbol)
 	{
-		bool result = false;
+		double testsToMeet = getParamValue("sell-num-tests-met");
 
-		// sell when a stock is overbought
-		// 5 EMA crossing from above to below the 10 EMA indicates overbought
-		// RSI over 70 but this is configurable
+		// 1. RSI
+		if (tools::MarketData::getRSI(symbol) >= getParamValue("sell-RSI-over"))
+		{
+			testsToMeet--;
+		}
 
-		// we may also sell if we hit a profit margin
-		// we are satisfied with (ie. 10%)
-
-		// or if we have lost a significant amount
-		// ie. 15% (configurable)
+		// 2. Profit margin
+		double paid = tools::AccountData::getPurchasePrice(symbol);
+		double currentPrice = tools::MarketData::getPrices({symbol})[0];
+		double margin = (currentPrice-paid)/paid;
+		if (margin >= getParamValue("sell-profit-margin-over"))
+		{
+			testsToMeet--;
+		}
 		
-		return result;
+		// 3. Loss tolerance
+		if (margin <= getParamValue("sell-loss-tolerance"))
+		{
+			testsToMeet--;
+		}
+		return (testsToMeet<=0);
 	}
 
 	// parse out json strategy parameters from file
@@ -58,6 +104,7 @@ namespace trading
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[0], strategyJSON["sell-when"]["num-tests-met"].GetDouble()));
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[1], strategyJSON["sell-when"]["profit-margin-over"].GetDouble()));
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[2], strategyJSON["sell-when"]["RSI-over"].GetDouble()));
+			parameters.insert(parameters.begin(), std::pair<std::string, double>(SELL_WHEN[3], strategyJSON["sell-when"]["loss-more-than"].GetDouble()));
 
 			// parse out buy conditions
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[0], strategyJSON["buy-when"]["num-tests-met"].GetDouble()));
@@ -114,8 +161,10 @@ namespace trading
 	// are static
 	const std::string Strategy::PARAM_CONFIG_FILE = "settings/strategy.config";
 	const std::string Strategy::WATCHLIST_CONFIG_FILE = "settings/stocks.config";
+
+
 	const std::string Strategy::SELL_WHEN[] = 
-	{"sell-num-tests-met", "sell-profit-margin-over", "sell-RSI-over"};
+	{"sell-num-tests-met", "sell-profit-margin-over", "sell-RSI-over", "sell-loss-tolerance"};
 	const std::string Strategy::BUY_WHEN[] =
 	{"buy-num-tests-met", "buy-RSI-below", "buy-min-market-cap", "buy-PE-greater-than", "buy-PE-less-than", "buy-min-dividend", "buy-min-ytd-change"};
 

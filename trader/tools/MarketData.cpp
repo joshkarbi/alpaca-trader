@@ -163,4 +163,12 @@ namespace tools
 		if (percent > 0) { return 0; }
 		return percent;
 	}
+
+	double MarketData::getPE(const std::string& symbol)
+	{
+		std::string response = marketQueryIEX("stock/"+symbol+"/quote");
+		rapidjson::Document doc = getDOMTree(response);
+
+		return doc["peRatio"].GetDouble();
+	}
 }

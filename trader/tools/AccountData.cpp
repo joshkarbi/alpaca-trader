@@ -68,4 +68,21 @@ namespace tools
 		return (doc["status"].GetString() == activeState);
 	}
 
+	double AccountData::getPurchasePrice(const std::string& symbol)
+	{
+		std::string response = accountQuery("positions");
+
+		rapidjson::Document doc = getDOMTree(response);
+
+		for (auto& positionObj : doc.GetArray())
+		{
+			if (positionObj["symbol"].GetString() == symbol)
+			{
+				return std::stod(positionObj["avg_entry_price"].GetString());
+			}
+		}
+
+		return -1;
+	}
+
 }

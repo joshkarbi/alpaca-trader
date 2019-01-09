@@ -30,6 +30,10 @@ namespace tools
 		// Note: Holding objects contain price, quantity, symbol, and exchange information
 		static std::vector<trading::Holding> getAccountPositions();
 
+		// @return price we paid for a stock
+		// Note: returns -1 if we dont own the stock
+		static double getPurchasePrice(const std::string& symbol);
+
 	private:
 		// @param endOfUrl - portion of endpoint after /v1/
 		// @return response from API
