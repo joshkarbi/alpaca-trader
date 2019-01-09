@@ -2,6 +2,37 @@
 A Linux algorithmic trading application and C++ Alpaca Markets client.
 Uses the open IEX API to fetch stock financial information and current prices.
 
+# Running the Trader
+After revising configuration and authentication settings and building the project (see below).
+```bash
+cd trader/
+./trader.exe
+```
+
+# Using this as a C++ Alpaca Markets client library
+Required setup (parsing account details out of settings/key-id.txt):
+```C++
+trading::Authentication::setup();
+```
+Placing orders:
+```C++
+std::string symbol = "AAPL";
+trading::Order* buyOrder = new trading::Order("buy", symbol, numSharesToBuy);
+trading::Order* sellOrder = new trading::Order("sell", symbol, numSharesToSell);
+```
+Querying for market prices:
+```C++
+std::vector<double> prices;
+std::vector<std::string> stocks = {"AMZN", "AAPL", "BA", "VGT"};
+prices = tools::MarketData::getPrices(stocks));
+```
+Getting any key stats available form IEX API:
+```C++
+std::vector<double> keyStats;
+std::vector<std::string> interestedFields = {"marketcap", "dividendYield", "peRatioHigh"};
+keyStats = tools::MarketData::getKeyStats("AAPL", interestedFields);
+```
+
 # Building
 The application can be built by running the following:
 ```bash
@@ -35,32 +66,3 @@ See trading/Strategy.hpp for formatting details.
 
 Strategy.config contains parameters than can be adjusted (sell-when and buy-when parameters).
 See trading/Strategy.hpp for details.
-
-# Running
-```bash
-cd trader/
-./trader.exe
-```
-# Using this as a C++ Alpaca Markets client library
-Required setup (parsing account details out of settings/key-id.txt):
-```C++
-trading::Authentication::setup();
-```
-Placing orders:
-```C++
-std::string symbol = "AAPL";
-trading::Order* buyOrder = new trading::Order("buy", symbol, numSharesToBuy);
-trading::Order* sellOrder = new trading::Order("sell", symbol, numSharesToSell);
-```
-Querying for market prices:
-```C++
-std::vector<double> prices;
-std::vector<std::string> stocks = {"AMZN", "AAPL", "BA", "VGT"};
-prices = tools::MarketData::getPrices(stocks));
-```
-Getting any key stats available form IEX API:
-```C++
-std::vector<double> keyStats;
-std::vector<std::string> interestedFields = {"marketcap", "dividendYield", "peRatioHigh"};
-keyStats = tools::MarketData::getKeyStats("AAPL", interestedFields);
-```
