@@ -19,8 +19,8 @@ namespace tools
 		// @return true if account is in ACTIVE state
 		static bool accountIsActive();
 
-		// @return cash available
-		static double getCashBalance();
+		// @return cash available (run account query)
+		static double updateCashBalance();
 
 		// @return value of equities in account
 		static double getEquityValue();
@@ -34,9 +34,15 @@ namespace tools
 		// Note: returns -1 if we dont own the stock
 		static double getPurchasePrice(const std::string& symbol);
 
+		// returns the saved double amount, (DOES NOT FETCH NEW AMOUNT)
+		static double getCashBalance();
+
 	private:
 		// @param endOfUrl - portion of endpoint after /v1/
 		// @return response from API
 		static std::string accountQuery(const std::string& endOfUrl);
+
+		// as described
+		static double cashInAccount;
 	};
 }

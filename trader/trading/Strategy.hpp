@@ -46,7 +46,10 @@ namespace trading
 			// Note: is reference
 			static std::vector<Stock>& getWatchlist() { return watchlist; }
 
+			// reserve level
 			static double getMinCash() { return reserveCash; }
+
+			static size_t getStocksToOwn() { return stocksToOwn; }
 
 		private:
 			// contains key-value pairs of trading parameters and limits
@@ -58,5 +61,8 @@ namespace trading
 
 			// reserve cash
 			static double reserveCash;
+
+			// number of shares to own at any one time (cash will be split amongst this)
+			static size_t stocksToOwn;
 	};
 }

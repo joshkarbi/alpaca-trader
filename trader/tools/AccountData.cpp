@@ -19,12 +19,14 @@ namespace tools
 		return (simpleGet(url, "", headers));
 	}
 
-	double AccountData::getCashBalance()
+	double AccountData::updateCashBalance()
 	{
 		std::string response = accountQuery("account");
 		rapidjson::Document doc = getDOMTree(response);
 
-		return std::stod(doc["cash"].GetString());
+		cashInAccount = std::stod(doc["cash"].GetString());
+
+		return cashInAccount;
 	}
 
 	double AccountData::getEquityValue()
@@ -85,4 +87,13 @@ namespace tools
 		return -1;
 	}
 
+	double AccountData::getCashBalance()
+	{
+		// run query if not saved yet
+		if (cashInAccount == -1) { updateCashBalance(); }
+		return cashInAccount;
+	}
+
+	// link and set default
+	double AccountData::cashInAccount = -1;
 }

@@ -37,8 +37,13 @@ namespace trading
         // save stuff to files if anything goes wrong
         void finishUp();
 
+        // decide how many shares to buy/sell
+        size_t getSharesToBuy(const std::string& symbol);
+        size_t getSharesToSell(const std::string& symbol);
+
         // big logic objects
         std::vector<Holding> currentHoldings;
         Stats tradingStats;
+        std::vector<Stock> watchlist;
     };
 }

@@ -31,7 +31,7 @@ namespace trading
 	{
 		// first check if we even have enough money or if we are under reserve cash
 		double cashInAccount = tools::AccountData::getCashBalance();
-		if (tools::MarketData::getPrices({symbol})[0] > cashInAccount || reserveCash >= cashInAccount)
+		if (tools::MarketData::getPrices({symbol})[0] > cashInAccount || reserveCash >= cashInAccount || !tools::MarketData::isOpen())
 		{
 			return false;
 		}
@@ -133,8 +133,9 @@ namespace trading
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[5], strategyJSON["buy-when"]["min-dividend"].GetDouble()));
 			parameters.insert(parameters.begin(), std::pair<std::string, double>(BUY_WHEN[6], strategyJSON["buy-when"]["min-ytd-change"].GetDouble()));
 			
-			// parse out reserve cash
+			// parse out reserve cash and stocks to own
 			reserveCash = strategyJSON["min-cash"].GetDouble();
+			stocksToOwn = strategyJSON["stocks-to-own"].GetUint64();
 
 			// parse out watchlist
 			for (std::string& line : stockLines)
@@ -190,5 +191,7 @@ namespace trading
 	std::map<std::string, double> Strategy::parameters;
 	std::vector<Stock> Strategy::watchlist;
 	double Strategy::reserveCash;
+	size_t Strategy::stocksToOwn;
+
 
 }
