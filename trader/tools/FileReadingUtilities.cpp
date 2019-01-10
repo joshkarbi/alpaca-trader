@@ -26,6 +26,9 @@ namespace tools
         
         while (std::getline(file, line))
         {
+            // always skip comments and empty lines
+            if (line.empty() || line[0] == '#') { continue; }
+            
             results.push_back(line);
             line.clear();
         }

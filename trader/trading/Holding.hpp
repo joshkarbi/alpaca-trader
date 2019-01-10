@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "Stock.hpp"
+
 #include <stdint.h>
 #include <string>
 #include <stddef.h>
@@ -32,6 +34,7 @@ namespace trading
 
         // overloads
         bool operator==(const Holding& other) const;
+        bool operator==(const Stock& s) const;
         char operator[] (size_t index) const { return symbol[index]; };
         
     private:

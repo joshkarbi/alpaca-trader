@@ -22,10 +22,8 @@ namespace tools
         key = doc["paper-trading-id"].GetString();
         secretKey = doc["secret-key"].GetString();
 
-#ifdef DEBUG
         std::cout << "Found API key: " << key << std::endl;
         std::cout << "Found secret key: " << secretKey << std::endl;
-#endif
     }
 
 	// required for linking

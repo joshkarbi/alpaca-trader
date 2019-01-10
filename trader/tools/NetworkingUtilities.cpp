@@ -69,7 +69,7 @@ namespace tools
             
             for (size_t i = 0; i < headers.size(); i++)
             {
-#ifdef DEBUG_MODE
+#ifdef VERBOSE_DEBUG
                 std::cout << "Header " << i << " " << headers[i] << std::endl;
 #endif
                 header_list = curl_slist_append(header_list, headers[i].c_str());
@@ -86,7 +86,7 @@ namespace tools
         
         std::string result(chunk.memory, chunk.size);
         
-#ifdef DEBUG_MODE
+#ifdef VERBOSE_DEBUG
     std::cout << "POST URL: " << url << " with params: " << params << std::endl;
     std::cout << result << std::endl;
 #endif
@@ -138,7 +138,7 @@ namespace tools
         
         std::string result(chunk.memory, chunk.size);
         
-#ifdef DEBUG_MODE
+#ifdef VERBOSE_DEBUG
         std::cout << "GET to " << url << std::endl;
         std::cout << "With headers: " << std::endl;
         for (const std::string& header : headers)

@@ -120,7 +120,9 @@ namespace tools
 		for (size_t i = 1; i <= NUM_PERIODS; i++)
 		{
 			double dayDelta = recentStats[recentStats.Size()-i]["changePercent"].GetDouble();
+#ifdef VERBOSE_DEBUG		
 			std::cout << "Day " << i << " changePercent: " << dayDelta << std::endl;
+#endif
 			if  (dayDelta < 0) 
 			{ 
 				numLosses++;
@@ -138,7 +140,9 @@ namespace tools
 		double denominator = 1.0+(avgGain*NUM_PERIODS + getCurrentGain(symbol))/(avgLoss*NUM_PERIODS + getCurrentLoss(symbol));
 		double rsi = (100.0 - (100.0)/denominator);
 
+#ifdef VERBOSE_DEBUG
 		std::cout << "RSI caluclated for " << symbol << ": " << rsi << std::endl;
+#endif
 		return rsi;
 	}
 
@@ -147,7 +151,9 @@ namespace tools
 		std::string response = marketQueryIEX("stock/"+symbol+"/quote");
 		rapidjson::Document doc = getDOMTree(response);
 		double res = doc["changePercent"].GetDouble();
+#ifdef VERBOSE_DEBUG
 		std::cout << "Current change percent in " << symbol << ": " << res << std::endl;
+#endif
 		return res;
 	}
 

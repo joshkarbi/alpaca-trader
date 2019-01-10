@@ -17,7 +17,7 @@ namespace
 {
 	void debugMessage(const std::string& message, double val=-1)
 	{
-#ifdef DEBUG 
+#ifdef VERBOSE_DEBUG 
 		if (val != -1)
 			std::cout << message << " " << val << std::endl;
 		else
@@ -156,12 +156,14 @@ namespace trading
 				{
 					// just symbol
 					Stock s(lineElements[0]);
+					std::cout << lineElements[0] << std::endl;
 					watchlist.push_back(s);
 				}
 				else if (lineElements.size() == 2)
 				{
 					// symbol, name specified
 					boost::algorithm::trim(lineElements[1]);
+					std::cout << lineElements[0] << std::endl;
 					Stock s(lineElements[0], lineElements[1]);
 					watchlist.push_back(s);
 				}
@@ -170,6 +172,7 @@ namespace trading
 					// symbol, name, industry
 					boost::algorithm::trim(lineElements[1]);
 					boost::algorithm::trim(lineElements[2]);
+					std::cout << lineElements[0] << std::endl;
 					Stock s(lineElements[0], lineElements[1], lineElements[2]);
 					watchlist.push_back(s); 
 				}

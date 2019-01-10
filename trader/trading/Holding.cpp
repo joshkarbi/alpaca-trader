@@ -16,13 +16,18 @@ namespace trading
     // do not take into account price or number of shares
     bool Holding::operator==(const Holding& other) const
     {
-        if (symbol == other.getSymbol() && exchange == other.getExchange())
+        if (symbol == other.getSymbol())
         {
             return true;
         }
         return false;
     }
     
+    bool Holding::operator==(const Stock& s) const
+    {
+        Holding h(s.getSymbol(), 0, 0, "NASDAQ");
+        return (*this == h);
+    }
 
     std::string Holding::toString() const
     {
