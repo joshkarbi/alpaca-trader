@@ -22,15 +22,13 @@ trading::Order* sellOrder = new trading::Order("sell", symbol, numSharesToSell);
 ```
 Querying for market prices:
 ```C++
-std::vector<double> prices;
 std::vector<std::string> stocks = {"AMZN", "AAPL", "BA", "VGT"};
-prices = tools::MarketData::getPrices(stocks));
+std::vector<double> prices = tools::MarketData::getPrices(stocks));
 ```
 Getting any key stats available from IEX API:
 ```C++
-std::vector<double> keyStats;
 std::vector<std::string> interestedFields = {"marketcap", "dividendYield", "peRatioHigh"};
-keyStats = tools::MarketData::getKeyStats("AAPL", interestedFields);
+std::vector<double> keyStats = tools::MarketData::getKeyStats("AAPL", interestedFields);
 ```
 
 # Building
