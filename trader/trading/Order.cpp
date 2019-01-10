@@ -56,7 +56,7 @@ namespace trading
 
 		security = new Holding(doc["symbol"].GetString(), 
 			std::stoi(doc["qty"].GetString()), std::stod(priceJSON["filled_avg_price"].GetString()),
-			Holding::NASDAQ);
+			doc["exchange"].GetString());
 
         if (action == "buy") 
         {

@@ -11,7 +11,7 @@ namespace trading
         std::string log_message = "";
         for (const Holding& holding : holdings)
         {
-            log_message.append(holding.getStringExchange() + ":" + holding.getSymbol() + "\n");
+            log_message.append(holding.getExchange() + ":" + holding.getSymbol() + "\n");
             log_message.append(std::to_string(holding.getNumShares()) + " shares at $" + std::to_string(holding.getPrice()) + "\n");
         }
         tools::log(log_message);

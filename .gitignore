@@ -10,3 +10,6 @@ myAlgo/a.out
 # ignore log files
 *.txt
 *.log
+
+# ignore authentication info
+.key-id

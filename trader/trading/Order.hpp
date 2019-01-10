@@ -24,9 +24,12 @@ namespace trading
                 delete security;
             }
         }
+
         // place an order (buy or sell)
-        // NOTE: for now will only do market orders, good until cancelled, on NASDAQ
+        // NOTE: for now will only do market orders for US securities, good until cancelled
         // @param action - "sell" or "buy"
+        // @param symbol - ticker symbol (i.e. "AAPL")
+        // @param quantity - number of shares 
         Order(const std::string& action, const std::string& symbol, const size_t quantity);
 
         // secondary constructor

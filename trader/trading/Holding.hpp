@@ -9,47 +9,42 @@
 namespace trading
 {
     /**
-     * Used by Portfolio to keep track of current holdings.
-     *
      * A Holding is a security with a ticker symbol, 
      * exchange, number of shares, and purchase price.
      */
     class Holding
     {
     public:
-        // statics for exchanges
-        static const size_t NYSE = 0;
-        static const size_t NASDAQ = 1;
-        static const size_t TSX = 2;
-
+        // ie. at time order is placed (until filled)
         static constexpr double UNKNOWN_PRICE = -1;
         
         // main constructor
-        Holding(const std::string& sym, size_t number, double price, size_t ex=0);
+        Holding(const std::string& sym, size_t qty, double price, const std::string& ex);
         
-        // getters
+        // Getters
         std::string getSymbol() const { return symbol; };
-        std::string getStringExchange() const;
-        std::string toString() const;
-        size_t getExchange() const { return exchange; };
-        size_t getNumShares() const { return num_shares; };
-        double getPrice() const { return purchase_price; };
+        std::string getExchange() const { return exchange; };
+        size_t getNumShares() const { return numShares; };
+        double getPrice() const { return purchasePrice; };
         
-        // operator overloads
+        // @return string representation of holding
+        std::string toString() const;
+
+        // overloads
         bool operator==(const Holding& other) const;
         char operator[] (size_t index) const { return symbol[index]; };
         
     private:
-        // ie. "APPL"
+        // private members
         std::string symbol;
         
-        // see above statics
-        size_t exchange;
+        std::string exchange;
         
-        size_t num_shares;
+        size_t numShares;
         
-        double purchase_price;
+        double purchasePrice;
     };
+
 } // namespace
 
 // overload hash method to store in unordered sets
@@ -58,13 +53,8 @@ namespace std {
     {
         size_t operator()(const trading::Holding& x) const
         {
-            // assume size_t is 32 bits (can be 64 as well)
-            size_t result = (x.getExchange() << 24);
-            result += (x[0] << 24);
-            result += (x[1] << 16);
-            result += (x[2] << 8);
-            result += x[3];
-            return result;
+            std::hash<std::string> holdingHhash;
+            return holdingHhash(x.getSymbol()+x.getExchange());
         }
     };
 }

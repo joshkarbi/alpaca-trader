@@ -31,5 +31,5 @@ namespace tools
 	// required for linking
 	std::string Authentication::key = "";
 	std::string Authentication::secretKey = "";
-	const std::string Authentication::KEY_FILE = "settings/key-id.txt";
+	const std::string Authentication::KEY_FILE = "settings/.key-id";
 }

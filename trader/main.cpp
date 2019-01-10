@@ -14,18 +14,16 @@
 
 int main() 
 {
-	try 
-	{
+    try 
+    {
     	trading::Trader app;
     	app.run();
-    	return 0;
     } catch (const std::exception& e)
     {
     	// log any errors thrown up to main
     	tools::log(e.what());
-
-#ifdef DEBUG
     	std::cout << "Logging: " << e.what() << std::endl;
-#endif
     }
+
+    return 0;
 }

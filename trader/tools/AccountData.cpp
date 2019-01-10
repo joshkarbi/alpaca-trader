@@ -54,7 +54,7 @@ namespace tools
 		{
 			// const std::string& sym, size_t number, double price, size_t ex=0
 			trading::Holding pos(positionObj["symbol"].GetString(), std::stoi(positionObj["qty"].GetString()),
-				std::stod(positionObj["avg_entry_price"].GetString()), trading::Holding::NASDAQ);
+				std::stod(positionObj["avg_entry_price"].GetString()), positionObj["exchange"].GetString());
 			results.push_back(pos);
 		}
 
