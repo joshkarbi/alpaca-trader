@@ -26,7 +26,7 @@ std::vector<double> prices;
 std::vector<std::string> stocks = {"AMZN", "AAPL", "BA", "VGT"};
 prices = tools::MarketData::getPrices(stocks));
 ```
-Getting any key stats available form IEX API:
+Getting any key stats available from IEX API:
 ```C++
 std::vector<double> keyStats;
 std::vector<std::string> interestedFields = {"marketcap", "dividendYield", "peRatioHigh"};
