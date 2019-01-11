@@ -30,7 +30,7 @@ namespace trading
         // @param action - "sell" or "buy"
         // @param symbol - ticker symbol (i.e. "AAPL")
         // @param quantity - number of shares 
-        Order(const std::string& action, const std::string& symbol, const size_t quantity);
+        Order(const std::string& action, const std::string& symbol, size_t quantity);
 
         // secondary constructor
         Order(const Holding& hold);

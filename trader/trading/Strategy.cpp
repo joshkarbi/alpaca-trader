@@ -40,9 +40,14 @@ namespace trading
 {
 	bool Strategy::shouldBuy(const std::string& symbol)
 	{
-		// first check if we even have enough money or if we are under reserve cash
+		// first check if we even have enough money or if we are under reserve cash or we've hit num-stocks-to-own
 		double cashInAccount = tools::AccountData::getCashBalance();
 		if (tools::MarketData::getPrices({symbol})[0] > cashInAccount || reserveCash >= cashInAccount || !tools::MarketData::isOpen())
+		{
+			return false;
+		}
+
+		if (tools::AccountData::getAccountPositions().size() >= stocksToOwn)
 		{
 			return false;
 		}

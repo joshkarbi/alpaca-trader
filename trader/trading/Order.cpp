@@ -35,24 +35,31 @@ namespace trading
 
     // Create and POST a new order
     Order::Order(const std::string& action,
-     const std::string& symbol, const size_t quantity)
+     const std::string& symbol, size_t quantity)
     {
     	std::string url = (tools::PAPER_DOMAIN+"orders");
         std::string orderID = "";
         // NOTE: Alpaca expects POST bodies in JSON format
 
-    	std::stringstream ss;
-    	ss << "{\"symbol\":\"" << symbol << "\",\"qty\":\"" <<
-    		quantity << "\",\"side\":\"" << action << "\",\"type\":\"market\",\"time_in_force\":\"gtc\"}";
-		std::string params = ss.str();
+        std::string apiResponse;
+        std::vector<std::string> headers;
+        do {
+    	    std::stringstream ss;
+    	    ss << "{\"symbol\":\"" << symbol << "\",\"qty\":\"" <<
+    		  quantity << "\",\"side\":\"" << action << "\",\"type\":\"market\",\"time_in_force\":\"gtc\"}";
+		    std::string params = ss.str();
 
 
-    	std::string auth = ("APCA-API-KEY-ID: " + tools::Authentication::key);
-		std::string secret = ("APCA-API-SECRET-KEY: " + tools::Authentication::secretKey);
-		std::vector<std::string> headers = {auth, secret};
+    	    std::string auth = ("APCA-API-KEY-ID: " + tools::Authentication::key);
+		    std::string secret = ("APCA-API-SECRET-KEY: " + tools::Authentication::secretKey);
+		    headers = {auth, secret};
 
-		std::string apiResponse = tools::simplePost(url, "", params, headers);
-        ::debugMessage(apiResponse);
+		    apiResponse = tools::simplePost(url, "", params, headers);
+            ::debugMessage(apiResponse);
+
+            // try to buy one less share if this failed
+            quantity--;
+        } while (apiResponse.find("insufficient buying power") != std::string::npos);
 
 		// construct Order from JSON response
 		rapidjson::Document doc = tools::getDOMTree(apiResponse);
