@@ -9,15 +9,12 @@
 
 // REQUIRED FOR PAPER TRADING URL TO BE USED
 #define PAPER
+
 // #define REAL
 
-// all basically saying the same thing
-// TODO: consolidate these to DEBUG
-//#define SANDBOX
-//#define DEBUG_MODE
-
+// basic debug messages
 #define DEBUG
 
-// if you want API JSON responses to be printed
-#define VERBOSE_DEBUG
+// if you want more detailed messages and API JSON responses to be printed
+// #define VERBOSE_DEBUG
 

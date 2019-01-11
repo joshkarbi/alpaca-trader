@@ -27,6 +27,20 @@ namespace
     {
         std::cout << message << std::endl;
     }
+
+    void debugMessage(const std::string& message)
+    {
+#ifdef DEBUG
+        print(message);
+#endif
+    }
+
+    void verboseDebugMessage(const std::string& message)
+    {
+#ifdef VERBOSE_DEBUG
+        print(message);
+#endif
+    }
 }
 namespace trading
 {   
@@ -72,14 +86,14 @@ namespace trading
 
             for (const Holding& stock : currentHoldings)
             {
-#ifdef DEBUG
-                std::cout << "Checking sell conditions for " << stock.toString() << std::endl;
-#endif
+                ::debugMessage("Checking sell conditions for " + stock.toString());
+
                 if (Strategy::shouldSell(stock.getSymbol()))
                 {
                     // place buy Order (logging and console output taken care of)
                     Order* sellDecision = new Order("sell", stock.getSymbol(), getSharesToSell(stock.getSymbol()));
-                    std::cout << "SELLING " << stock.getSymbol() << std::endl;
+                    
+                    ::print("SELLING " + stock.getSymbol());
 
                     // update the holdings, cash left available
                     currentHoldings = tools::AccountData::getAccountPositions();
@@ -92,17 +106,16 @@ namespace trading
             // for each stock we are tracking, see if we should buy it
             for (const Stock& stock : watchlist)
             {
-#ifdef DEBUG
-                std::cout << "Check buy condition for: " << stock.getSymbol() << std::endl;
-#endif
-                // must not already own the stock and meets buy conditions
+                ::debugMessage("Checking buy conditions for " + stock.getSymbol());
+
+                // must not already own the stock and must meets buy conditions
                 if (! (std::find(currentHoldings.begin(), currentHoldings.end(), stock) != currentHoldings.end())
                  && Strategy::shouldBuy(stock.getSymbol()))
                 {
                     // place buy order
                     Order* buyDecision = new Order("buy", stock.getSymbol(), getSharesToBuy(stock.getSymbol()));
                     
-                    std::cout << "BUYING " << stock.getSymbol() << std::endl;
+                   ::print("BUYING " + stock.getSymbol());
 
                     // update holdings and cash left available
                     currentHoldings = tools::AccountData::getAccountPositions();
@@ -135,14 +148,12 @@ namespace trading
 
         double shares = cashToSpend/(tools::MarketData::getPrices({symbol})[0]);
 
-#ifdef DEBUG
-        std::cout << "Stocks we can own: " << stocksWeCanOwn << std::endl;
-        std::cout << "Cash available: " << cashAvailable << std::endl;
-        std::cout << "Num stocks owned: " << numStocksOwned << std::endl;
-        std::cout << "Reserve cash level: " << reserveCash << std::endl;
-        std::cout << "Cash to spend on trade: " << cashToSpend << std::endl;
-        std::cout << "SHARES TO BUY: " << shares << std::endl;
-#endif
+        ::verboseDebugMessage("Stocks we can own: " + std::to_string(stocksWeCanOwn));
+        ::verboseDebugMessage("Cash available: " + std::to_string(cashAvailable));
+        ::verboseDebugMessage("Num stocks owned: " + std::to_string(numStocksOwned));
+        ::verboseDebugMessage("Reserve cash level: " + std::to_string(reserveCash));
+        ::verboseDebugMessage("Cash to spend on trade: " + std::to_string(cashToSpend));
+        ::verboseDebugMessage("SHARES TO BUY OF " + symbol + ": " + std::to_string(shares));
 
         size_t result = static_cast<size_t>(floor(shares));
         std::cout << "SHARES TO BUY: " << shares << std::endl;
