@@ -81,6 +81,9 @@ namespace trading
 
 	bool Strategy::shouldSell(const std::string& symbol)
 	{
+		// first check if market is even open
+		if ( ! tools::MarketData::isOpen()) { return false; }
+		
 		double testsToMeet = getParamValue("sell-num-tests-met");
 
 		// 1. RSI
@@ -91,6 +94,12 @@ namespace trading
 
 		// 2. Profit margin
 		double paid = tools::AccountData::getPurchasePrice(symbol);
+		if (paid == -1) 
+		{
+			// order has not executed yet so it does not show up in account positions
+			return false;
+		}
+
 		double currentPrice = tools::MarketData::getPrices({symbol})[0];
 		double margin = (currentPrice-paid)/paid;
 		if (margin >= getParamValue("sell-profit-margin-over"))

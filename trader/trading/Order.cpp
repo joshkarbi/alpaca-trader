@@ -47,7 +47,7 @@ namespace trading
 		rapidjson::Document doc = tools::getDOMTree(apiResponse);
         orderID = doc["id"].GetString();
 
-/*
+
         // wait for order to execute
         usleep(1000);
 
@@ -55,17 +55,25 @@ namespace trading
         std::string getPriceResponse = tools::simpleGet(tools::PAPER_DOMAIN+"orders/"+orderID, "", headers);
         rapidjson::Document priceJSON = tools::getDOMTree(getPriceResponse);
 
+        double filledPrice = 0;
+        if ( ! priceJSON["filled_avg_price"].IsNull()) 
+        {
+            // will be null if order still hasnt gone through
+            filledPrice = std::stod(priceJSON["filled_avg_price"].GetString());
+        }
+
 		security = new Holding(doc["symbol"].GetString(), 
-			std::stoi(doc["qty"].GetString()), std::stod(priceJSON["filled_avg_price"].GetString()),
+			std::stoi(doc["qty"].GetString()), filledPrice,
 			doc["exchange"].GetString());
-*/
+
+        std::string priceString = (filledPrice==0) ? "UNKNOWN PRICE" : std::to_string(filledPrice);
         if (action == "buy") 
         {
-		    tools::log("Bought " + security->toString() + " at " + "UNKNOWN PRICE");
+		    tools::log("Bought " + security->toString() + " at " + priceString);
         }
         else if (action == "sell")
         {
-            tools::log("Sold " + security->toString() + "at UNKNOWN PRICE");
+            tools::log("Sold " + security->toString() + priceString);
         }
     }
 

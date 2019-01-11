@@ -72,6 +72,8 @@ namespace tools
 
 	double AccountData::getPurchasePrice(const std::string& symbol)
 	{
+		constexpr double DEFAULT = -1;
+
 		std::string response = accountQuery("positions");
 
 		rapidjson::Document doc = getDOMTree(response);
@@ -80,11 +82,14 @@ namespace tools
 		{
 			if (positionObj["symbol"].GetString() == symbol)
 			{
+				// i.e. order not excuted yet
+				if (positionObj["avg_entry_price"].IsNull()) { return DEFAULT; }
+				
 				return std::stod(positionObj["avg_entry_price"].GetString());
 			}
 		}
 
-		return -1;
+		return DEFAULT;
 	}
 
 	double AccountData::getCashBalance()

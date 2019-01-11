@@ -4,7 +4,7 @@ Build/*
 myAlgo.xcodeproj/*
 
 *.gch
-myAlgo/a.out
+a.out
 *.exe
 
 # ignore log files
@@ -13,3 +13,6 @@ myAlgo/a.out
 
 # ignore authentication info
 .key-id
+
+# debug build info
+trader.exe.dSYM/

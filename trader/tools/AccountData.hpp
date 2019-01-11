@@ -27,11 +27,11 @@ namespace tools
 
 		// This will need to be done on start-up
 		// @return list of all holdings - return nullptr if none
-		// Note: Holding objects contain price, quantity, symbol, and exchange information
+		// NOTE: Holding objects contain price, quantity, symbol, and exchange information
 		static std::vector<trading::Holding> getAccountPositions();
 
 		// @return price we paid for a stock
-		// Note: returns -1 if we dont own the stock
+		// NOTE: returns -1 if we dont own the stock or order is not executed
 		static double getPurchasePrice(const std::string& symbol);
 
 		// returns the saved double amount, (DOES NOT FETCH NEW AMOUNT)
