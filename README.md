@@ -10,7 +10,7 @@ cd trader/
 ```
 
 # Using this as a C++ Alpaca Markets client library
-Required setup (parsing account details out of settings/key-id.txt):
+Required setup (parsing account details out of settings/.key-id):
 ```C++
 trading::Authentication::setup();
 ```
@@ -51,7 +51,7 @@ Relies on the libcurl C networking library, as well as C++ Boost.
 Refer to: https://github.com/curl/curl and https://www.boost.org/.
 
 # Settings
-A "key-id.txt" config file must be made under settings/ and formatted as following:
+A ".key-id" config file must be made under settings/ and formatted as following:
 ```
 {
   "paper-trading-id":"{your Alpaca Markets key}",
