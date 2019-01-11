@@ -159,6 +159,12 @@ namespace tools
 	{
 		std::string response = marketQueryIEX("stock/"+symbol+"/quote");
 		rapidjson::Document doc = getDOMTree(response);
+
+		constexpr double DEFAULT = 0;
+		if (doc["changePercent"].IsNull())
+		{
+			return DEFAULT;
+		}
 		double res = doc["changePercent"].GetDouble();
 
 		::debugMessage("Current change percent in " + symbol + ": " + std::to_string(res));
@@ -182,8 +188,15 @@ namespace tools
 
 	double MarketData::getPE(const std::string& symbol)
 	{
+		constexpr double DEFAULT = 0;
+
 		std::string response = marketQueryIEX("stock/"+symbol+"/quote");
 		rapidjson::Document doc = getDOMTree(response);
+
+		if ( doc["peRatio"].IsNull())
+		{
+			return DEFAULT;
+		}
 
 		return doc["peRatio"].GetDouble();
 	}

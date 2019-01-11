@@ -17,6 +17,16 @@ namespace
 {
 	void debugMessage(const std::string& message, double val=-1)
 	{
+#ifdef DEBUG 
+		if (val != -1)
+			std::cout << message << " " << val << std::endl;
+		else
+			std::cout << message << std::endl;
+#endif
+	}
+
+	void verboseDebugMessage(const std::string& message, double val=-1)
+	{
 #ifdef VERBOSE_DEBUG 
 		if (val != -1)
 			std::cout << message << " " << val << std::endl;
@@ -25,6 +35,7 @@ namespace
 #endif
 	}
 }
+
 namespace trading
 {
 	bool Strategy::shouldBuy(const std::string& symbol)
@@ -41,7 +52,7 @@ namespace trading
 		// 1. RSI
 		if (tools::MarketData::getRSI(symbol) <= getParamValue("buy-RSI-below"))
 		{
-			::debugMessage("RSI under set oversold condition");
+			::verboseDebugMessage("RSI under set oversold condition");
 			testsToMeet--;
 		}
 
@@ -51,28 +62,28 @@ namespace trading
 		// 2. P/E ratio
 		if (peRatio >= getParamValue("buy-PE-greater-than") && peRatio <= getParamValue("buy-PE-less-than"))
 		{
-			::debugMessage("P/E within specified ratio.");
+			::verboseDebugMessage("P/E within specified ratio.");
 			testsToMeet--;
 		}
 
 		// 3. Market cap
 		if (keyStats[0] >= getParamValue("buy-min-market-cap"))
 		{
-			::debugMessage("Maret cap greater than minimum: ", keyStats[0]);
+			::verboseDebugMessage("Maret cap greater than minimum: ", keyStats[0]);
 			testsToMeet--;
 		}
 
 		// 4. Dividend yield
 		if (keyStats[1] >= getParamValue("buy-min-dividend"))
 		{
-			::debugMessage("Dividend yield greater than specified minimum: " , keyStats[1]);
+			::verboseDebugMessage("Dividend yield greater than specified minimum: " , keyStats[1]);
 			testsToMeet--;
 		}
 
 		// 5. YTD percentage change
 		if (keyStats[2] >= getParamValue("buy-min-ytd-change"))
 		{
-			::debugMessage("YTD percentage change: ", keyStats[2]);
+			::verboseDebugMessage("YTD percentage change: ", keyStats[2]);
 			testsToMeet--;
 		}
 
@@ -89,6 +100,7 @@ namespace trading
 		// 1. RSI
 		if (tools::MarketData::getRSI(symbol) >= getParamValue("sell-RSI-over"))
 		{
+			::debugMessage("Should sell because RSI is over set limit of " + std::to_string(getParamValue("sell-RSI-over")));
 			testsToMeet--;
 		}
 
@@ -104,12 +116,14 @@ namespace trading
 		double margin = (currentPrice-paid)/paid;
 		if (margin >= getParamValue("sell-profit-margin-over"))
 		{
+			::debugMessage("Should sell because of profit margin of " + std::to_string(margin));
 			testsToMeet--;
 		}
 		
 		// 3. Loss tolerance
 		if (margin <= getParamValue("sell-loss-tolerance"))
 		{
+			::debugMessage("Should sell because of loss tolerance of " + std::to_string(margin));
 			testsToMeet--;
 		}
 		return (testsToMeet<=0);
