@@ -84,25 +84,6 @@ namespace trading
         try 
         {
 
-            for (const Holding& stock : currentHoldings)
-            {
-                ::debugMessage("Checking sell conditions for " + stock.toString());
-
-                if (Strategy::shouldSell(stock.getSymbol()))
-                {
-                    // place buy Order (logging and console output taken care of)
-                    Order* sellDecision = new Order("sell", stock.getSymbol(), getSharesToSell(stock.getSymbol()));
-                    
-                    ::print("SELLING " + stock.getSymbol());
-
-                    // update the holdings, cash left available
-                    currentHoldings = tools::AccountData::getAccountPositions();
-                    tools::AccountData::updateCashBalance();
-
-                    delete sellDecision;
-                }
-            }
-
             // for each stock we are tracking, see if we should buy it
             for (const Stock& stock : watchlist)
             {
@@ -122,6 +103,25 @@ namespace trading
                     tools::AccountData::updateCashBalance();
 
                     delete buyDecision;
+                }
+            }
+            
+            for (const Holding& stock : currentHoldings)
+            {
+                ::debugMessage("Checking sell conditions for " + stock.toString());
+
+                if (Strategy::shouldSell(stock.getSymbol()))
+                {
+                    // place buy Order (logging and console output taken care of)
+                    Order* sellDecision = new Order("sell", stock.getSymbol(), getSharesToSell(stock.getSymbol()));
+                    
+                    ::print("SELLING " + stock.getSymbol());
+
+                    // update the holdings, cash left available
+                    currentHoldings = tools::AccountData::getAccountPositions();
+                    tools::AccountData::updateCashBalance();
+
+                    delete sellDecision;
                 }
             }
         }
@@ -156,7 +156,7 @@ namespace trading
         ::verboseDebugMessage("SHARES TO BUY OF " + symbol + ": " + std::to_string(shares));
 
         size_t result = static_cast<size_t>(floor(shares));
-        std::cout << "SHARES TO BUY: " << shares << std::endl;
+        std::cout << "SHARES TO BUY: " << result << std::endl;
 
         return result;
     }

@@ -12,6 +12,16 @@
 #include <iostream>
 #include <unistd.h>
 
+namespace
+{
+    void debugMessage(const std::string& message)
+    {
+#ifdef DEBUG 
+        std::cout << message << std::endl;
+#endif
+    }
+}
+
 namespace trading
 {
     Order::Order(const Holding& hold)
@@ -42,17 +52,20 @@ namespace trading
 		std::vector<std::string> headers = {auth, secret};
 
 		std::string apiResponse = tools::simplePost(url, "", params, headers);
+        ::debugMessage(apiResponse);
 
 		// construct Order from JSON response
 		rapidjson::Document doc = tools::getDOMTree(apiResponse);
         orderID = doc["id"].GetString();
-
 
         // wait for order to execute
         usleep(1000);
 
         // get execution price
         std::string getPriceResponse = tools::simpleGet(tools::PAPER_DOMAIN+"orders/"+orderID, "", headers);
+        ::debugMessage("Trying to find execution price.");
+        ::debugMessage(getPriceResponse);
+
         rapidjson::Document priceJSON = tools::getDOMTree(getPriceResponse);
 
         double filledPrice = 0;
@@ -62,9 +75,15 @@ namespace trading
             filledPrice = std::stod(priceJSON["filled_avg_price"].GetString());
         }
 
+        // check for failure
+        if ( ! priceJSON["failed_at"].IsNull())
+        {
+            throw std::runtime_error("Failed to place " + action + " order of " + symbol + "!");
+        }
+
 		security = new Holding(doc["symbol"].GetString(), 
 			std::stoi(doc["qty"].GetString()), filledPrice,
-			doc["exchange"].GetString());
+			"NASDAQ");
 
         std::string priceString = (filledPrice==0) ? "UNKNOWN PRICE" : std::to_string(filledPrice);
         if (action == "buy") 
