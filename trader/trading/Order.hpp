@@ -38,6 +38,9 @@ namespace trading
         // GET list of orders on this account from the Alpaca API
         static std::vector<Order> getAllOrders();
 
+        // cancel an order
+        static void cancelOrder(const std::string& orderID);
+        
         // getters
         Holding* getHolding() { return security; }
         std::string getTimestamp() { return timestamp; }

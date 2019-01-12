@@ -30,8 +30,7 @@ BOOST_AUTO_TEST_CASE(file_parse)
     std::string strategyFile = "tests/resources/strategy.config";
     std::string stockFile = "tests/resources/stocks.config";
 
-    // check return value is true
-    BOOST_CHECK_EQUAL(trading::Strategy::setup(strategyFile, stockFile), true);
+    BOOST_CHECK_NO_THROW(trading::Strategy::setup(strategyFile, stockFile));
 
     // 1. Test basic strategy parameters
     // test parameters in config file
@@ -39,10 +38,10 @@ BOOST_AUTO_TEST_CASE(file_parse)
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("sell-RSI-over"), 70);
     BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("sell-profit-margin-over"), 0.1);
 
-    BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-num-tests-met"), 5);
-    BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-RSI-below"), 40);
-    BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-min-market-cap"), 5);
-    BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-PE-greater-than"), 15);
+    BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-num-tests-met"), 6);
+    BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-RSI-below"), 37);
+    BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-min-market-cap"), 10);
+    BOOST_CHECK_EQUAL(trading::Strategy::getParamValue("buy-PE-greater-than"), 10);
 
     BOOST_CHECK_EQUAL(trading::Strategy::getMinCash(), 75.0);
     

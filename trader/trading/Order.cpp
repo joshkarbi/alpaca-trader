@@ -127,4 +127,14 @@ namespace trading
 		return res;
     }
 
+    void Order::cancelOrder(const std::string& orderID)
+    {
+        std::string url = tools::PAPER_DOMAIN+"orders/"+orderID;
+        std::string auth = ("APCA-API-KEY-ID: " + tools::Authentication::key);
+        std::string secret = ("APCA-API-SECRET-KEY: " + tools::Authentication::secretKey);
+        std::vector<std::string> headers = {auth, secret};
+
+        std::string apiResponse = tools::simpleDelete(url, headers);
+    }
+
 }

@@ -33,4 +33,7 @@ namespace tools
     std::string simpleGet(const std::string& url,
                           const std::string& user_pass = "",
                           const std::vector<std::string>& headers = std::vector<std::string>());
+
+    std::string simpleDelete(const std::string& url,
+                            const std::vector<std::string>& headers = std::vector<std::string>());
 }

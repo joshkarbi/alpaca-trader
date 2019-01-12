@@ -149,4 +149,30 @@ namespace tools
 #endif
         return result;
     }
+
+    // the only time this is used it to cancel an order, so it can be pretty simplistic
+    std::string simpleDelete(const std::string& url, const std::vector<std::string>& headers)
+    {
+        struct MemoryStruct chunk;
+
+        CURL *hnd = curl_easy_init();
+        curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_easy_setopt(hnd, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(hnd, CURLOPT_WRITEDATA, (void *)&chunk);
+
+        struct curl_slist *header_list = NULL;
+            
+        for (size_t i = 0; i < headers.size(); i++)
+        {
+            header_list = curl_slist_append(header_list, headers[i].c_str());
+        }
+            
+        curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, header_list);
+
+        CURLcode ret = curl_easy_perform(hnd);
+        curl_easy_cleanup(hnd);
+
+        std::string result(chunk.memory, chunk.size);
+        return result;
+    }
 }

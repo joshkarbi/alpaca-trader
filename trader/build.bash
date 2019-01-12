@@ -3,6 +3,7 @@
 # TODO: use CMake
 
 # MAIN APPLICATION EXECUTABLE
+# signing with gdb: https://www.thomasvitale.com/how-to-setup-gdb-and-eclipse-to-debug-c-files-on-macos-sierra/
 echo "Main executable"
 g++ -g -O main.cpp -std=c++11 -o trader.exe trading/Order.cpp trading/Strategy.cpp trading/Holding.cpp trading/Trader.cpp trading/Stats.cpp tools/FileReadingUtilities.cpp tools/FileWritingUtilities.cpp tools/JSONUtilities.cpp tools/NetworkingUtilities.cpp tools/MarketData.cpp tools/AccountData.cpp tools/Authentication.cpp -lcurl -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/
 

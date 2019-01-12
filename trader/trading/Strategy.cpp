@@ -40,14 +40,15 @@ namespace trading
 {
 	bool Strategy::shouldBuy(const std::string& symbol)
 	{
-		// first check if we even have enough money or if we are under reserve cash or we've hit num-stocks-to-own
+		// first check some base 'false' conditions
 		double cashInAccount = tools::AccountData::getCashBalance();
-		if (tools::MarketData::getPrices({symbol})[0] > cashInAccount || reserveCash >= cashInAccount || !tools::MarketData::isOpen())
-		{
-			return false;
-		}
+		double currentPrice = tools::MarketData::getPrices({symbol})[0];
 
-		if (tools::AccountData::getAccountPositions().size() >= stocksToOwn)
+		bool notEnoughMoney = (currentPrice > cashInAccount);
+		bool belowReserveMoney = (reserveCash >= cashInAccount);
+		bool marketClosed = (!tools::MarketData::isOpen());
+		bool alreadyOwnConfiguredAmountOfStocks = (tools::AccountData::getAccountPositions().size() >= stocksToOwn);
+		if (notEnoughMoney || belowReserveMoney || marketClosed || alreadyOwnConfiguredAmountOfStocks)
 		{
 			return false;
 		}
@@ -61,7 +62,7 @@ namespace trading
 			testsToMeet--;
 		}
 
-		std::vector<double> keyStats = tools::MarketData::getKeyStats(symbol, {"marketcap", "dividendYield", "ytdChangePercent"});
+		std::vector<double> keyStats = tools::MarketData::getKeyStats(symbol, {"marketcap", "dividendYield", "ytdChangePercent", "day200MovingAvg", "day50MovingAvg"});
 		double peRatio = tools::MarketData::getPE(symbol);
 
 		// 2. P/E ratio
@@ -89,6 +90,19 @@ namespace trading
 		if (keyStats[2] >= getParamValue("buy-min-ytd-change"))
 		{
 			::verboseDebugMessage("YTD percentage change: ", keyStats[2]);
+			testsToMeet--;
+		}
+
+		// 6. 50-day SMA (if set in config file)
+		if ((currentPrice >= keyStats[4]) && priceAbove50SMA)
+		{
+			::verboseDebugMessage("Price above 50-day MA.");
+			testsToMeet--;
+		}
+		// 7. 200-day SMA (if set in config file)
+		if (currentPrice >= keyStats[3] && priceAbove200SMA)
+		{
+			::verboseDebugMessage("Price above 200-day MA.");
 			testsToMeet--;
 		}
 
@@ -171,6 +185,10 @@ namespace trading
 			stocksToOwn = strategyJSON["stocks-to-own"].GetUint();
 			std::cout << "Stocks to own parsed. " << std::endl;
 
+			// parse out 200 and 50-day SMA indicators
+			priceAbove200SMA = strategyJSON["buy-when"]["price-above-200-SMA"].GetBool();
+			priceAbove50SMA = strategyJSON["buy-when"]["price-above-50-SMA"].GetBool();
+
 			// parse out watchlist
 			for (std::string& line : stockLines)
 			{
@@ -229,6 +247,8 @@ namespace trading
 	std::vector<Stock> Strategy::watchlist;
 	double Strategy::reserveCash;
 	size_t Strategy::stocksToOwn;
+	bool Strategy::priceAbove200SMA;
+	bool Strategy::priceAbove50SMA;
 
 
 }

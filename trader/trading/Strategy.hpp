@@ -64,5 +64,8 @@ namespace trading
 
 			// number of shares to own at any one time (cash will be split amongst this)
 			static size_t stocksToOwn;
+
+			// price above 200-day and 50-day moving averages
+			static bool priceAbove200SMA, priceAbove50SMA;
 	};
 }
