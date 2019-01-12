@@ -3,7 +3,12 @@ A Linux algorithmic trading application and C++ Alpaca Markets client.
 Uses the open IEX API to fetch stock financial information and current prices.
 
 # Using this as a C++ Alpaca Markets client library
-Required setup (parsing account details out of settings/.key-id):
+The lib/ directory includes header-only files. You'll need to clone the folder, then you can include the library as follows:
+```C++
+#include <AlpacaCPP.h>
+```
+
+Setting up authentication details (parsing account details out of settings/.key-id):
 ```C++
 trading::Authentication::setup();
 ```
