@@ -54,7 +54,8 @@ cd trader/
 ```
 
 # Dependencies
-Relies on the libcurl C networking library, as well as C++ Boost.
+Relies on the libcurl C networking library, as well as C++ Boost (version 1.68+).
+cURL headers should be installed in /usr/include/curl and Boost in /usr/local/lib/boost_<version> .
 Refer to: https://github.com/curl/curl and https://www.boost.org/.
 
 # Settings
