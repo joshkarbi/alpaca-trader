@@ -64,3 +64,10 @@ See trading/Strategy.hpp for formatting details.
 
 Strategy.config contains parameters than can be adjusted (sell-when and buy-when parameters).
 See trading/Strategy.hpp for details.
+
+# Manual mode
+Orders can be manually cancelled or placed via the command-line by running the commands below. Users should then follow the application's on-screen instructions (i.e. will be asked for "buy", "sell", or "cancel", then for order-id (if cancelling) or for symbol and quantity.
+```bash
+cd trader/
+./trader.exe manual
+```
