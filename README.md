@@ -2,13 +2,6 @@
 A Linux algorithmic trading application and C++ Alpaca Markets client.
 Uses the open IEX API to fetch stock financial information and current prices.
 
-# Running the Trader
-After revising configuration and authentication settings and building the project (see below).
-```bash
-cd trader/
-./trader.exe
-```
-
 # Using this as a C++ Alpaca Markets client library
 Required setup (parsing account details out of settings/.key-id):
 ```C++
@@ -31,6 +24,20 @@ std::vector<std::string> interestedFields = {"marketcap", "dividendYield", "peRa
 std::vector<double> keyStats = tools::MarketData::getKeyStats("AAPL", interestedFields);
 ```
 
+# Running the Trader
+After revising configuration and authentication settings and building the project (see below).
+```bash
+cd trader/
+./trader.exe
+```
+
+# Manual mode
+Orders can be manually cancelled or placed via the command-line by running the commands below. Users should then follow the application's on-screen instructions (i.e. will be asked for "buy", "sell", or "cancel", then for order-id (if cancelling) or for symbol and quantity.
+```bash
+cd trader/
+./trader.exe manual
+```
+
 # Building
 The application can be built by running the following:
 ```bash
@@ -47,7 +54,8 @@ cd trader/
 ```
 
 # Dependencies
-Relies on the libcurl C networking library, as well as C++ Boost.
+Relies on the libcurl, C++ Boost (version 1.68+), and rapidjson libraries.
+cURL headers should be installed in /usr/include/curl and Boost in /usr/local/lib/boost_<version> .
 Refer to: https://github.com/curl/curl and https://www.boost.org/.
 
 # Settings
@@ -64,10 +72,3 @@ See trading/Strategy.hpp for formatting details.
 
 Strategy.config contains parameters than can be adjusted (sell-when and buy-when parameters).
 See trading/Strategy.hpp for details.
-
-# Manual mode
-Orders can be manually cancelled or placed via the command-line by running the commands below. Users should then follow the application's on-screen instructions (i.e. will be asked for "buy", "sell", or "cancel", then for order-id (if cancelling) or for symbol and quantity.
-```bash
-cd trader/
-./trader.exe manual
-```
