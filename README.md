@@ -28,6 +28,12 @@ Getting any key stats available from IEX API:
 std::vector<std::string> interestedFields = {"marketcap", "dividendYield", "peRatioHigh"};
 std::vector<double> keyStats = tools::MarketData::getKeyStats("AAPL", interestedFields);
 ```
+Note: needs to be compiled with a "-lcurl" flag to link with cURL (see dependencies below).
+
+# Dependencies
+Relies on the libcurl, C++ Boost (version 1.68+), and rapidjson libraries.
+cURL headers should be installed in /usr/include/curl and Boost in /usr/local/lib/boost_<version> .
+Refer to: https://github.com/curl/curl and https://www.boost.org/.
 
 # Running the Trader
 After revising configuration and authentication settings and building the project (see below).
@@ -49,19 +55,6 @@ The application can be built by running the following:
 cd trader/
 bash build.bash
 ```
-
-# Tests
-Function suites are tested in Unit Tests under the tests/ directory (using C++ Boost Unit Test Framework).
-To run a test after building project (ie. one for NetworkingUtilities):
-```bash
-cd trader/
-./TestNetworkingUtilities.exe
-```
-
-# Dependencies
-Relies on the libcurl, C++ Boost (version 1.68+), and rapidjson libraries.
-cURL headers should be installed in /usr/include/curl and Boost in /usr/local/lib/boost_<version> .
-Refer to: https://github.com/curl/curl and https://www.boost.org/.
 
 # Settings
 A ".key-id" config file must be made under settings/ and formatted as following:
