@@ -32,7 +32,7 @@ Note: needs to be compiled with a "-lcurl" flag to link with cURL (see dependenc
 
 # Dependencies
 Relies on the libcurl, C++ Boost (version 1.68+), and rapidjson libraries.
-cURL headers should be installed in /usr/include/curl and Boost in /usr/local/lib/boost_<version> .
+cURL headers should be installed in /usr/include/curl and Boost in /usr/local/lib/boost_1_68_0.
 Refer to: https://github.com/curl/curl and https://www.boost.org/.
 
 # Running the Trader
