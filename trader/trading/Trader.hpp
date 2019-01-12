@@ -42,6 +42,9 @@ namespace trading
         // save stuff to files if anything goes wrong
         void finishUp();
 
+        // called if user runs "./trader.exe manual"
+        void runManualMode();
+        
         // decide how many shares to buy/sell
         size_t getSharesToBuy(const std::string& symbol);
         size_t getSharesToSell(const std::string& symbol);

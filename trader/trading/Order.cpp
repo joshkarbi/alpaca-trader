@@ -135,6 +135,8 @@ namespace trading
         std::vector<std::string> headers = {auth, secret};
 
         std::string apiResponse = tools::simpleDelete(url, headers);
+
+        std::cout << "Cancelled order: " << orderID << std::endl;
     }
 
 }

@@ -180,4 +180,29 @@ namespace trading
         // write the trading day's stats to a file.
         // ie. trading_stats.logStats(file_path);
     }
+
+    void Trader::runManualMode()
+    {
+        // allow for manual placement of orders through command line
+        tools::Authentication::setup();
+
+        std::string action, orderID, symbol;
+        size_t quantity;
+        std::cout << " buy, sell, or cancel: ";
+        std::cin >> action;
+        if (action == "cancel")
+        {
+            std::cout << "Order ID: ";
+            std::cin >> orderID;
+            trading::Order::cancelOrder(orderID);
+            return;
+        }
+
+        std::cout << "symbol: ";
+        std::cin >> symbol;
+        std::cout << "quantity: ";
+        std::cin >> quantity;
+        trading::Order* placeOrder = new trading::Order(action, symbol, quantity);
+        delete placeOrder;
+    }
 }

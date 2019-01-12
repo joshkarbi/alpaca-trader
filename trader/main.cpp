@@ -3,7 +3,6 @@
 // Alpaca Markets brokerage API.
 // 
 // Main method -> no logic, just startup and log any errors
-// 
 
 #include "trading/Trader.hpp"
 #include "tools/FileWritingUtilities.hpp"
@@ -13,36 +12,23 @@
 
 #include <fstream>
 #include <iostream>
+#include <string.h>
 
 int main(int argc, char **argv) 
 {
-    if (argc != -1)
+    trading::Trader app;
+
+    std::string manualMode = "manual";
+    constexpr size_t EQUAL = 0;
+    if (argc > 1 && (strncmp(argv[1], manualMode.c_str(), manualMode.size()) == EQUAL))
     {
-        // allow for manual placement of orders through command line
-        tools::Authentication::setup();
-
-        std::string action, orderID, symbol;
-        size_t quantity;
-        std::cout << " buy, sell, or cancel: ";
-        std::cin >> action;
-        if (action == "cancel")
-        {
-            std::cout << "Order ID: ";
-            std::cin >> orderID;
-            trading::Order::cancelOrder(orderID);
-            return 0;
-        }
-
-        std::cout << "symbol: ";
-        std::cin >> symbol;
-        std::cout << "quantity: ";
-        std::cin >> quantity;
-        trading::Order* placeOrder = new trading::Order(action, symbol, quantity);
-        delete placeOrder;
+        app.runManualMode();
+        return 0;
     }
+
+
     try 
     {
-    	trading::Trader app;
     	app.run();
     } catch (const std::exception& e)
     {
