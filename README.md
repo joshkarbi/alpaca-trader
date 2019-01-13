@@ -59,7 +59,7 @@ bash build.bash
 
 # Settings
 A ".key-id" config file must be made under settings/ and formatted as following:
-```json
+```javascript
 {
   "paper-trading-id":"{your Alpaca Markets key}",
   "secret-key":"{your Alpaca Markets secret key}",
@@ -68,7 +68,7 @@ A ".key-id" config file must be made under settings/ and formatted as following:
 ```
 Stocks.config contains the stocks you want to have the algorithm track and potentially buy. 
 Here's one line from the file:
-```
+```csv
 AXP,American Express Co,Financials
 ```
 
