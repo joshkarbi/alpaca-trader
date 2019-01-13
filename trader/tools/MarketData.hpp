@@ -35,6 +35,9 @@ namespace tools
 		// @return P/E ratio
 		static double getPE(const std::string& symbol);
 
+		// @return latest news headline related to specified stock
+		static std::string getLatestHeadline(const std::string& symbol);
+
 	private:
 		// querying is very similar across other functions
 		// @param url - entire URL (sometimes data.api.markets, others paper-api...)
