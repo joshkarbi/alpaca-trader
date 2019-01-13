@@ -7,6 +7,7 @@
 #include "../tools/MarketData.hpp"
 #include "../tools/AccountData.hpp"
 #include "../tools/PreprocessorOptions.hpp"
+#include "../tools/SentimentAnalysis.hpp"
 
 #include <cstddef>
 #include <boost/algorithm/string.hpp>
@@ -106,6 +107,13 @@ namespace trading
 			testsToMeet--;
 		}
 
+		// sentiment analysis on news headlines related to stock
+		if (tools::SentimentAnalysis::getSentimentScore(tools::MarketData::getLatestHeadline(symbol)) >= sentimentMinScore)
+		{
+			::verboseDebugMessage("News sentiment score above specified minumum.");
+			testsToMeet--;
+		}
+
 		return (testsToMeet<=0);
 	}
 
@@ -189,6 +197,9 @@ namespace trading
 			priceAbove200SMA = strategyJSON["buy-when"]["price-above-200-SMA"].GetBool();
 			priceAbove50SMA = strategyJSON["buy-when"]["price-above-50-SMA"].GetBool();
 
+			// news sentiment minimum score 
+			sentimentMinScore = strategyJSON["buy-when"]["news-sentiment-above"].GetDouble();
+
 			// parse out watchlist
 			for (std::string& line : stockLines)
 			{
@@ -249,6 +260,6 @@ namespace trading
 	size_t Strategy::stocksToOwn;
 	bool Strategy::priceAbove200SMA;
 	bool Strategy::priceAbove50SMA;
-
+	double Strategy::sentimentMinScore;
 
 }

@@ -67,5 +67,8 @@ namespace trading
 
 			// price above 200-day and 50-day moving averages
 			static bool priceAbove200SMA, priceAbove50SMA;
+
+			// for NLP sentiment analysis on news headlines
+			static double sentimentMinScore;
 	};
 }
