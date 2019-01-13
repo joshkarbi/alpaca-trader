@@ -224,5 +224,19 @@ namespace
  			if (percent > 0) { return 0; }
  			return percent;
  		}
+
+ 		// @return latest news headline related to stock with ticker 'symbol'
+ 		static std::string getLatestHeadline(const std::string& symbol)
+		{
+			// strings still not supported by constexpr
+			const std::string DEFAULT = "";
+
+			// is array of news objects
+			std::string response = marketQueryIEX("stock/"+symbol+"/news/last/1");
+			rapidjson::Document doc = getDOMTree(response);
+
+			if (doc[0]["headline"].IsNull()) { return DEFAULT; }
+			else { return doc[0]["headline"].GetString(); }
+		}
  	};
  }
