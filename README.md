@@ -1,6 +1,7 @@
 # Overview
 A Linux algorithmic trading application and C++ Alpaca Markets client.
-Uses the open IEX API to fetch stock financial information and current prices.
+
+Uses the open IEX API to fetch stock financial information and current prices, as well as the IBM Watson API to use Natural Language Processing of news headlines related to stocks on a watchlist.
 
 # Using this as a C++ Alpaca Markets client library
 The lib/ directory includes header-only files. You'll need to clone the folder, then you can include the library as follows:
@@ -61,7 +62,8 @@ A ".key-id" config file must be made under settings/ and formatted as following:
 ```
 {
   "paper-trading-id":"{your Alpaca Markets key}",
-  "secret-key":"{your Alpaca Markets secret key}"
+  "secret-key":"{your Alpaca Markets secret key}",
+  "watson-api-key":{you Watson NLP credentials}"
 }
 ```
 Stocks.config contains the stocks you want to have the algorithm track. 
