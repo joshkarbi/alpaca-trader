@@ -74,12 +74,12 @@ AXP,American Express Co,Financials
 
 Strategy.config contains adjustable "sell-when" and "buy-when" parameters.
 Here's some of the "buy-when" parameters for reference:
-```json
+```javascript
 "buy-when":{
 		"num-tests-met":7,
 		"news-sentiment-above":0.4,
 		"RSI-below":33,
-		# ...
+		//  ...
 		"price-above-50-SMA":true
 	}
 ```
