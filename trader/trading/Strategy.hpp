@@ -34,6 +34,9 @@ namespace trading
 			// Note: stocks.config should be formatted with <symbol>,<company name>,<industry> on each line
 			static bool setup(const std::string& paramFile=PARAM_CONFIG_FILE, const std::string& stockFile=WATCHLIST_CONFIG_FILE);
 
+			// save todays sentiment scores in the todaysSentiment map
+			static void updateTodaysSentiment();
+
 			// check map (return -1 if not found)
 			static double getParamValue(const std::string& key) {
 				auto it = parameters.find(key);
@@ -82,6 +85,9 @@ namespace trading
 			// price above 200-day and 50-day moving averages
 			static bool priceAbove200SMA, priceAbove50SMA;
 
+			// last time we checked if the market was open
+			static bool marketOpen;
+			
 			// for NLP sentiment analysis on news headlines
 			static double sentimentMinScore;
 			static size_t headlines;

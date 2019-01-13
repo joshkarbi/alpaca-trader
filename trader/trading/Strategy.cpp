@@ -49,6 +49,14 @@ namespace trading
 		bool belowReserveMoney = (reserveCash >= cashInAccount);
 		bool marketClosed = (!tools::MarketData::isOpen());
 		bool alreadyOwnConfiguredAmountOfStocks = (tools::AccountData::getAccountPositions().size() >= stocksToOwn);
+
+		if (!marketClosed && marketOpen == false)
+		{
+			// i.e. market just opened (last time we checked it was closed)
+			updateTodaysSentiment();
+		}
+		marketOpen = !marketClosed;
+
 		if (notEnoughMoney || belowReserveMoney || marketClosed || alreadyOwnConfiguredAmountOfStocks)
 		{
 			return false;
@@ -214,14 +222,12 @@ namespace trading
 				{
 					// just symbol
 					Stock s(lineElements[0]);
-					std::cout << lineElements[0] << std::endl;
 					watchlist.push_back(s);
 				}
 				else if (lineElements.size() == 2)
 				{
 					// symbol, name specified
 					boost::algorithm::trim(lineElements[1]);
-					std::cout << lineElements[0] << std::endl;
 					Stock s(lineElements[0], lineElements[1]);
 					watchlist.push_back(s);
 				}
@@ -230,24 +236,36 @@ namespace trading
 					// symbol, name, industry
 					boost::algorithm::trim(lineElements[1]);
 					boost::algorithm::trim(lineElements[2]);
-					std::cout << lineElements[0] << std::endl;
 					Stock s(lineElements[0], lineElements[1], lineElements[2]);
 					watchlist.push_back(s); 
 				}
+
+				::verboseDebugMessage(lineElements[0]);
 			}
 
-			// fill today's sentiment scores on start-up (avoids rate limiting)
-			for (const Stock& s : watchlist)
-			{
-				std::string latestHeadlines = tools::MarketData::getLatestHeadlines(s.getSymbol(), headlines);
-				todaysSentiments.insert(todaysSentiments.begin(), std::pair<std::string, double>(s.getSymbol(), tools::SentimentAnalysis::getSentimentScore(latestHeadlines)));
-			}
+			updateTodaysSentiment();
 
 			return true;
 		}
 		else
 		{
 			return false;
+		}
+	}
+
+	void Strategy::updateTodaysSentiment()
+	{
+		todaysSentiments.clear();
+
+		// fill today's sentiment scores on start-up (avoids rate limiting)
+		for (const Stock& s : watchlist)
+		{
+			std::string latestHeadlines = tools::MarketData::getLatestHeadlines(s.getSymbol(), headlines);
+			double score = tools::SentimentAnalysis::getSentimentScore(latestHeadlines);
+
+			::debugMessage("Todays sentiment score for " + s.getSymbol() + ": ",score);
+
+			todaysSentiments.insert(todaysSentiments.begin(), std::pair<std::string, double>(s.getSymbol(), score));
 		}
 	}
 
@@ -275,5 +293,6 @@ namespace trading
 
 	bool Strategy::priceAbove200SMA;
 	bool Strategy::priceAbove50SMA;
+	bool Strategy::marketOpen = false;
 	
 }

@@ -5,6 +5,7 @@
 #include "NetworkingUtilities.hpp"
 #include "Authentication.hpp"
 #include "JSONUtilities.hpp"
+#include "PreprocessorOptions.hpp"
 
 #include <boost/algorithm/string/replace.hpp>
 #include <iostream>
@@ -21,7 +22,11 @@ namespace tools
 		std::string url = (WATSON_DOMAIN+"analyze?version=2018-11-16&features=sentiment&text="+textWithSpacesAsPlusSigns);
 		std::string authInfo = ("apikey:"+Authentication::watsonKey);
 		std::string watsonResponse = simpleGet(url, authInfo);
-		
+
+#ifdef VERBOSE_DEBUG
+		std::cout << watsonResponse << std::endl;
+#endif
+
 		rapidjson::Document doc = getDOMTree(watsonResponse);
 
 		// 0 is "neutral" according to Watson

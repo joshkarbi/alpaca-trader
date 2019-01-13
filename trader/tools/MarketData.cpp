@@ -16,6 +16,12 @@ namespace
 {
 	void debugMessage(const std::string& message)
 	{
+#ifdef DEBUG 
+		std::cout << message << std::endl;
+#endif
+	}
+	void verboseDebugMessage(const std::string& message)
+	{
 #ifdef VERBOSE_DEBUG
 		std::cout << message << std::endl;
 #endif		
@@ -131,7 +137,7 @@ namespace tools
 		{
 			double dayDelta = recentStats[recentStats.Size()-i]["changePercent"].GetDouble();
 
-			::debugMessage("Day " + std::to_string(i) + " changePercent: " + std::to_string(dayDelta));
+			::verboseDebugMessage("Day " + std::to_string(i) + " changePercent: " + std::to_string(dayDelta));
 
 			if  (dayDelta < 0) 
 			{ 
@@ -150,7 +156,7 @@ namespace tools
 		double denominator = 1.0+(avgGain*NUM_PERIODS + getCurrentGain(symbol))/(avgLoss*NUM_PERIODS + getCurrentLoss(symbol));
 		double rsi = (100.0 - (100.0)/denominator);
 
-		::debugMessage("RSI calculated for " + symbol + ": " + std::to_string(rsi));
+		::verboseDebugMessage("RSI calculated for " + symbol + ": " + std::to_string(rsi));
 
 		return rsi;
 	}
@@ -167,7 +173,7 @@ namespace tools
 		}
 		double res = doc["changePercent"].GetDouble();
 
-		::debugMessage("Current change percent in " + symbol + ": " + std::to_string(res));
+		::verboseDebugMessage("Current change percent in " + symbol + ": " + std::to_string(res));
 		
 		return res;
 	}
@@ -205,6 +211,8 @@ namespace tools
 	{
 		// is array of news objects
 		std::string response = marketQueryIEX("stock/"+symbol+"/news/last/"+std::to_string(qty));
+		::verboseDebugMessage(response);
+
 		rapidjson::Document doc = getDOMTree(response);
 
 		std::string result;
@@ -214,9 +222,11 @@ namespace tools
 			return result;
 		}
 
-		for (auto& newsObj : doc.GetArray())
+		for (size_t i = 0; i < doc.Size(); i++)
 		{
-			result = result+(doc["headline"].GetString());
+			if (doc[i]["headline"].IsNull()) { continue; }
+
+			result = result+(doc[i]["headline"].GetString());
 		}
 
 		return result;
