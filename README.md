@@ -63,7 +63,7 @@ A ".key-id" config file must be made under settings/ and formatted as following:
 {
   "paper-trading-id":"{your Alpaca Markets key}",
   "secret-key":"{your Alpaca Markets secret key}",
-  "watson-api-key":{you Watson NLP credentials}"
+  "watson-api-key":"{your Watson NLP credentials}"
 }
 ```
 Stocks.config contains the stocks you want to have the algorithm track and potentially buy. 
@@ -79,7 +79,7 @@ Here's some of the "buy-when" parameters for reference:
 		"num-tests-met":7,
 		"news-sentiment-above":0.4,
 		"RSI-below":33,
-		      ...
+		# ...
 		"price-above-50-SMA":true
 	}
 ```
