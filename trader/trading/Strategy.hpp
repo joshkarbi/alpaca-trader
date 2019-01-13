@@ -43,6 +43,15 @@ namespace trading
 				return -1;
 			}
 
+			// check sentiment map
+			static double getSentiment(const std::string& symbol) {
+				auto it = todaysSentiments.find(symbol);
+				if (it != todaysSentiments.end()) {
+					return it->second;
+				}
+				return -1;
+			}
+
 			// Note: is reference
 			static std::vector<Stock>& getWatchlist() { return watchlist; }
 
@@ -55,6 +64,11 @@ namespace trading
 			// contains key-value pairs of trading parameters and limits
 			// ie. "buyLimit" -> "$500"
 			static std::map<std::string, double> parameters;
+
+			// today's sentiment scores.
+			// map stock symbol to a score
+			// this will be filled on setup() to avoid rate-limiting by the Watson API
+			static std::map<std::string, double> todaysSentiments;
 
 			// list of stock symbols to track
 			static std::vector<Stock> watchlist;
@@ -70,5 +84,6 @@ namespace trading
 
 			// for NLP sentiment analysis on news headlines
 			static double sentimentMinScore;
+			static size_t headlines;
 	};
 }

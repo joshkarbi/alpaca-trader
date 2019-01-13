@@ -107,10 +107,10 @@ namespace trading
 			testsToMeet--;
 		}
 
-		// sentiment analysis on news headlines related to stock
-		if (tools::SentimentAnalysis::getSentimentScore(tools::MarketData::getLatestHeadline(symbol)) >= sentimentMinScore)
+		// 8. sentiment analysis on news headlines related to stock
+		if (getSentiment(symbol) >= sentimentMinScore)
 		{
-			::verboseDebugMessage("News sentiment score above specified minumum.");
+			::verboseDebugMessage("Today's news sentiment score above specified minumum.");
 			testsToMeet--;
 		}
 
@@ -199,6 +199,7 @@ namespace trading
 
 			// news sentiment minimum score 
 			sentimentMinScore = strategyJSON["buy-when"]["news-sentiment-above"].GetDouble();
+			headlines = strategyJSON["headlines"].GetUint();
 
 			// parse out watchlist
 			for (std::string& line : stockLines)
@@ -233,8 +234,15 @@ namespace trading
 					Stock s(lineElements[0], lineElements[1], lineElements[2]);
 					watchlist.push_back(s); 
 				}
-				
 			}
+
+			// fill today's sentiment scores on start-up (avoids rate limiting)
+			for (const Stock& s : watchlist)
+			{
+				std::string latestHeadlines = tools::MarketData::getLatestHeadlines(s.getSymbol(), headlines);
+				todaysSentiments.insert(todaysSentiments.begin(), std::pair<std::string, double>(s.getSymbol(), tools::SentimentAnalysis::getSentimentScore(latestHeadlines)));
+			}
+
 			return true;
 		}
 		else
@@ -255,11 +263,17 @@ namespace trading
 
 	// for linking with static members
 	std::map<std::string, double> Strategy::parameters;
+	std::map<std::string, double> Strategy::todaysSentiments;
+
 	std::vector<Stock> Strategy::watchlist;
+
 	double Strategy::reserveCash;
-	size_t Strategy::stocksToOwn;
-	bool Strategy::priceAbove200SMA;
-	bool Strategy::priceAbove50SMA;
 	double Strategy::sentimentMinScore;
 
+	size_t Strategy::stocksToOwn;
+	size_t Strategy::headlines;
+
+	bool Strategy::priceAbove200SMA;
+	bool Strategy::priceAbove50SMA;
+	
 }

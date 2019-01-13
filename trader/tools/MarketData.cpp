@@ -201,16 +201,24 @@ namespace tools
 		return doc["peRatio"].GetDouble();
 	}
 
-	std::string MarketData::getLatestHeadline(const std::string& symbol)
+	std::string MarketData::getLatestHeadlines(const std::string& symbol, const size_t qty)
 	{
-		// strings still not supported by constexpr
-		const std::string DEFAULT = "";
-
 		// is array of news objects
-		std::string response = marketQueryIEX("stock/"+symbol+"/news/last/1");
+		std::string response = marketQueryIEX("stock/"+symbol+"/news/last/"+std::to_string(qty));
 		rapidjson::Document doc = getDOMTree(response);
 
-		if (doc[0]["headline"].IsNull()) { return DEFAULT; }
-		else { return doc[0]["headline"].GetString(); }
+		std::string result;
+
+		if (response == "[]")
+		{
+			return result;
+		}
+
+		for (auto& newsObj : doc.GetArray())
+		{
+			result = result+(doc["headline"].GetString());
+		}
+
+		return result;
 	}
 }

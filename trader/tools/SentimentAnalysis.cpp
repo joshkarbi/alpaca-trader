@@ -24,6 +24,7 @@ namespace tools
 		
 		rapidjson::Document doc = getDOMTree(watsonResponse);
 
+		// 0 is "neutral" according to Watson
 		constexpr double DEFAULT = 0;
 
 		try {

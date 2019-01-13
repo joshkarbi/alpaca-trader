@@ -35,8 +35,10 @@ namespace tools
 		// @return P/E ratio
 		static double getPE(const std::string& symbol);
 
+		// @param symbol stock to lookup
+		// @param qty - number between 1 & 20 headlines to fetch
 		// @return latest news headline related to specified stock
-		static std::string getLatestHeadline(const std::string& symbol);
+		static std::string getLatestHeadlines(const std::string& symbol, const size_t qty=1);
 
 	private:
 		// querying is very similar across other functions

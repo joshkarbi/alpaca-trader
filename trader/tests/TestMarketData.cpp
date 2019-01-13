@@ -84,9 +84,9 @@ BOOST_AUTO_TEST_CASE(todays_change_in_percentage)
 BOOST_AUTO_TEST_CASE(latest_headline)
 {
 	std::string aapl="aapl", ba="ba", mmm="mmm";
-	BOOST_CHECK_NO_THROW(aapl = tools::MarketData::getLatestHeadline(aapl));
-	BOOST_CHECK_NO_THROW(ba = tools::MarketData::getLatestHeadline(ba));
-	BOOST_CHECK_NO_THROW(mmm = tools::MarketData::getLatestHeadline(mmm));
+	BOOST_CHECK_NO_THROW(aapl = tools::MarketData::getLatestHeadlines(aapl, 1));
+	BOOST_CHECK_NO_THROW(ba = tools::MarketData::getLatestHeadlines(ba, 1));
+	BOOST_CHECK_NO_THROW(mmm = tools::MarketData::getLatestHeadlines(mmm, 1));
 
 	std::cout << "Apple headline: " << aapl << std::endl;
 	std::cout << "Boing headline: " << ba << std::endl;
