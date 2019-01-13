@@ -20,9 +20,10 @@ namespace tools
 #endif
 	const std::string MARKET_DATA_DOMAIN = "https://data.alpaca.markets/v1/";
   const std::string IEX_DOMAIN = "https://api.iextrading.com/1.0/";
-
+  const std::string WATSON_DOMAIN = "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/";
+  
     // @param url - url to POST to
-    // @param user_pass - see HTTP basic authentication
+    // @param user_pass - HTTP basic authentication fields formattes <username>:<password>
     // @param params - ie. "param1=value&other=val"
     // @param headers - any HTTP headers to append to the POST
     std::string simplePost(const std::string& url,

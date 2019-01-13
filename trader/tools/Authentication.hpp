@@ -20,6 +20,9 @@ namespace tools
 		static std::string key;
 		static std::string secretKey;
 		
+		// Watson API credentials for NLP
+		static std::string watsonKey;
+		
 		static const std::string KEY_FILE;
 
 		// parse out token from settings file

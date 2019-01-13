@@ -37,3 +37,5 @@ g++ tests/TestAccountData.cpp -std=c++11 -o TestAccountData.exe tools/Authentica
 echo "TestTrader"
 g++ tests/TestTrader.cpp -std=c++11 -o TestTrader.exe trading/Order.cpp trading/Strategy.cpp trading/Holding.cpp trading/Trader.cpp trading/Stats.cpp tools/FileReadingUtilities.cpp tools/FileWritingUtilities.cpp tools/JSONUtilities.cpp tools/NetworkingUtilities.cpp tools/MarketData.cpp tools/AccountData.cpp tools/Authentication.cpp -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl
 
+echo "TestSentimentAnalysis"
+g++ tests/TestSentimentAnalysis.cpp -std=c++11 -o TestSentimentAnalysis.exe trading/Order.cpp trading/Strategy.cpp trading/Holding.cpp trading/Trader.cpp trading/Stats.cpp tools/FileReadingUtilities.cpp tools/FileWritingUtilities.cpp tools/JSONUtilities.cpp tools/NetworkingUtilities.cpp tools/MarketData.cpp tools/AccountData.cpp tools/Authentication.cpp tools/SentimentAnalysis.cpp -I /usr/local/lib/boost_1_68_0/ -I/usr/local/lib/ -L /usr/local/lib/boost_1_68_0/stage/lib/ -lboost_unit_test_framework -lcurl
