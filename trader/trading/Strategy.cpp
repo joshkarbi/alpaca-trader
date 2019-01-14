@@ -50,12 +50,12 @@ namespace trading
 		bool marketClosed = (!tools::MarketData::isOpen());
 		bool alreadyOwnConfiguredAmountOfStocks = (tools::AccountData::getAccountPositions().size() >= stocksToOwn);
 
+		marketOpen = !marketClosed;
 		if (!marketClosed && marketOpen == false)
 		{
 			// i.e. market just opened (last time we checked it was closed)
 			updateTodaysSentiment();
 		}
-		marketOpen = !marketClosed;
 
 		if (notEnoughMoney || belowReserveMoney || marketClosed || alreadyOwnConfiguredAmountOfStocks)
 		{
