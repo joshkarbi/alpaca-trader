@@ -59,16 +59,27 @@ bash build.bash
 
 # Settings
 A ".key-id" config file must be made under settings/ and formatted as following:
-```
+```javascript
 {
   "paper-trading-id":"{your Alpaca Markets key}",
   "secret-key":"{your Alpaca Markets secret key}",
-  "watson-api-key":{you Watson NLP credentials}"
+  "watson-api-key":"{your Watson NLP credentials}"
 }
 ```
-Stocks.config contains the stocks you want to have the algorithm track. 
-Currently set to the S&P 500 indexed companies, but this can be configured.
-See trading/Strategy.hpp for formatting details.
+Stocks.config contains the stocks you want to have the algorithm track and potentially buy. 
+Here's one line from the file:
+```csv
+AXP,American Express Co,Financials
+```
 
-Strategy.config contains parameters than can be adjusted (sell-when and buy-when parameters).
-See trading/Strategy.hpp for details.
+Strategy.config contains adjustable "sell-when" and "buy-when" parameters.
+Here's some of the "buy-when" parameters for reference:
+```javascript
+"buy-when":{
+		"num-tests-met":7,
+		"news-sentiment-above":0.4,
+		"RSI-below":33,
+		//  ...
+		"price-above-50-SMA":true
+	}
+```
