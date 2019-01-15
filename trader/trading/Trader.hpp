@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "Stats.hpp"
 #include "Strategy.hpp"
 #include "Holding.hpp"
 
@@ -51,7 +50,6 @@ namespace trading
 
         // big logic objects
         std::vector<Holding> currentHoldings;
-        Stats tradingStats;
         std::vector<Stock> watchlist;
     };
 }
