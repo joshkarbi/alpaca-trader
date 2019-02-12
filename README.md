@@ -9,9 +9,9 @@ The lib/ directory includes header-only files. You'll need to clone the folder, 
 #include <AlpacaCPP.h>
 ```
 
-Setting up authentication details (parsing account details out of settings/.key-id):
+Setting up Alpaca authentication details:
 ```C++
-trading::Authentication::setup();
+trading::Authentication::setKeys("myKeyID", "mySecretKey");
 ```
 Placing orders:
 ```C++
