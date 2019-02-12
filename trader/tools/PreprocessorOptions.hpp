@@ -7,14 +7,10 @@
   throw std::runtime_error("ERROR: rapidjson internal assertion failure: " #x); }
 #endif
 
-// REQUIRED FOR PAPER TRADING URL TO BE USED
+// required for paper trading vs. real url to be used
 #define PAPER
-
 // #define REAL
 
-// basic debug messages
+// toggle between regular and debug log files to be used
 #define DEBUG
-
-// if you want more detailed messages and API JSON responses to be printed
-// #define VERBOSE_DEBUG
 

@@ -8,6 +8,7 @@
 #include "../tools/AccountData.hpp"
 #include "../tools/PreprocessorOptions.hpp"
 #include "../tools/SentimentAnalysis.hpp"
+#include "../tools/OutputOptions.hpp"
 
 #include <cstddef>
 #include <boost/algorithm/string.hpp>
@@ -18,22 +19,22 @@ namespace
 {
 	void debugMessage(const std::string& message, double val=-1)
 	{
-#ifdef DEBUG 
-		if (val != -1)
-			std::cout << message << " " << val << std::endl;
-		else
-			std::cout << message << std::endl;
-#endif
+		if (tools::OutputOptions::isDebug) {
+			if (val != -1)
+				std::cout << message << " " << val << std::endl;
+			else
+				std::cout << message << std::endl;
+		}
 	}
 
 	void verboseDebugMessage(const std::string& message, double val=-1)
 	{
-#ifdef VERBOSE_DEBUG 
-		if (val != -1)
-			std::cout << message << " " << val << std::endl;
-		else
-			std::cout << message << std::endl;
-#endif
+		if (tools::OutputOptions::isVerbose) {
+			if (val != -1)
+				std::cout << message << " " << val << std::endl;
+			else
+				std::cout << message << std::endl;
+		}
 	}
 }
 

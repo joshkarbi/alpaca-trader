@@ -2,6 +2,8 @@
 
 #include "NetworkingUtilities.hpp"
 #include "PreprocessorOptions.hpp"
+#include "OutputOptions.hpp"
+
 #include <stdlib.h>
 #include <iostream>
 #include <vector>
@@ -69,9 +71,8 @@ namespace tools
             
             for (size_t i = 0; i < headers.size(); i++)
             {
-#ifdef VERBOSE_DEBUG
-                std::cout << "Header " << i << " " << headers[i] << std::endl;
-#endif
+                if (OutputOptions::isVerbose)
+                    std::cout << "Header " << i << " " << headers[i] << std::endl;
                 header_list = curl_slist_append(header_list, headers[i].c_str());
             }
             curl_easy_setopt(curl, CURLOPT_HTTPHEADER, header_list);
@@ -86,10 +87,10 @@ namespace tools
         
         std::string result(chunk.memory, chunk.size);
         
-#ifdef VERBOSE_DEBUG
-    std::cout << "POST URL: " << url << " with params: " << params << std::endl;
-    std::cout << result << std::endl;
-#endif
+    if (OutputOptions::isVerbose) {
+        std::cout << "POST URL: " << url << " with params: " << params << std::endl;
+        std::cout << result << std::endl;
+    }
         
         return result;
     }
@@ -138,15 +139,16 @@ namespace tools
         
         std::string result(chunk.memory, chunk.size);
         
-#ifdef VERBOSE_DEBUG
-        std::cout << "GET to " << url << std::endl;
-        std::cout << "With headers: " << std::endl;
-        for (const std::string& header : headers)
+        if (OutputOptions::isVerbose) 
         {
-            std::cout << header << std::endl;
+            std::cout << "GET to " << url << std::endl;
+            std::cout << "With headers: " << std::endl;
+            for (const std::string& header : headers)
+            {
+                std::cout << header << std::endl;
+            }
+            std::cout << result << std::endl;
         }
-        std::cout << result << std::endl;
-#endif
         return result;
     }
 

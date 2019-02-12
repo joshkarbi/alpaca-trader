@@ -11,7 +11,7 @@
 #include "../tools/JSONUtilities.hpp"
 #include "../tools/AccountData.hpp"
 #include "../tools/MarketData.hpp"
-
+#include "../tools/OutputOptions.hpp"
 #include "Strategy.hpp"
 
 #include <fstream>
@@ -30,16 +30,14 @@ namespace
 
     void debugMessage(const std::string& message)
     {
-#ifdef DEBUG
-        print(message);
-#endif
+        if (tools::OutputOptions::isDebug)
+            print(message);
     }
 
     void verboseDebugMessage(const std::string& message)
     {
-#ifdef VERBOSE_DEBUG
-        print(message);
-#endif
+        if (tools::OutputOptions::isVerbose)
+            print(message);  
     }
 }
 namespace trading
@@ -50,6 +48,9 @@ namespace trading
         tools::Authentication::setup();
         ::print("AUTHENTICATION SETUP COMPLETE");
 
+        // set output mode
+        tools::OutputOptions::setup();
+        
         tools::AccountData::updateCashBalance();
         ::print("UPDATED CASH BALANCE");
         

@@ -6,6 +6,7 @@
 #include "JSONUtilities.hpp"
 #include "Authentication.hpp"
 #include "PreprocessorOptions.hpp"
+#include "OutputOptions.hpp"
 
 #include <vector>
 #include <iostream>
@@ -16,15 +17,13 @@ namespace
 {
 	void debugMessage(const std::string& message)
 	{
-#ifdef DEBUG 
-		std::cout << message << std::endl;
-#endif
+		if (tools::OutputOptions::isDebug)
+			std::cout << message << std::endl;
 	}
 	void verboseDebugMessage(const std::string& message)
 	{
-#ifdef VERBOSE_DEBUG
-		std::cout << message << std::endl;
-#endif		
+		if (tools::OutputOptions::isVerbose)
+			std::cout << message << std::endl;	
 	}
 }
 

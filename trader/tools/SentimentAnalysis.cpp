@@ -6,6 +6,7 @@
 #include "Authentication.hpp"
 #include "JSONUtilities.hpp"
 #include "PreprocessorOptions.hpp"
+#include "OutputOptions.hpp"
 
 #include <boost/algorithm/string/replace.hpp>
 #include <iostream>
@@ -23,9 +24,8 @@ namespace tools
 		std::string authInfo = ("apikey:"+Authentication::watsonKey);
 		std::string watsonResponse = simpleGet(url, authInfo);
 
-#ifdef VERBOSE_DEBUG
-		std::cout << watsonResponse << std::endl;
-#endif
+		if (OutputOptions::isVerbose)
+			std::cout << "Watson response: " << watsonResponse << std::endl;	
 
 		rapidjson::Document doc = getDOMTree(watsonResponse);
 

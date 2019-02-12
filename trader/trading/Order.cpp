@@ -6,6 +6,7 @@
 #include "../tools/FileWritingUtilities.hpp"
 #include "../tools/PreprocessorOptions.hpp"
 #include "../tools/Authentication.hpp"
+#include "../tools/OutputOptions.hpp"
 
 #include <ctime>
 #include <sstream>
@@ -16,9 +17,8 @@ namespace
 {
     void debugMessage(const std::string& message)
     {
-#ifdef DEBUG 
-        std::cout << message << std::endl;
-#endif
+        if (tools::OutputOptions::isDebug)
+            std::cout << message << std::endl;
     }
 }
 
