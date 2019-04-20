@@ -83,3 +83,9 @@ Here's some of the "buy-when" parameters for reference:
 		"price-above-50-SMA":true
 	}
 ```
+Output.config is used to specify the output mode of the trader ("debug", "verbose", or "production").
+```javascript
+{
+   "mode":"debug"
+}
+```
