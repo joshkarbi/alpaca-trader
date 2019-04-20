@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     trading::Trader app;
 
     std::string manualMode = "manual";
-    constexpr size_t EQUAL = 0;
+    const size_t EQUAL = 0;
     if (argc > 1 && (strncmp(argv[1], manualMode.c_str(), manualMode.size()) == EQUAL))
     {
         app.runManualMode();

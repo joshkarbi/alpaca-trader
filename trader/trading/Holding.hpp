@@ -18,7 +18,7 @@ namespace trading
     {
     public:
         // ie. at time order is placed (until filled)
-        static constexpr double UNKNOWN_PRICE = -1;
+        static const double UNKNOWN_PRICE = -1;
         
         // main constructor
         Holding(const std::string& sym, size_t qty, double price, const std::string& ex);
